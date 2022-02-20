@@ -3,7 +3,7 @@ stages:
   - test
   - deploy
 
-Build:
+build:
   stage: build
   image: node:latest
   rules:
@@ -21,7 +21,7 @@ Build:
     paths:
       - node_modules/
 
-Test:
+test:
   stage: test
   image: node:latest
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
@@ -53,7 +53,7 @@ Test:
 #   only:
 #     - staging
 
-Staging:
+staging:
   stage: deploy
   image: node:latest
 
@@ -78,7 +78,7 @@ Staging:
     - DEPLOYMENT_URL=$(vercel --name $PROJECT_NAME --confirm -t $VERCEL_TOKEN)
     - vercel alias set $DEPLOYMENT_URL $STAGING_URL -t $VERCEL_TOKEN
 
-Prod:
+prod:
   stage: deploy
   image: node:latest
 
