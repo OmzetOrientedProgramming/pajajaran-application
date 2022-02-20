@@ -5,7 +5,7 @@ test('renders a title', () => {
   const { container, getByText } = render(<Home />);
   // console.log(container);
   // console.log(getByText);
-  expect(getByText('Airlangga Web')).toBeInTheDocument();
+  expect(getByText('Wave Admin')).toBeInTheDocument();
   // expect(container.firstChild).toMatchInlineSnapshot(`
   //   <h1>Hello, World!</h1>
   // `)

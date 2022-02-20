@@ -30,7 +30,7 @@ const Home: React.FC = () => {
         </h1>
 
         {/* Using previously made styled component*/}
-        <Title>Airlangga Web</Title>
+        <Title>Wave Admin</Title>
 
         <div tw="w-32 flex justify-between items-center">
           <Link href="/example">

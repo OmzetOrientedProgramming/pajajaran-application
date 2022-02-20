@@ -1,17 +1,17 @@
-# Web Front-End Application
+# Pajajaran Front-End Application
 
-<!-- [![pipeline status](https://gitlab.cs.ui.ac.id/ppl-fasilkom-ui/2022/Kelas-B/OOP/sriwijaya-application/badges/master/pipeline.svg)](https://gitlab.cs.ui.ac.id/ppl-fasilkom-ui/2022/Kelas-B/OOP/sriwijaya-application/-/commits/master)
-[![coverage report](https://gitlab.cs.ui.ac.id/ppl-fasilkom-ui/2022/Kelas-B/OOP/sriwijaya-application/badges/master/coverage.svg)](https://gitlab.cs.ui.ac.id/ppl-fasilkom-ui/2022/Kelas-B/OOP/sriwijaya-application/-/commits/master) -->
+[![pipeline status](https://gitlab.cs.ui.ac.id/ppl-fasilkom-ui/2022/Kelas-B/OOP/pajajaran-application/badges/master/pipeline.svg)](https://gitlab.cs.ui.ac.id/ppl-fasilkom-ui/2022/Kelas-B/OOP/pajajaran-application/-/commits/master)
+[![coverage report](https://gitlab.cs.ui.ac.id/ppl-fasilkom-ui/2022/Kelas-B/OOP/pajajaran-application/badges/master/coverage.svg)](https://gitlab.cs.ui.ac.id/ppl-fasilkom-ui/2022/Kelas-B/OOP/pajajaran-application/-/commits/master)
 
 ## Description
 
-This is a front-end admin repository for Software Engineering Project using Next.js, Typescript, twin.macro, and react-query.
+This is a front-end business admin repository for Software Engineering Project using Next.js, Typescript, twin.macro, and react-query.
 
 ## Installation & Development
 
 1. Clone this repository
    ```
-   <!-- git clone https://gitlab.com/omzet-oriented-programming/sriwijaya-application.git -->
+   git clone https://gitlab.com/omzet-oriented-programming/pajajaran-application.git
    ```
 2. Instal all dependencies (using node v16)
    ```
@@ -21,7 +21,7 @@ This is a front-end admin repository for Software Engineering Project using Next
    ```
    npm run dev
    ```
-   default URL will be at `http://localhost:3000`
+   default URL will be at `http://localhost:4000`
 4. Build & start
    ```
    npm run build
