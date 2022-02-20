@@ -3,7 +3,7 @@ stages:
   - test
   - deploy
 
-build:
+Build:
   stage: build
   image: node:latest
   rules:
@@ -21,7 +21,7 @@ build:
     paths:
       - node_modules/
 
-test:
+Test:
   stage: test
   image: node:latest
   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
@@ -53,12 +53,12 @@ test:
 #   only:
 #     - staging
 
-staging:
+Staging:
   stage: deploy
   image: node:latest
 
   variables:
-    PROJECT_NAME: airlangga
+    PROJECT_NAME: admin-wave
     STAGING_URL: $PROJECT_NAME-staging.vercel.app
 
   rules:
@@ -78,12 +78,12 @@ staging:
     - DEPLOYMENT_URL=$(vercel --name $PROJECT_NAME --confirm -t $VERCEL_TOKEN)
     - vercel alias set $DEPLOYMENT_URL $STAGING_URL -t $VERCEL_TOKEN
 
-prod:
+Prod:
   stage: deploy
   image: node:latest
 
   variables:
-    PROJECT_NAME: airlangga
+    PROJECT_NAME: admin-wave
     PROD_URL: $PROJECT_NAME.vercel.app
 
   rules:
