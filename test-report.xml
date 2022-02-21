@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testExecutions version="1">
-  <file path="C:\Users\Asus\Documents\Git\Kuliah\Sem6\PPL\airlangga-web\tests\pages\index.test.tsx">
-    <testCase name="renders a title" duration="373"/>
+  <file path="/Users/mekari/Documents/personal/akademis/ppl/gitlab-cs/pajajaran-application/tests/pages/index.test.tsx">
+    <testCase name="renders a title" duration="167"/>
   </file>
 </testExecutions>

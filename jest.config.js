@@ -7,7 +7,7 @@ module.exports = {
     "!**/*.d.ts",
     "!**/node_modules/**",
   ],
-  coverageReporters: ["html", "text", "text-summary", "cobertura"],
+  coverageReporters: ["html", "text", "text-summary", "cobertura", "lcov"],
   testEnvironment: "jsdom",
   setupFilesAfterEnv: ["<rootDir>/setupTests.ts"],
   testPathIgnorePatterns: ["/node_modules/", "/.next/"],

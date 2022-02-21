@@ -39,19 +39,38 @@ test:
         - junit.xml
       cobertura: coverage/cobertura-coverage.xml
 
-# SonarScanner:
-#   stage: test
-#   image:
-#     name: sonarsource/sonar-scanner-cli:latest
-#     entrypoint: ['']
-#   script:
-#     - sonar-scanner
-#       -Dproject.settings=./sonar-project.properties
-#       -Dsonar.host.url=$SONARQUBE_HOST_URL
-#       -Dsonar.login=$SONARQUBE_TOKEN
-#       -Dsonar.branch.target=staging
-#   only:
-#     - staging
+SonarScanner Dev:
+  image:
+    name: sonarsource/sonar-scanner-cli:latest
+    entrypoint: [""]
+  stage: test
+  script:
+    - sonar-scanner
+      -Dsonar.host.url=$SONARQUBE_HOST_URL
+      -Dsonar.login=$SONARQUBE_TOKEN
+      -Dsonar.branch.name=$CI_COMMIT_REF_NAME
+      -Dsonar.branch.target=staging
+      -Dsonar.projectKey=$SONARQUBE_PROJECT_KEY
+      -Dproject.settings=./sonar-project.properties
+  except:
+    - master
+    - staging
+
+SonarScanner:
+  image:
+    name: sonarsource/sonar-scanner-cli:latest
+    entrypoint: [""] 
+  stage: test
+  script:
+    - sonar-scanner
+      -Dsonar.host.url=$SONARQUBE_HOST_URL
+      -Dsonar.login=$SONARQUBE_TOKEN
+      -Dsonar.branch.name=$CI_COMMIT_REF_NAME
+      -Dsonar.projectKey=$SONARQUBE_PROJECT_KEY
+      -Dproject.settings=./sonar-project.properties
+  only:
+    - master
+    - staging
 
 staging:
   stage: deploy
