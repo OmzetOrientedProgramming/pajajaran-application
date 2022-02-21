@@ -77,7 +77,7 @@ staging:
   image: node:latest
 
   variables:
-    PROJECT_NAME: airlangga
+    PROJECT_NAME: admin-wave
     STAGING_URL: $PROJECT_NAME-staging.vercel.app
 
   rules:
@@ -102,7 +102,7 @@ prod:
   image: node:latest
 
   variables:
-    PROJECT_NAME: airlangga
+    PROJECT_NAME: admin-wave
     PROD_URL: $PROJECT_NAME.vercel.app
 
   rules:
