@@ -1,52 +1,102 @@
 import React from 'react';
 import 'twin.macro';
-import { useQuery, useQueryClient } from 'react-query';
-
-import Button from '../components/Example/Button';
-import { Layout } from '../components/Utils/Layout';
 import Head from 'next/head';
-
-// Fetch API function
-const getData = async () => {
-  const response = await fetch('https://catfact.ninja/facts');
-  if (!response.ok) {
-    console.log('Response error');
-    throw new Error('Network response was not ok');
-  }
-  return response.json();
-};
+import toast from 'react-hot-toast';
+import { useGetExample, usePostExample } from '../requests/hooks/exampleHooks';
+import Button from '../components/Utils/Button';
+import Link from 'next/link';
+import { Layout } from '../components/Utils/Layout';
 
 const Example: React.FC = () => {
-  const queryClient = useQueryClient();
-  console.log(queryClient);
+  // Init POST Request Example (using hook from /requests/)
+  const { mutate: postRegistration, isLoading: isPostingRegistration } =
+    usePostExample();
 
-  // Query hook
-  const { data, status, error } = useQuery('data', getData);
-  console.log(data);
+  // GET Request Example with dummy params (using hook from /requests/)
+  const { data, status, error } = useGetExample(
+    { id: '1', page: 2 }, // data can be from state or other variable
+    {
+      onSuccess: (res: any) => {
+        // console.log('res:', res);
+        toast.success('Get Success!');
+      },
+      onError: (err: any) => {
+        // console.log('err', err);
+        toast.error(err.response.data.message, { position: 'top-right' });
+      },
+    }
+  );
 
   return (
-    <>
+    <Layout>
       <Head>
-        <title>Example</title>
+        <title>Example Page</title>
       </Head>
-      <Layout>
-        <div tw="pt-8 pb-16 flex flex-col items-center justify-center min-h-screen w-full">
-          <Button>Back to Home</Button>
-          {status === 'loading' && <p>Loading data . . .</p>}
-
-          {status === 'error' && <p>Error: {error}</p>}
-          <div tw="my-4 flex flex-col items-center justify-center">
-            {status === 'success' &&
-              data.data.map((fact: any, key: any) => (
-                <div key={key} tw="text-center">
-                  <p>{fact.fact}</p>
-                  <p>{fact.length}</p>
-                </div>
-              ))}
-          </div>
+      <div tw="flex flex-col items-center w-full">
+        <div tw="w-[200px]">
+          <Link href="/">
+            <a>
+              <Button buttonType="primary">Back to Home</Button>
+            </a>
+          </Link>
         </div>
-      </Layout>
-    </>
+
+        {status === 'loading' && <p>Getting data . . .</p>}
+
+        {status === 'error' && <p>Error: {error}</p>}
+        <div tw="my-4 flex flex-col items-center justify-center">
+          {status === 'success' &&
+            data?.data.data.map((user: any, key: any) => (
+              <div key={key} tw="text-center mb-2">
+                <p>{user.name}</p>
+                <p>{user.age}</p>
+              </div>
+            ))}
+        </div>
+
+        {isPostingRegistration && <p>Posting . . .</p>}
+
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci
+          dolore maxime inventore deserunt corporis provident rerum. Tempore
+          alias impedit nisi quisquam quaerat natus, dignissimos necessitatibus
+          accusamus nesciunt, perspiciatis explicabo eligendi!
+        </p>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci
+          dolore maxime inventore deserunt corporis provident rerum. Tempore
+          alias impedit nisi quisquam quaerat natus, dignissimos necessitatibus
+          accusamus nesciunt, perspiciatis explicabo eligendi!
+        </p>
+
+        {/* Trigger POST onClick button with dummy params */}
+        <button
+          tw="border p-4"
+          onClick={() =>
+            postRegistration(
+              {
+                name: 'budi', // data can be from state or form response
+                job: 'softeng',
+              },
+              {
+                onSuccess: (res: any) => {
+                  // console.log('res', res);
+                  toast.success('Post Success!');
+                },
+                onError: (err: any) => {
+                  // console.log('err', err);
+                  toast.error(err.response.data.message, {
+                    position: 'top-right',
+                  });
+                },
+              }
+            )
+          }
+        >
+          Click to Post
+        </button>
+      </div>
+    </Layout>
   );
 };
 
