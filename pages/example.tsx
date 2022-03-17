@@ -2,7 +2,7 @@ import React from 'react';
 import 'twin.macro';
 import Head from 'next/head';
 import toast from 'react-hot-toast';
-import { useGetExample, usePostExample } from '../requests/hooks/exampleHooks';
+import { useGetExample, usePostExample } from '../apis/hooks/exampleHooks';
 import Button from '../components/Utils/Button';
 import Link from 'next/link';
 import { Layout } from '../components/Utils/Layout';

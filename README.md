@@ -11,7 +11,7 @@ This is a front-end business admin repository for Software Engineering Project u
 
 1. Clone this repository
    ```
-   git clone https://gitlab.com/omzet-oriented-programming/pajajaran-application.git
+   git clone https://gitlab.cs.ui.ac.id/ppl-fasilkom-ui/2022/Kelas-B/OOP/pajajaran-application.git
    ```
 2. Instal all dependencies (using node v16)
    ```
