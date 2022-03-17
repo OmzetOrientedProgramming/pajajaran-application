@@ -8,15 +8,15 @@ import {
 import axios from 'axios';
 
 import Example from '../../pages/example';
-import { headers } from '../../requests/constants';
-import endpoint from '../../requests/endpoint';
+import { headers } from '../../apis/constants';
+import endpoint from '../../apis/endpoint';
 import ExampleWrapper from '../../__mocks__/pages/example';
 import {
   getExampleParams,
   mockGetExampleResponse,
   mockPostExampleResponse,
   postExampleParams,
-} from '../../__mocks__/requests/exampleMocks';
+} from '../../__mocks__/apis/exampleMocks';
 
 // To mock axios
 jest.mock('axios');

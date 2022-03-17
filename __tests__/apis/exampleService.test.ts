@@ -1,11 +1,8 @@
 import { cleanup } from '@testing-library/react';
 import axios from 'axios';
-import { headers } from '../../requests/constants';
-import endpoint from '../../requests/endpoint';
-import {
-  getExample,
-  postExample,
-} from '../../requests/services/exampleService';
+import { headers } from '../../apis/constants';
+import endpoint from '../../apis/endpoint';
+import { getExample, postExample } from '../../apis/services/exampleService';
 import {
   dummyGetExampleResponse,
   dummyPostExampleResponse,
@@ -13,7 +10,7 @@ import {
   mockGetExampleResponse,
   mockPostExampleResponse,
   postExampleParams,
-} from '../../__mocks__/requests/exampleMocks';
+} from '../../__mocks__/apis/exampleMocks';
 
 jest.mock('axios');
 const mockAxios = axios as jest.Mocked<typeof axios>;
