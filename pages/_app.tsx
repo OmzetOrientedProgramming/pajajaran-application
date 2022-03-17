@@ -4,6 +4,7 @@ import 'twin.macro';
 
 import GlobalStyles from './../styles/GlobalStyles';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { Toaster } from 'react-hot-toast';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,6 +29,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="icon" type="image/png" href="/icon-192x192.png" />
       </Head>
       <GlobalStyles />
+      <Toaster position="top-center" />
       <QueryClientProvider client={queryClient}>
         <Component {...pageProps} />
       </QueryClientProvider>
