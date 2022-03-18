@@ -1,5 +1,5 @@
 import { cleanup, render, screen } from '@testing-library/react';
-import Detail from '../../pages/booking/detail';
+import Detail from '../../pages/booking/[id]';
 import ExampleWrapper from '../../__mocks__/pages/example';
 
 afterEach(() => {
