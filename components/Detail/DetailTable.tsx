@@ -70,19 +70,19 @@ const formatter = new Intl.NumberFormat('id-ID', {
 
 const ItemContent: React.FunctionComponent<ItemContentProps> = (props) => {
   return (
-    <div css={[tw`pt-4 border border-black rounded-b-lg color[#003366]`]}>
+    <div css={[tw`pt-4 mb-5 border border-black rounded-b-lg color[#003366]`]}>
       <div
         css={[
           css`
             border-bottom-width: 3px;
           `,
-          tw`text-xl mx-10 flex flex-row justify-between items-center pb-4 mb-3`,
+          tw`text-xl mx-10 grid grid-cols-6 pb-4 mb-3 px-6 text-center`,
         ]}
       >
-        <p tw="flex-1"></p>
-        <p tw="flex-grow">Nama Item</p>
-        <p tw="flex-1">Harga Satuan</p>
-        <p tw="flex-1">Jumlah Item</p>
+        <p tw=""></p>
+        <p tw="col-span-2">Nama Item</p>
+        <p tw="col-span-2">Harga Satuan</p>
+        <p tw="">Jumlah Item</p>
       </div>
       <div
         css={[
@@ -96,16 +96,18 @@ const ItemContent: React.FunctionComponent<ItemContentProps> = (props) => {
           <div
             key={key}
             css={[
-              tw`flex flex-row justify-between items-center border-b mx-16 px-8 pb-5 mb-5`,
+              tw`grid grid-cols-6 border-b mx-16 pb-5 mb-5`,
               item.title === 'Status Booking' && tw`font-bold border-none`,
             ]}
           >
-            <div tw="w-[60px] h-auto flex-1 mr-5">
+            <div tw="mx-auto w-[60px] h-auto mr-5">
               <img src={item.image} alt={item.name} tw="" />
             </div>
-            <p tw="text-left text-xl flex-grow">{item.name}</p>
-            <p tw="text-xl flex-1">{formatter.format(item.price)}</p>
-            <p tw="text-xl flex-1">{`x${item.qty}`}</p>
+            <p tw="text-left text-xl col-span-2">{item.name}</p>
+            <p tw="text-center text-xl col-span-2">
+              {formatter.format(item.price)}
+            </p>
+            <p tw="text-center text-xl">{`x${item.qty}`}</p>
           </div>
         ))}
       </div>
@@ -122,7 +124,22 @@ interface DetailTableSubComponents {
 const DetailTable: React.FunctionComponent & DetailTableSubComponents = (
   props
 ) => {
-  return <div tw="w-[800px]" {...props} />;
+  return (
+    <div
+      css={[
+        css`
+          max-width: 800px;
+          min-width: 600px;
+          width: 50vw;
+
+          @media only screen and (min-width: 1600px) {
+            width: 800px;
+          }
+        `,
+      ]}
+      {...props}
+    />
+  );
 };
 
 DetailTable.Title = Title;

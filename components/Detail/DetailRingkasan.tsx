@@ -51,6 +51,7 @@ const DetailRingkasan: React.FC<DetailRingkasanProps> = (props) => {
       css={[
         css`
           border-width: 3px;
+          max-width: 400px;
         `,
         tw`text-xl color[#003366] pt-4 pb-3 rounded-xl flex flex-col justify-center`,
       ]}

@@ -1,11 +1,11 @@
 import React from 'react';
 import 'twin.macro';
 import Head from 'next/head';
-import { Layout } from '../../components/Utils/Layout';
-import { dummyGetDetailBookingResponse as dataMock } from '../../__mocks__/apis/detailMocks';
-import DetailRingkasan from '../../components/Detail/DetailRingkasan';
+import { Layout } from '../../../components/Utils/Layout';
+import { dummyGetDetailBookingResponse as dataMock } from '../../../__mocks__/apis/detailMocks';
+import DetailRingkasan from '../../../components/Detail/DetailRingkasan';
 import tw, { css } from 'twin.macro';
-import DetailTable from '../../components/Detail/DetailTable';
+import DetailTable from '../../../components/Detail/DetailTable';
 
 const Detail: React.FC = () => {
   return (
@@ -30,7 +30,7 @@ const Detail: React.FC = () => {
             <p tw="color[#829CB6]">Dibuat pada {dataMock.data.created_at}</p>
           </div>
         </div>
-        <div tw="flex flex-row justify-between items-stretch gap-x-12">
+        <div tw="flex flex-row flex-wrap justify-center items-stretch gap-x-12">
           <div id="info" tw="flex flex-col justify-center items-center">
             <div tw="mb-5">
               <DetailTable>
