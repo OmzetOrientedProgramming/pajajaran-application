@@ -8,7 +8,7 @@ interface TitleProps {
 }
 
 interface InfoContentProps {
-  id: number;
+  customer: string;
   date: string;
   start_time: string;
   end_time: string;
@@ -28,7 +28,7 @@ const Title: React.FunctionComponent<TitleProps> = (props) => (
 
 const InfoContent: React.FunctionComponent<InfoContentProps> = (props) => {
   const fields = [
-    { title: 'Nama Customer', value: props.id },
+    { title: 'Nama Customer', value: props.customer },
     { title: 'Jumlah Tiket', value: `${props.capacity} Tiket` },
     { title: 'Tanggal Booking', value: props.date },
     { title: 'Jam Booking', value: `${props.start_time}-${props.end_time}` },
@@ -76,7 +76,7 @@ const ItemContent: React.FunctionComponent<ItemContentProps> = (props) => {
           css`
             border-bottom-width: 3px;
           `,
-          tw`text-xl mx-10 grid grid-cols-6 pb-4 mb-3 px-6 text-center`,
+          tw`text-xl mx-10 grid grid-cols-6 items-center pb-4 mb-3 text-center`,
         ]}
       >
         <p tw=""></p>
@@ -130,7 +130,7 @@ const DetailTable: React.FunctionComponent & DetailTableSubComponents = (
         css`
           max-width: 800px;
           min-width: 600px;
-          width: 50vw;
+          width: 53vw;
 
           @media only screen and (min-width: 1600px) {
             width: 800px;

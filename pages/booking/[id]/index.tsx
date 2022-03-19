@@ -36,7 +36,7 @@ const Detail: React.FC = () => {
               <DetailTable>
                 <DetailTable.Title>Informasi Booking</DetailTable.Title>
                 <DetailTable.InfoContent
-                  id={dataMock.data.id}
+                  customer={'Budi'}
                   date={dataMock.data.date}
                   start_time={dataMock.data.start_time}
                   end_time={dataMock.data.end_time}
@@ -52,7 +52,7 @@ const Detail: React.FC = () => {
               </DetailTable>
             </div>
           </div>
-          <div tw="flex flex-col justify-between">
+          <div tw="flex flex-col justify-start">
             <DetailRingkasan
               title="Ringkasan"
               status={dataMock.data.status}
@@ -65,7 +65,38 @@ const Detail: React.FC = () => {
               total_price_booking={dataMock.data.total_price_ticket}
               total_price_item={dataMock.data.total_price_item}
             />
-            <div></div>
+            <div tw="flex flex-col items-center justify-center">
+              <button
+                onClick={() => {}}
+                css={[
+                  css`
+                    box-shadow: 0px 3px 0px 0px #888888;
+                    border-color: #03bd36;
+                    border-radius: 10px;
+                    padding-top: 9.5px;
+                    padding-bottom: 9.5px;
+                  `,
+                  tw`font-bold mt-12 mb-5 text-2xl w-full border-2 background[#03BD36] color[#FFFFFF] duration-150 hover:(brightness-110)`,
+                ]}
+              >
+                Terima
+              </button>
+              <button
+                onClick={() => {}}
+                css={[
+                  css`
+                    box-shadow: 0px 3px 0px 0px #888888;
+                    border-color: #fe3131;
+                    border-radius: 10px;
+                    padding-top: 9.5px;
+                    padding-bottom: 9.5px;
+                  `,
+                  tw`font-bold text-2xl w-full border-2 background[#FFFFFF] color[#FE3131] duration-150 hover:(background[#FE3131] color[#FFFFFF])`,
+                ]}
+              >
+                Tolak
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -25,7 +25,7 @@ const formatter = new Intl.NumberFormat('id-ID', {
 const DetailRingkasan: React.FC<DetailRingkasanProps> = (props) => {
   const summaryFields = [
     { title: 'Status', value: StatusMap.get(props.status) },
-    { title: 'Customer', value: 'Budi' },
+    { title: 'Customer', value: props.customer },
     { title: 'Jumlah Tiket', value: `${props.capacity} Tiket` },
     {
       title: 'Waktu Booking',
