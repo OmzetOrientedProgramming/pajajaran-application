@@ -43,21 +43,21 @@ const Button: React.FC<ButtonProps> = ({
         ],
         buttonType === 'customPrimary' && [
           css`
-            background: ${color!};
+            background: ${color};
             color: #ffffff;
-            border-color: ${color!};
+            border-color: ${color};
           `,
           tw`duration-150 hover:(brightness-110)`,
         ],
         buttonType === 'customSecondary' &&
           css`
             background: #ffffff;
-            color: ${color!};
-            border-color: ${color!};
+            color: ${color};
+            border-color: ${color};
             transition: 0.15;
 
             :hover {
-              background: ${color!};
+              background: ${color};
               color: #ffffff;
             }
           `,
