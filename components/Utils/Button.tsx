@@ -16,7 +16,6 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
   color,
 }) => {
-  console.log(buttonType);
   return (
     <button
       type={type}

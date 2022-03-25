@@ -2,12 +2,12 @@ import React from 'react';
 import 'twin.macro';
 import Head from 'next/head';
 import { Layout } from '../../../components/Utils/Layout';
-import { dummyGetDetailBookingResponse as dataMock } from '../../../__mocks__/apis/detailMocks';
+import { dummyGetDetailBookingResponse as dataMock } from '../../../__mocks__/apis/detailBookingMocks';
 import DetailRingkasan from '../../../components/Detail/DetailRingkasan';
 import tw, { css } from 'twin.macro';
 import DetailTable from '../../../components/Detail/DetailTable';
 
-const Detail: React.FC = () => {
+const DetailBooking: React.FC = () => {
   return (
     <Layout>
       <Head>
@@ -104,4 +104,4 @@ const Detail: React.FC = () => {
   );
 };
 
-export default Detail;
+export default DetailBooking;
