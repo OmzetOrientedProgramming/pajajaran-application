@@ -53,7 +53,21 @@ const InfoContent: React.FunctionComponent<InfoContentProps> = (props) => {
             ]}
           >
             <p>{field.title}</p>
-            <p>{field.value}</p>
+            <p
+              css={[
+                field.title === 'Status Booking' &&
+                  field.value === 'Menunggu Pembayaran' &&
+                  tw`color[#FD7702]`,
+                field.title === 'Status Booking' &&
+                  (field.value === 'Berhasil' || field.value === 'Selesai') &&
+                  tw`color[#03BD36]`,
+                field.title === 'Status Booking' &&
+                  field.value === 'Gagal' &&
+                  tw`color[#FE3131]`,
+              ]}
+            >
+              {field.value}
+            </p>
           </div>
         </div>
       ))}

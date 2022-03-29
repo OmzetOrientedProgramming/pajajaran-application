@@ -22,8 +22,7 @@ const DetailBooking: React.FC = () => {
   const [confirmType, setConfirmType] = useState('');
   const [bookingStatus, setBookingStatus] = useState(0);
 
-  const { mutate: confirmBooking, isLoading: isConfirmingBooking } =
-    useConfirmBooking();
+  const { mutate: confirmBooking } = useConfirmBooking();
 
   const { data, status, error } = useGetDetailBooking(
     { id: stringId },
