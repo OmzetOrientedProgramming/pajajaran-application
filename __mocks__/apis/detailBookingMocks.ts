@@ -10,7 +10,7 @@ export const dummyGetDetailBookingResponse = {
     start_time: '21:00',
     end_time: '23:00',
     capacity: 10,
-    status: 2,
+    status: 0,
     total_price: 500000,
     total_price_ticket: 150000,
     total_price_item: 350000,

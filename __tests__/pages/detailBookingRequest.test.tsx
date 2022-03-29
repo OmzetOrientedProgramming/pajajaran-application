@@ -18,6 +18,12 @@ import {
   mockGetDetailBookingResponse,
 } from '../../__mocks__/apis/detailBookingMocks';
 
+// @ts-expect-error
+global.IntersectionObserver = class FakeIntersectionObserver {
+  observe() {}
+  disconnect() {}
+};
+
 jest.mock('axios');
 const mockAxios = axios as jest.Mocked<typeof axios>;
 
@@ -34,7 +40,7 @@ afterEach(() => {
 
 describe('useGetDetailBooking()', () => {
   test('page display data requested', async () => {
-    mockAxios.get.mockResolvedValueOnce(mockGetDetailBookingResponse);
+    mockAxios.get.mockResolvedValue(mockGetDetailBookingResponse);
 
     render(
       <ExampleWrapper>
@@ -65,7 +71,6 @@ describe('useGetDetailBooking()', () => {
       </ExampleWrapper>
     );
 
-    // await expect(mockAxios.get).rejects.toThrow('get error');
     await waitFor(() => {
       expect(mockAxios.get).toHaveBeenCalledTimes(1);
       expect(screen.queryByText('22 April 2022')).not.toBeInTheDocument();
@@ -75,8 +80,9 @@ describe('useGetDetailBooking()', () => {
 });
 
 describe('useConfirmBooking()', () => {
-  test('confirmation button request works correctly', async () => {
-    mockAxios.patch.mockResolvedValueOnce(mockConfirmBookingResponse);
+  test('confirmation terima button request works correctly', async () => {
+    mockAxios.get.mockResolvedValue(mockGetDetailBookingResponse);
+    mockAxios.patch.mockResolvedValue(mockConfirmBookingResponse);
 
     render(
       <ExampleWrapper>
@@ -84,12 +90,19 @@ describe('useConfirmBooking()', () => {
       </ExampleWrapper>
     );
 
-    fireEvent.click(screen.getByText('Terima'));
+    await waitFor(() => {
+      expect(screen.getByText('22 April 2022')).toBeInTheDocument();
+      expect(screen.getByText('Terima')).toBeInTheDocument();
+
+      fireEvent.click(screen.getByText('Terima'));
+
+      fireEvent.click(screen.getByText('Ya'));
+    });
 
     expect(mockAxios.patch).toHaveBeenCalledTimes(1);
     expect(mockAxios.patch).toHaveBeenCalledWith(
       `${endpoint.detailBooking}/${confirmBookingParams.id}/confirmation`,
-      { booking_status: confirmBookingParams.booking_status },
+      { booking_status: 1 },
       { headers: headers }
     );
 
@@ -98,8 +111,8 @@ describe('useConfirmBooking()', () => {
     });
   });
 
-  test('confirmation button failed request', async () => {
-    mockAxios.patch.mockReturnValueOnce(Promise.reject(new Error('get error')));
+  test('confirmation tolak button request works correctly', async () => {
+    mockAxios.patch.mockResolvedValue(mockConfirmBookingResponse);
 
     render(
       <ExampleWrapper>
@@ -107,12 +120,24 @@ describe('useConfirmBooking()', () => {
       </ExampleWrapper>
     );
 
-    fireEvent.click(screen.getByText('Terima'));
-
-    // await expect(mockAxios.get).rejects.toThrow('get error');
     await waitFor(() => {
-      expect(mockAxios.patch).toHaveBeenCalledTimes(1);
-      expect(screen.getByText('Terima')).toBeInTheDocument();
+      expect(screen.getByText('22 April 2022')).toBeInTheDocument();
+      expect(screen.getByText('Tolak')).toBeInTheDocument();
+
+      fireEvent.click(screen.getByText('Tolak'));
+
+      fireEvent.click(screen.getByText('Ya'));
+    });
+
+    expect(mockAxios.patch).toHaveBeenCalledTimes(1);
+    expect(mockAxios.patch).toHaveBeenCalledWith(
+      `${endpoint.detailBooking}/${confirmBookingParams.id}/confirmation`,
+      { booking_status: 4 },
+      { headers: headers }
+    );
+
+    await waitFor(() => {
+      expect(screen.queryByText('Tolak')).not.toBeInTheDocument();
     });
   });
 });

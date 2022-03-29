@@ -14,7 +14,7 @@ afterEach(() => {
 
 describe('ui components', () => {
   test('sections title exist', async () => {
-    mockAxios.get.mockResolvedValueOnce(mockGetDetailBookingResponse);
+    mockAxios.get.mockResolvedValue(mockGetDetailBookingResponse);
 
     render(
       <ExampleWrapper>
