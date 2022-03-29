@@ -53,7 +53,7 @@ export const dummyConfirmBookingResponse = {
 };
 
 export const mockConfirmBookingResponse: AxiosResponse = {
-  data: dummyGetDetailBookingResponse,
+  data: dummyConfirmBookingResponse,
   status: 200,
   statusText: 'OK',
   headers: {},

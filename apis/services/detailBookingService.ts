@@ -13,3 +13,26 @@ export const getDetailBooking = async ({ id }: getDetailBookingParams) => {
   const response = await axios.get(`${endpoint.detailBooking}/${id}`, options);
   return response;
 };
+
+export interface confirmBookingParams {
+  id: string;
+  booking_status: number;
+}
+
+export const confirmBooking = async ({
+  id,
+  booking_status,
+}: confirmBookingParams) => {
+  const options = {
+    headers,
+  };
+  const data = {
+    booking_status,
+  };
+  const response = await axios.patch(
+    `${endpoint.detailBooking}/${id}/confirmation`,
+    data,
+    options
+  );
+  return response;
+};

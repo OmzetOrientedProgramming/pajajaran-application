@@ -48,7 +48,7 @@ describe('confirmBooking()', () => {
 
     expect(mockAxios.patch).toHaveBeenCalledTimes(1);
     expect(mockAxios.patch).toHaveBeenCalledWith(
-      `${endpoint.confirmBooking}/${confirmBookingParams.id}`,
+      `${endpoint.detailBooking}/${confirmBookingParams.id}/confirmation`,
       { booking_status: confirmBookingParams.booking_status },
       { headers: headers }
     );
