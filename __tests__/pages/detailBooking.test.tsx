@@ -1,6 +1,11 @@
-import { cleanup, render, screen } from '@testing-library/react';
-import Detail from '../../pages/booking/[id]';
+import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import axios from 'axios';
+import DetailBooking from '../../pages/booking/[id]';
+import { mockGetDetailBookingResponse } from '../../__mocks__/apis/detailBookingMocks';
 import ExampleWrapper from '../../__mocks__/pages/example';
+
+jest.mock('axios');
+const mockAxios = axios as jest.Mocked<typeof axios>;
 
 afterEach(() => {
   cleanup();
@@ -9,14 +14,18 @@ afterEach(() => {
 
 describe('ui components', () => {
   test('sections title exist', async () => {
+    mockAxios.get.mockResolvedValueOnce(mockGetDetailBookingResponse);
+
     render(
       <ExampleWrapper>
-        <Detail />
+        <DetailBooking />
       </ExampleWrapper>
     );
 
-    expect(screen.queryByText('Informasi Booking')).toBeInTheDocument();
-    expect(screen.queryByText('Pesanan Tambahan')).toBeInTheDocument();
-    expect(screen.queryByText('Ringkasan')).toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByText('Detail Booking')).toBeInTheDocument();
+      expect(screen.getByText('Pesanan Tambahan')).toBeInTheDocument();
+      expect(screen.getByText('Ringkasan')).toBeInTheDocument();
+    });
   });
 });
