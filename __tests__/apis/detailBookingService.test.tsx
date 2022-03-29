@@ -2,10 +2,16 @@ import { cleanup } from '@testing-library/react';
 import axios from 'axios';
 import { headers } from '../../apis/constants';
 import endpoint from '../../apis/endpoint';
-import { getDetailBooking } from '../../apis/services/detailBookingService';
 import {
+  getDetailBooking,
+  confirmBooking,
+} from '../../apis/services/detailBookingService';
+import {
+  confirmBookingParams,
+  dummyConfirmBookingResponse,
   dummyGetDetailBookingResponse,
   getDetailBookingParams,
+  mockConfirmBookingResponse,
   mockGetDetailBookingResponse,
 } from '../../__mocks__/apis/detailBookingMocks';
 
@@ -21,7 +27,7 @@ describe('getDetailBooking()', () => {
   test('getDetailBooking works correctly', async () => {
     mockAxios.get.mockResolvedValueOnce(mockGetDetailBookingResponse);
 
-    expect(mockAxios.post).not.toHaveBeenCalled();
+    expect(mockAxios.get).not.toHaveBeenCalled();
     const data = await getDetailBooking(getDetailBookingParams);
 
     expect(mockAxios.get).toHaveBeenCalledTimes(1);
@@ -30,5 +36,22 @@ describe('getDetailBooking()', () => {
       { headers: headers }
     );
     expect(data.data).toEqual(dummyGetDetailBookingResponse);
+  });
+});
+
+describe('confirmBooking()', () => {
+  test('confirmBooking works correctly', async () => {
+    mockAxios.patch.mockResolvedValueOnce(mockConfirmBookingResponse);
+
+    expect(mockAxios.patch).not.toHaveBeenCalled();
+    const data = await confirmBooking(confirmBookingParams);
+
+    expect(mockAxios.patch).toHaveBeenCalledTimes(1);
+    expect(mockAxios.patch).toHaveBeenCalledWith(
+      `${endpoint.confirmBooking}/${confirmBookingParams.id}`,
+      { booking_status: confirmBookingParams.booking_status },
+      { headers: headers }
+    );
+    expect(data.data).toEqual(dummyConfirmBookingResponse);
   });
 });

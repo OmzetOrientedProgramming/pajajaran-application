@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
 
+// Get Detail Booking
 export const dummyGetDetailBookingResponse = {
   status: 200,
   message: 'success',
@@ -43,4 +44,23 @@ export const mockGetDetailBookingResponse: AxiosResponse = {
 
 export const getDetailBookingParams = {
   id: '1',
+};
+
+// Confirm Booking
+export const dummyConfirmBookingResponse = {
+  status: 200,
+  message: 'success update booking status',
+};
+
+export const mockConfirmBookingResponse: AxiosResponse = {
+  data: dummyGetDetailBookingResponse,
+  status: 200,
+  statusText: 'OK',
+  headers: {},
+  config: {},
+};
+
+export const confirmBookingParams = {
+  id: '1',
+  booking_status: 1,
 };
