@@ -1,5 +1,6 @@
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import {
+  confirmBooking,
   getDetailBooking,
   getDetailBookingParams,
 } from '../services/detailBookingService';
@@ -13,4 +14,8 @@ export function useGetDetailBooking(
     () => getDetailBooking(params),
     handler
   );
+}
+
+export function useConfirmBooking() {
+  return useMutation(confirmBooking);
 }

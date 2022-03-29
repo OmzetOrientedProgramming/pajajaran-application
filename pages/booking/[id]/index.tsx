@@ -1,24 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import 'twin.macro';
 import Head from 'next/head';
 import { Layout } from '../../../components/Utils/Layout';
 import DetailRingkasan from '../../../components/Detail/DetailRingkasan';
 import tw, { css } from 'twin.macro';
 import DetailTable from '../../../components/Detail/DetailTable';
-import { useGetDetailBooking } from '../../../apis/hooks/detailBookingHooks';
+import {
+  useConfirmBooking,
+  useGetDetailBooking,
+} from '../../../apis/hooks/detailBookingHooks';
 import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
+import ConfirmModal from '../../../components/Detail/ConfirmModal';
 
 const DetailBooking: React.FC = () => {
   const router = useRouter();
   const { id } = router.query;
   const stringId = id as string;
 
+  const [isOpen, setIsOpen] = useState(false);
+  const [confirmType, setConfirmType] = useState('');
+  const [bookingStatus, setBookingStatus] = useState(0);
+
+  const { mutate: confirmBooking, isLoading: isConfirmingBooking } =
+    useConfirmBooking();
+
   const { data, status, error } = useGetDetailBooking(
     { id: stringId },
     {
       onSuccess: (res: any) => {
-        // console.log('res:', res);
+        // console.log(res);
+        setBookingStatus(res.data.data.status);
       },
       onError: (err: any) => {
         // console.log('err', err);
@@ -29,11 +41,43 @@ const DetailBooking: React.FC = () => {
 
   const detail = data?.data.data;
 
+  const handleConfirm = (state: boolean) => {
+    confirmBooking(
+      {
+        id: detail.id,
+        booking_status: state ? 1 : 4,
+      },
+      {
+        onSuccess: (res: any) => {
+          state ? setBookingStatus(1) : setBookingStatus(4);
+          setIsOpen(false);
+          toast.success(
+            state ? 'Booking konfirmasi diterima' : 'Booking konfirmasi ditolak'
+          );
+        },
+        onError: (err: any) => {
+          // console.log('err', err);
+          toast.error(err.response.data.message, {
+            position: 'top-right',
+          });
+        },
+      }
+    );
+  };
+
   return (
     <Layout>
       <Head>
         <title>Detail Booking</title>
       </Head>
+
+      <ConfirmModal
+        type={confirmType}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        handleConfirm={handleConfirm}
+      />
+
       <div
         css={[
           css`
@@ -92,38 +136,47 @@ const DetailBooking: React.FC = () => {
                   total_price_booking={detail.total_price_ticket}
                   total_price_item={detail.total_price_item}
                 />
-                <div tw="flex flex-col items-center justify-center">
-                  <button
-                    onClick={() => {}}
-                    css={[
-                      css`
-                        box-shadow: 0px 3px 0px 0px #888888;
-                        border-color: #03bd36;
-                        border-radius: 10px;
-                        padding-top: 9.5px;
-                        padding-bottom: 9.5px;
-                      `,
-                      tw`font-bold mt-12 mb-5 text-2xl w-full border-2 background[#03BD36] color[#FFFFFF] duration-150 hover:(brightness-110)`,
-                    ]}
-                  >
-                    Terima
-                  </button>
-                  <button
-                    onClick={() => {}}
-                    css={[
-                      css`
-                        box-shadow: 0px 3px 0px 0px #888888;
-                        border-color: #fe3131;
-                        border-radius: 10px;
-                        padding-top: 9.5px;
-                        padding-bottom: 9.5px;
-                      `,
-                      tw`font-bold text-2xl w-full border-2 background[#FFFFFF] color[#FE3131] duration-150 hover:(background[#FE3131] color[#FFFFFF])`,
-                    ]}
-                  >
-                    Tolak
-                  </button>
-                </div>
+                {bookingStatus === 0 && (
+                  <div tw="flex flex-col items-center justify-center">
+                    <button
+                      onClick={() => {
+                        setConfirmType('terima');
+                        setIsOpen(true);
+                      }}
+                      css={[
+                        css`
+                          box-shadow: 0px 3px 0px 0px #888888;
+                          border-color: #03bd36;
+                          border-radius: 10px;
+                          padding-top: 9.5px;
+                          padding-bottom: 9.5px;
+                        `,
+                        tw`font-bold mt-12 mb-5 text-2xl w-full border-2 background[#03BD36] color[#FFFFFF] duration-150 hover:(brightness-110)`,
+                      ]}
+                    >
+                      Terima
+                    </button>
+                    <button
+                      onClick={() => {
+                        setConfirmType('batal');
+                        setIsOpen(true);
+                      }}
+                      data-testid={'tolak'}
+                      css={[
+                        css`
+                          box-shadow: 0px 3px 0px 0px #888888;
+                          border-color: #fe3131;
+                          border-radius: 10px;
+                          padding-top: 9.5px;
+                          padding-bottom: 9.5px;
+                        `,
+                        tw`font-bold text-2xl w-full border-2 background[#FFFFFF] color[#FE3131] duration-150 hover:(background[#FE3131] color[#FFFFFF])`,
+                      ]}
+                    >
+                      Tolak
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </>
