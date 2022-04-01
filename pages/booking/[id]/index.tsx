@@ -24,7 +24,7 @@ const DetailBooking: React.FC = () => {
 
   const { mutate: confirmBooking } = useConfirmBooking();
 
-  const { data, status, error } = useGetDetailBooking(
+  const { data, status, error, refetch } = useGetDetailBooking(
     { id: stringId },
     {
       onSuccess: (res: any) => {
@@ -62,6 +62,7 @@ const DetailBooking: React.FC = () => {
         },
       }
     );
+    refetch();
   };
 
   return (
