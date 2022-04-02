@@ -12,7 +12,7 @@ import {
 import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
 import ConfirmModal from '../../../components/Detail/ConfirmModal';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 const DetailBooking: React.FC = () => {
   const router = useRouter();
@@ -101,7 +101,7 @@ const DetailBooking: React.FC = () => {
                   Id Booking #{detail.id}
                 </h3>
                 <p tw="color[#829CB6]">
-                  Dibuat pada {moment(detail.created_at).format('DD/MM/YYYY')}
+                  Dibuat pada {dayjs(detail.created_at).format('DD/MM/YYYY')}
                 </p>
               </div>
             </div>
