@@ -12,7 +12,6 @@ import {
 import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
 import ConfirmModal from '../../../components/Detail/ConfirmModal';
-import dayjs from 'dayjs';
 
 const DetailBooking: React.FC = () => {
   const router = useRouter();
@@ -41,6 +40,10 @@ const DetailBooking: React.FC = () => {
   );
 
   const detail = data?.data.data;
+  const bookingDate = detail && new Date(detail.date);
+  const createDate = detail && new Date(detail.created_at);
+  const startTime = detail?.start_time.slice(0, 5);
+  const endTime = detail?.end_time.slice(0, 5);
 
   const handleConfirm = (state: boolean) => {
     confirmBooking(
@@ -101,7 +104,11 @@ const DetailBooking: React.FC = () => {
                   Id Booking #{detail.id}
                 </h3>
                 <p tw="color[#829CB6]">
-                  Dibuat pada {dayjs(detail.created_at).format('DD/MM/YYYY')}
+                  Dibuat pada{' '}
+                  {`${createDate.getDate()}/${
+                    createDate.getMonth() + 1
+                  }/${createDate.getFullYear()}`}
+                  {/* DD/MM/YYYY */}
                 </p>
               </div>
             </div>
@@ -112,9 +119,9 @@ const DetailBooking: React.FC = () => {
                     <DetailTable.Title>Informasi Booking</DetailTable.Title>
                     <DetailTable.InfoContent
                       customer={'Budi'}
-                      date={detail.date}
-                      start_time={detail.start_time}
-                      end_time={detail.end_time}
+                      date={bookingDate}
+                      start_time={startTime}
+                      end_time={endTime}
                       capacity={detail.capacity}
                       status={detail.status}
                     />
@@ -133,9 +140,9 @@ const DetailBooking: React.FC = () => {
                   status={detail.status}
                   customer={'Budi'}
                   capacity={detail.capacity}
-                  date={detail.date}
-                  start_time={detail.start_time}
-                  end_time={detail.end_time}
+                  date={bookingDate}
+                  start_time={startTime}
+                  end_time={endTime}
                   total_price={detail.total_price}
                   total_price_booking={detail.total_price_ticket}
                   total_price_item={detail.total_price_item}

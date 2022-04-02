@@ -29,9 +29,9 @@ jest.mock('next/link', () => {
   };
 });
 
-// beforeAll(() => {
-//   console.error = jest.fn();
-// });
+beforeAll(() => {
+  console.error = jest.fn();
+});
 
 afterEach(() => {
   cleanup();

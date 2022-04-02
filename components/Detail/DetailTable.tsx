@@ -1,8 +1,7 @@
 import React from 'react';
 import 'twin.macro';
 import tw, { css } from 'twin.macro';
-import StatusMap from './StatusMap';
-import dayjs from 'dayjs';
+import StatusMap, { days, months } from './ConstantMap';
 
 interface TitleProps {
   children: string;
@@ -10,7 +9,7 @@ interface TitleProps {
 
 interface InfoContentProps {
   customer: string;
-  date: string;
+  date: Date;
   start_time: string;
   end_time: string;
   capacity: number;
@@ -33,13 +32,13 @@ const InfoContent: React.FunctionComponent<InfoContentProps> = (props) => {
     { title: 'Jumlah Tiket', value: `${props.capacity} Tiket` },
     {
       title: 'Tanggal Booking',
-      value: dayjs(props.date).format('dddd, D MMMM YYYY'),
+      value: `${days[props.date.getDay()]}, ${props.date.getDate()} ${
+        months[props.date.getMonth()]
+      } ${props.date.getFullYear()}`, // dddd, D MMMM YYYY
     },
     {
       title: 'Jam Booking',
-      value: `${dayjs(props.start_time).format('HH:mm')} - ${dayjs(
-        props.end_time
-      ).format('HH:mm')}`,
+      value: `${props.start_time} - ${props.end_time}`,
     },
     { title: 'Status Booking', value: StatusMap.get(props.status) },
   ];
