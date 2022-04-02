@@ -2,6 +2,7 @@ import React from 'react';
 import 'twin.macro';
 import tw, { css } from 'twin.macro';
 import StatusMap from './StatusMap';
+import moment from 'moment';
 
 interface TitleProps {
   children: string;
@@ -30,8 +31,16 @@ const InfoContent: React.FunctionComponent<InfoContentProps> = (props) => {
   const fields = [
     { title: 'Nama Customer', value: props.customer },
     { title: 'Jumlah Tiket', value: `${props.capacity} Tiket` },
-    { title: 'Tanggal Booking', value: props.date },
-    { title: 'Jam Booking', value: `${props.start_time}-${props.end_time}` },
+    {
+      title: 'Tanggal Booking',
+      value: moment(props.date).format('dddd, D MMMM YYYY'),
+    },
+    {
+      title: 'Jam Booking',
+      value: `${moment(props.start_time).format('HH:mm')} - ${moment(
+        props.end_time
+      ).format('HH:mm')}`,
+    },
     { title: 'Status Booking', value: StatusMap.get(props.status) },
   ];
 
@@ -106,24 +115,30 @@ const ItemContent: React.FunctionComponent<ItemContentProps> = (props) => {
           tw`overflow-y-scroll overflow-x-hidden`,
         ]}
       >
-        {props.items.map((item: any, key: any) => (
-          <div
-            key={key}
-            css={[
-              tw`grid grid-cols-6 border-b mx-16 pb-5 mb-5`,
-              item.title === 'Status Booking' && tw`font-bold border-none`,
-            ]}
-          >
-            <div tw="mx-auto w-[60px] h-auto mr-5">
-              <img src={item.image} alt={item.name} tw="" />
-            </div>
-            <p tw="text-left text-xl col-span-2">{item.name}</p>
-            <p tw="text-center text-xl col-span-2">
-              {formatter.format(item.price)}
-            </p>
-            <p tw="text-center text-xl">{`x${item.qty}`}</p>
+        {props.items.length === 0 ? (
+          <div tw="flex items-center justify-center">
+            <p tw="mx-8 mb-8 mt-4 color[#829CB6]">Tidak ada pesanan item</p>
           </div>
-        ))}
+        ) : (
+          props.items.map((item: any, key: any) => (
+            <div
+              key={key}
+              css={[
+                tw`grid grid-cols-6 border-b mx-16 pb-5 mb-5`,
+                item.title === 'Status Booking' && tw`font-bold border-none`,
+              ]}
+            >
+              <div tw="mx-auto w-[60px] h-auto mr-5">
+                <img src={item.image} alt={item.name} tw="" />
+              </div>
+              <p tw="text-left text-xl col-span-2">{item.name}</p>
+              <p tw="text-center text-xl col-span-2">
+                {formatter.format(item.price)}
+              </p>
+              <p tw="text-center text-xl">{`x${item.qty}`}</p>
+            </div>
+          ))
+        )}
       </div>
     </div>
   );

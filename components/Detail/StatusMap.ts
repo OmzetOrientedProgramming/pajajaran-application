@@ -4,6 +4,7 @@ const StatusMap: Map<number, string> = new Map([
   [2, 'Berhasil'],
   [3, 'Selesai'],
   [4, 'Gagal'],
+  [5, 'Selesai'],
 ]);
 
 export default StatusMap;

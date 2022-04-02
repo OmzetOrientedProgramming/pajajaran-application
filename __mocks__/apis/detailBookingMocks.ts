@@ -6,15 +6,15 @@ export const dummyGetDetailBookingResponse = {
   message: 'success',
   data: {
     id: 1,
-    date: '22 April 2022',
-    start_time: '21:00',
-    end_time: '23:00',
+    date: '2022-04-22T00:00:00Z',
+    start_time: '0000-01-01T23:14:06Z',
+    end_time: '0000-01-01T23:14:06Z',
     capacity: 10,
     status: 0,
     total_price: 500000,
     total_price_ticket: 150000,
     total_price_item: 350000,
-    created_at: '20 April 2022',
+    created_at: '2022-04-22T00:00:00Z',
     items: [
       {
         name: 'Kopi Mocha Asik',
