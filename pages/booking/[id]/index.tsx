@@ -12,6 +12,8 @@ import {
 import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
 import ConfirmModal from '../../../components/Detail/ConfirmModal';
+import moment from 'moment';
+import 'moment/locale/id';
 
 const DetailBooking: React.FC = () => {
   const router = useRouter();
@@ -87,7 +89,9 @@ const DetailBooking: React.FC = () => {
           tw`max-w-screen-xl`,
         ]}
       >
-        {status === 'loading' && <p>Getting data . . .</p>}
+        {status === 'loading' && (
+          <p tw="flex justify-center items-center">Getting data . . .</p>
+        )}
 
         {status === 'error' && <p>Error: {error}</p>}
 
@@ -100,8 +104,7 @@ const DetailBooking: React.FC = () => {
                   Id Booking #{detail.id}
                 </h3>
                 <p tw="color[#829CB6]">
-                  Dibuat pada {detail.created_at}
-                  {/* DD/MM/YYYY */}
+                  Dibuat pada {moment(detail.created_at).format('DD/MM/YYYY')}
                 </p>
               </div>
             </div>

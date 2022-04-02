@@ -2,6 +2,7 @@ import React from 'react';
 import 'twin.macro';
 import tw, { css } from 'twin.macro';
 import StatusMap from './ConstantMap';
+import moment from 'moment';
 
 interface TitleProps {
   children: string;
@@ -32,11 +33,11 @@ const InfoContent: React.FunctionComponent<InfoContentProps> = (props) => {
     { title: 'Jumlah Tiket', value: `${props.capacity} Tiket` },
     {
       title: 'Tanggal Booking',
-      value: props.date, // dddd, D MMMM YYYY
+      value: moment(props.date).format('dddd, D MMMM YYYY'),
     },
     {
       title: 'Jam Booking',
-      value: `${props.start_time} - ${props.end_time}`,
+      value: `${props.start_time.slice(0, 5)} - ${props.end_time.slice(0, 5)}`,
     },
     { title: 'Status Booking', value: StatusMap.get(props.status) },
   ];
@@ -85,7 +86,7 @@ const formatter = new Intl.NumberFormat('id-ID', {
   style: 'currency',
   currency: 'IDR',
   //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
-  maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+  // maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
 });
 
 const ItemContent: React.FunctionComponent<ItemContentProps> = (props) => {

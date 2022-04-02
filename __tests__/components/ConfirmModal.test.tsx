@@ -42,7 +42,7 @@ describe('confirm modal behavior', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText('2022-04-22')).toBeInTheDocument();
+      expect(screen.getByText('Jumat, 22 April 2022')).toBeInTheDocument();
       expect(screen.getByText('Terima')).toBeInTheDocument();
 
       fireEvent.click(screen.getByText('Terima'));
@@ -66,7 +66,7 @@ describe('confirm modal behavior', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText('2022-04-22')).toBeInTheDocument();
+      expect(screen.getByText('Jumat, 22 April 2022')).toBeInTheDocument();
       expect(screen.getByText('Terima')).toBeInTheDocument();
 
       fireEvent.click(screen.getByText('Terima'));
@@ -89,7 +89,7 @@ describe('confirm modal behavior', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText('2022-04-22')).toBeInTheDocument();
+      expect(screen.getByText('Jumat, 22 April 2022')).toBeInTheDocument();
       expect(screen.getByText('Tolak')).toBeInTheDocument();
 
       fireEvent.click(screen.getByText('Tolak'));
