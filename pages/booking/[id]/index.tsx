@@ -12,11 +12,16 @@ import {
 import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
 import ConfirmModal from '../../../components/Detail/ConfirmModal';
+import moment from 'moment';
+import 'moment/locale/id';
+
+moment.locale('id');
 
 const DetailBooking: React.FC = () => {
   const router = useRouter();
+  if (!router.isReady) return <></>;
   const { id } = router.query;
-  const stringId = id as string;
+  const stringId: string = (id as string) || '';
 
   const [isOpen, setIsOpen] = useState(false);
   const [confirmType, setConfirmType] = useState('');
@@ -98,7 +103,9 @@ const DetailBooking: React.FC = () => {
                 <h3 tw="font-bold text-xl color[#003366]">
                   Id Booking #{detail.id}
                 </h3>
-                <p tw="color[#829CB6]">Dibuat pada {detail.created_at}</p>
+                <p tw="color[#829CB6]">
+                  Dibuat pada {moment(detail.created_at).format('DD/MM/YYYY')}
+                </p>
               </div>
             </div>
             <div tw="flex flex-row flex-wrap justify-center items-stretch gap-x-12">

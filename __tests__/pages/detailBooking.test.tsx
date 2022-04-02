@@ -7,6 +7,12 @@ import ExampleWrapper from '../../__mocks__/pages/example';
 jest.mock('axios');
 const mockAxios = axios as jest.Mocked<typeof axios>;
 
+jest.mock('next/link', () => {
+  return ({ children }: any) => {
+    return children;
+  };
+});
+
 afterEach(() => {
   cleanup();
   jest.clearAllMocks();
