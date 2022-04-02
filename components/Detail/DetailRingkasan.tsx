@@ -2,13 +2,14 @@ import React from 'react';
 import 'twin.macro';
 import tw, { css } from 'twin.macro';
 import StatusMap from './ConstantMap';
+import moment from 'moment';
 
 interface DetailRingkasanProps {
   title: string;
   status: number;
   customer: string;
   capacity: number;
-  date: string;
+  date: Date;
   start_time: string;
   end_time: string;
   total_price: number;
@@ -19,7 +20,7 @@ interface DetailRingkasanProps {
 const formatter = new Intl.NumberFormat('id-ID', {
   style: 'currency',
   currency: 'IDR',
-  maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+  // maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
 });
 
 const DetailRingkasan: React.FC<DetailRingkasanProps> = (props) => {
@@ -29,7 +30,9 @@ const DetailRingkasan: React.FC<DetailRingkasanProps> = (props) => {
     { title: 'Jumlah Tiket', value: `${props.capacity} Tiket` },
     {
       title: 'Waktu Booking',
-      value: `${props.date}\n${props.start_time}-${props.end_time}`, // DD MMMM YYYY
+      value: `${moment(props.date).format(
+        'DD MMMM YYYY'
+      )}\n${props.start_time.slice(0, 5)} - ${props.end_time.slice(0, 5)}`,
     },
   ];
   const totalFields = [
