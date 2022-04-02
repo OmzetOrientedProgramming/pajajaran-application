@@ -1,15 +1,14 @@
 import React from 'react';
 import 'twin.macro';
 import tw, { css } from 'twin.macro';
-import StatusMap from './StatusMap';
-import dayjs from 'dayjs';
+import StatusMap, { months } from './ConstantMap';
 
 interface DetailRingkasanProps {
   title: string;
   status: number;
   customer: string;
   capacity: number;
-  date: string;
+  date: Date;
   start_time: string;
   end_time: string;
   total_price: number;
@@ -30,9 +29,9 @@ const DetailRingkasan: React.FC<DetailRingkasanProps> = (props) => {
     { title: 'Jumlah Tiket', value: `${props.capacity} Tiket` },
     {
       title: 'Waktu Booking',
-      value: `${dayjs(props.date).format('DD MMMM YYYY')} ${dayjs(
-        props.start_time
-      ).format('HH:mm')} - ${dayjs(props.end_time).format('HH:mm')}`,
+      value: `${props.date.getDate()} ${
+        months[props.date.getMonth()]
+      } ${props.date.getFullYear()}\n${props.start_time} - ${props.end_time}`, // DD MMMM YYYY
     },
   ];
   const totalFields = [
@@ -78,7 +77,7 @@ const DetailRingkasan: React.FC<DetailRingkasanProps> = (props) => {
             css={[tw`flex flex-row justify-between items-center pb-2`]}
           >
             <p tw="flex-1">{field.title}</p>
-            <p tw="flex-1 text-right">{field.value}</p>
+            <p tw="flex-1 text-right whitespace-pre">{field.value}</p>
           </div>
         ))}
         <div
