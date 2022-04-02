@@ -91,9 +91,7 @@ const DetailBooking: React.FC = () => {
           tw`max-w-screen-xl`,
         ]}
       >
-        {status === 'loading' && (
-          <p tw="flex justify-center items-center">Getting data . . .</p>
-        )}
+        {status === 'loading' && <p>Getting data . . .</p>}
 
         {status === 'error' && <p>Error: {error}</p>}
 
