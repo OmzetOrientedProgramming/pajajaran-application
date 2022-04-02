@@ -2,6 +2,7 @@ import React from 'react';
 import 'twin.macro';
 import tw, { css } from 'twin.macro';
 import StatusMap from './StatusMap';
+import moment from 'moment';
 
 interface DetailRingkasanProps {
   title: string;
@@ -29,7 +30,9 @@ const DetailRingkasan: React.FC<DetailRingkasanProps> = (props) => {
     { title: 'Jumlah Tiket', value: `${props.capacity} Tiket` },
     {
       title: 'Waktu Booking',
-      value: `${props.date} ${props.start_time}-${props.end_time}`,
+      value: `${moment(props.date).format('DD MMMM YYYY')} ${moment(
+        props.start_time
+      ).format('HH:mm')} - ${moment(props.end_time).format('HH:mm')}`,
     },
   ];
   const totalFields = [
