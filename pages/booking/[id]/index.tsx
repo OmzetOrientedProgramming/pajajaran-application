@@ -40,10 +40,6 @@ const DetailBooking: React.FC = () => {
   );
 
   const detail = data?.data.data;
-  const bookingDate = detail && new Date(detail.date);
-  const createDate = detail && new Date(detail.created_at);
-  const startTime = detail?.start_time.slice(0, 5);
-  const endTime = detail?.end_time.slice(0, 5);
 
   const handleConfirm = (state: boolean) => {
     confirmBooking(
@@ -104,10 +100,7 @@ const DetailBooking: React.FC = () => {
                   Id Booking #{detail.id}
                 </h3>
                 <p tw="color[#829CB6]">
-                  Dibuat pada{' '}
-                  {`${createDate.getDate()}/${
-                    createDate.getMonth() + 1
-                  }/${createDate.getFullYear()}`}
+                  Dibuat pada {detail.created_at}
                   {/* DD/MM/YYYY */}
                 </p>
               </div>
@@ -119,9 +112,9 @@ const DetailBooking: React.FC = () => {
                     <DetailTable.Title>Informasi Booking</DetailTable.Title>
                     <DetailTable.InfoContent
                       customer={'Budi'}
-                      date={bookingDate}
-                      start_time={startTime}
-                      end_time={endTime}
+                      date={detail.date}
+                      start_time={detail.start_time}
+                      end_time={detail.end_time}
                       capacity={detail.capacity}
                       status={detail.status}
                     />
@@ -140,9 +133,9 @@ const DetailBooking: React.FC = () => {
                   status={detail.status}
                   customer={'Budi'}
                   capacity={detail.capacity}
-                  date={bookingDate}
-                  start_time={startTime}
-                  end_time={endTime}
+                  date={detail.date}
+                  start_time={detail.start_time}
+                  end_time={detail.end_time}
                   total_price={detail.total_price}
                   total_price_booking={detail.total_price_ticket}
                   total_price_item={detail.total_price_item}

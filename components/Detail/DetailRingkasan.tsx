@@ -1,14 +1,14 @@
 import React from 'react';
 import 'twin.macro';
 import tw, { css } from 'twin.macro';
-import StatusMap, { months } from './ConstantMap';
+import StatusMap from './ConstantMap';
 
 interface DetailRingkasanProps {
   title: string;
   status: number;
   customer: string;
   capacity: number;
-  date: Date;
+  date: string;
   start_time: string;
   end_time: string;
   total_price: number;
@@ -29,9 +29,7 @@ const DetailRingkasan: React.FC<DetailRingkasanProps> = (props) => {
     { title: 'Jumlah Tiket', value: `${props.capacity} Tiket` },
     {
       title: 'Waktu Booking',
-      value: `${props.date.getDate()} ${
-        months[props.date.getMonth()]
-      } ${props.date.getFullYear()}\n${props.start_time} - ${props.end_time}`, // DD MMMM YYYY
+      value: `${props.date}\n${props.start_time}-${props.end_time}`, // DD MMMM YYYY
     },
   ];
   const totalFields = [

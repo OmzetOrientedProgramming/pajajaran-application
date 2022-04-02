@@ -1,7 +1,7 @@
 import React from 'react';
 import 'twin.macro';
 import tw, { css } from 'twin.macro';
-import StatusMap, { days, months } from './ConstantMap';
+import StatusMap from './ConstantMap';
 
 interface TitleProps {
   children: string;
@@ -32,9 +32,7 @@ const InfoContent: React.FunctionComponent<InfoContentProps> = (props) => {
     { title: 'Jumlah Tiket', value: `${props.capacity} Tiket` },
     {
       title: 'Tanggal Booking',
-      value: `${days[props.date.getDay()]}, ${props.date.getDate()} ${
-        months[props.date.getMonth()]
-      } ${props.date.getFullYear()}`, // dddd, D MMMM YYYY
+      value: props.date, // dddd, D MMMM YYYY
     },
     {
       title: 'Jam Booking',
