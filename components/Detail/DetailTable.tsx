@@ -2,7 +2,7 @@ import React from 'react';
 import 'twin.macro';
 import tw, { css } from 'twin.macro';
 import StatusMap from './StatusMap';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 interface TitleProps {
   children: string;
@@ -33,11 +33,11 @@ const InfoContent: React.FunctionComponent<InfoContentProps> = (props) => {
     { title: 'Jumlah Tiket', value: `${props.capacity} Tiket` },
     {
       title: 'Tanggal Booking',
-      value: moment(props.date).format('dddd, D MMMM YYYY'),
+      value: dayjs(props.date).format('dddd, D MMMM YYYY'),
     },
     {
       title: 'Jam Booking',
-      value: `${moment(props.start_time).format('HH:mm')} - ${moment(
+      value: `${dayjs(props.start_time).format('HH:mm')} - ${dayjs(
         props.end_time
       ).format('HH:mm')}`,
     },
