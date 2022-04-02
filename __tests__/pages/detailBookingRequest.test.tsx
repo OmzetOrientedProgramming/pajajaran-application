@@ -57,7 +57,7 @@ describe('useGetDetailBooking()', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText('Jumat, 22 April 2022')).toBeInTheDocument();
+      expect(screen.getByText('Friday, 22 April 2022')).toBeInTheDocument();
       expect(screen.getByText('Kopi Mocha Asik')).toBeInTheDocument();
     });
   });
@@ -74,7 +74,7 @@ describe('useGetDetailBooking()', () => {
     await waitFor(() => {
       expect(mockAxios.get).toHaveBeenCalledTimes(1);
       expect(
-        screen.queryByText('Jumat, 22 April 2022')
+        screen.queryByText('Friday, 22 April 2022')
       ).not.toBeInTheDocument();
       expect(screen.queryByText('Kopi Mocha Asik')).not.toBeInTheDocument();
     });
@@ -93,7 +93,7 @@ describe('useConfirmBooking()', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText('Jumat, 22 April 2022')).toBeInTheDocument();
+      expect(screen.getByText('Friday, 22 April 2022')).toBeInTheDocument();
       expect(screen.getByText('Terima')).toBeInTheDocument();
 
       fireEvent.click(screen.getByText('Terima'));
@@ -123,7 +123,7 @@ describe('useConfirmBooking()', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText('Jumat, 22 April 2022')).toBeInTheDocument();
+      expect(screen.getByText('Friday, 22 April 2022')).toBeInTheDocument();
       expect(screen.getByText('Tolak')).toBeInTheDocument();
 
       fireEvent.click(screen.getByText('Tolak'));
