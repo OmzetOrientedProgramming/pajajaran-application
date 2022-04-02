@@ -8,7 +8,7 @@ export const Layout: React.FC = ({ children }) => {
   return (
     <div tw="flex flex-col items-center">
       <Navbar navbarItems={navbarItems} />
-      <div tw="max-w-[1366px] mx-44 my-12">{children}</div>
+      <div tw="max-w-[1366px] mx-44 my-20">{children}</div>
     </div>
   );
 };

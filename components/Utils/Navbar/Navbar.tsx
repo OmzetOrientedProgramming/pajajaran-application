@@ -16,7 +16,7 @@ const Navbar: React.FC<NavbarProps> = (props) => {
   const { navbarItems } = props;
   return (
     <div
-      tw="h-16 w-full fixed top-0 left-0"
+      tw="h-16 w-full fixed top-0 left-0 z-50 background[#FFF]"
       css={css`
         box-shadow: 0px 3px 16px 0px #00000012;
       `}
