@@ -6,6 +6,7 @@ export const localURL = `${process.env.NEXT_PUBLIC_API_URL_LOCAL!}/api/v1`;
 const endpoint = {
   // Add more URL endpoints to request here
   example: `${baseUrlMock}/example`,
+  detailBooking: `${baseUrl}/business-admin/booking`,
 };
 
 export default endpoint;
