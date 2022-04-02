@@ -13,9 +13,6 @@ import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
 import ConfirmModal from '../../../components/Detail/ConfirmModal';
 import moment from 'moment';
-import 'moment/locale/id';
-
-moment.locale('id');
 
 const DetailBooking: React.FC = () => {
   const router = useRouter();
