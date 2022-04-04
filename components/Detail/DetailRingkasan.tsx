@@ -32,7 +32,7 @@ const DetailRingkasan: React.FC<DetailRingkasanProps> = (props) => {
       title: 'Waktu Booking',
       value: `${moment(props.date).format(
         'DD MMMM YYYY'
-      )}\n${props.start_time.slice(0, 5)} - ${props.end_time.slice(0, 5)}`,
+      )}\n${moment(props.start_time).format('HH:mm')} - ${moment(props.end_time).format('HH:mm')}`,
     },
   ];
   const totalFields = [

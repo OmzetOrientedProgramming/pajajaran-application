@@ -8,6 +8,7 @@ const endpoint = {
   example: `${baseUrlMock}/example`,
   detailBooking: `${baseUrl}/business-admin/booking`,
   balanceInformation: `${baseUrl}/business-admin/balance`,
+  login: `${baseUrl}/auth/business-admin/login`,
 };
 
 export default endpoint;
