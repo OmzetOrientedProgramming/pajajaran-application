@@ -15,11 +15,6 @@ build:
   cache:
     paths:
       - node_modules/
-  artifacts:
-    expire_in: 1 days
-    when: on_success
-    paths:
-      - node_modules/
 
 test:
   stage: test
@@ -31,13 +26,8 @@ test:
     - if: $CI_PIPELINE_SOURCE == 'push'
     - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
   script:
+    - npm install
     - npm run test:ci
-  artifacts:
-    when: always
-    reports:
-      junit:
-        - junit.xml
-      cobertura: coverage/cobertura-coverage.xml
 
 SonarScanner Dev:
   image:
