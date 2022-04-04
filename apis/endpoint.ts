@@ -7,6 +7,7 @@ const endpoint = {
   // Add more URL endpoints to request here
   example: `${baseUrlMock}/example`,
   detailBooking: `${baseUrl}/business-admin/booking`,
+  balanceInformation: `${baseUrl}/business-admin/balance`,
 };
 
 export default endpoint;
