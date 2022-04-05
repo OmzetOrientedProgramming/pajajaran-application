@@ -1,19 +1,14 @@
-import Button from '../Utils/Button';
-import { useForm } from 'react-hook-form';
-import { loginParams } from '../../apis/services/authService';
-import toast from 'react-hot-toast';
-import { useLogin } from '../../apis/hooks/authHooks';
-import { useEffect, useRef, useState } from 'react';
-import { auth } from '../../firebase';
-import { RecaptchaVerifier } from 'firebase/auth';
-import 'twin.macro';
-import nookies from 'nookies';
-
-interface loginForm {
-  email: string;
-  password: string;
-  recaptchaToken: string;
-}
+import Button from "../Utils/Button";
+import {useForm} from "react-hook-form";
+import {loginParams} from "../../apis/services/authService";
+import toast from "react-hot-toast";
+import {useLogin} from "../../apis/hooks/authHooks";
+import {useEffect, useRef, useState} from "react";
+import {auth} from "../../firebase";
+import {RecaptchaVerifier} from "firebase/auth";
+import "twin.macro";
+import nookies from "nookies";
+import Router from "next/router";
 
 const LoginForm = () => {
   const {
@@ -22,7 +17,7 @@ const LoginForm = () => {
     setValue,
     watch,
     reset,
-    formState: { errors },
+    formState: {errors},
   } = useForm({
     defaultValues: {
       email: '',
@@ -34,7 +29,7 @@ const LoginForm = () => {
   const [recaptchaVerifier, setRecaptchaVerifier] = useState<any>();
   const recaptchaValidatorWrapperRef = useRef<HTMLDivElement>(null);
 
-  const { mutate: login, isLoading: isLoggingIn } = useLogin();
+  const {mutate: login, isLoading: isLoggingIn} = useLogin();
   const recaptchaToken = watch('recaptchaToken');
 
   useEffect(
@@ -42,7 +37,7 @@ const LoginForm = () => {
       setRecaptchaVerifier(
         new RecaptchaVerifier(
           'recaptcha-validator',
-          { size: 'invisible' },
+          {size: 'invisible'},
           auth
         )
       ),
@@ -75,6 +70,7 @@ const LoginForm = () => {
             path: '/',
           });
           reset();
+          Router.push('/');
         } else {
           toast.error(data.message);
           reset();
@@ -88,7 +84,7 @@ const LoginForm = () => {
           setRecaptchaVerifier(
             new RecaptchaVerifier(
               'recaptcha-validator',
-              { size: 'invisible' },
+              {size: 'invisible'},
               auth
             )
           );
@@ -145,7 +141,7 @@ const LoginForm = () => {
         )}
       </div>
       <div ref={recaptchaValidatorWrapperRef}>
-        <div id="recaptcha-validator" />
+        <div id="recaptcha-validator"/>
       </div>
       {isLoggingIn ? (
         <div tw="text-center">. . .</div>
