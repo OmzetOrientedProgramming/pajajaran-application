@@ -37,9 +37,11 @@ const InfoContent: React.FunctionComponent<InfoContentProps> = (props) => {
     },
     {
       title: 'Jam Booking',
-      value: `${moment(props.start_time).format('HH:mm')} - ${moment(
+      value: `${moment(props.start_time).utc().format('HH:mm')} - ${moment(
         props.end_time
-      ).format('HH:mm')}`,
+      )
+        .utc()
+        .format('HH:mm')}`,
     },
     { title: 'Status Booking', value: StatusMap.get(props.status) },
   ];

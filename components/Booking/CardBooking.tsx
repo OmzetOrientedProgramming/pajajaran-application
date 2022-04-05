@@ -17,27 +17,23 @@ interface CardBookingProps {
   end_time: string;
 }
 
-function formatDate(date: any) {
-  const fDate = new Date(date);
-  return fDate.toDateString();
-}
-
 const CardBooking: React.FC<CardBookingProps> = (props) => {
   return (
     <>
       <StyledCardBookingContainer tw="shadow-md">
         <div tw="flex flex-row w-full items-center justify-center">
-          <div tw="w-1/6 mx-3 my-3 font-bold leading-tight">
-            <p tw="text-center">
-              {`${moment(props.start_time).format('HH:mm')} - ${moment(
+          <div tw="w-1/6 mx-3 my-3 font-semibold leading-tight">
+            <p tw="text-center text-base">
+              {`${moment(props.start_time).utc().format('HH:mm')} - ${moment(
                 props.end_time
-              ).format('HH:mm')}`}
-              -
+              )
+                .utc()
+                .format('HH:mm')}`}
             </p>
           </div>
           <div tw="w-8/12 py-4 px-3 flex flex-col">
             <p
-              tw="text-base font-normal overflow-hidden leading-normal"
+              tw="text-base overflow-hidden leading-normal font-bold"
               css={css`
                 text-overflow: ellipsis;
                 white-space: nowrap;
@@ -48,7 +44,7 @@ const CardBooking: React.FC<CardBookingProps> = (props) => {
 
             <div tw="mb-2">
               <p
-                tw="text-xs font-light text-[#868686] leading-normal"
+                tw="text-base font-light text-[#868686] leading-normal"
                 css={css`
                   text-overflow: ellipsis;
                   white-space: nowrap;
@@ -65,7 +61,7 @@ const CardBooking: React.FC<CardBookingProps> = (props) => {
                 white-space: nowrap;
               `}
             >
-              {`${moment(props.date).format('dddd, DD MMMM YYYY')}`}
+              {`${moment(props.date).format('dddd, D MMMM YYYY')}`}
             </p>
           </div>
           <div tw="w-1/6 mx-10 my-3">
