@@ -110,7 +110,7 @@ describe('useConfirmBooking()', () => {
     expect(mockAxios.patch).toHaveBeenCalledTimes(1);
     expect(mockAxios.patch).toHaveBeenCalledWith(
       `${endpoint.detailBooking}/${confirmBookingParams.id}/confirmation`,
-      { booking_status: 1 },
+      { status: 1 },
       { headers: headers }
     );
 
@@ -140,7 +140,7 @@ describe('useConfirmBooking()', () => {
     expect(mockAxios.patch).toHaveBeenCalledTimes(1);
     expect(mockAxios.patch).toHaveBeenCalledWith(
       `${endpoint.detailBooking}/${confirmBookingParams.id}/confirmation`,
-      { booking_status: 4 },
+      { status: 4 },
       { headers: headers }
     );
 

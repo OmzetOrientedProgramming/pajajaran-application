@@ -31,18 +31,18 @@ const DetailBooking: React.FC = () => {
     { id: stringId },
     {
       onSuccess: (res: any) => {
-        console.log(res);
+        // console.log(res);
         setBookingStatus(res.data.data.status);
       },
       onError: (err: any) => {
-        console.log('err', err);
+        // console.log('err', err);
         toast.error(err.response.data.message, { position: 'top-right' });
       },
     }
   );
 
   const detail = data?.data.data;
-  console.log(detail?.start_time);
+  // console.log(detail?.start_time);
 
   const handleConfirm = (state: boolean) => {
     confirmBooking(

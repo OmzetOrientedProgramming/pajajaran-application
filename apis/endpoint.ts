@@ -7,7 +7,7 @@ const endpoint = {
   // Add more URL endpoints to request here
   example: `${baseUrlMock}/example`,
   detailBooking: `${baseUrl}/business-admin/booking`,
-  listBooking: `${localURL}/business-admin`,
+  listBooking: `${baseUrl}/business-admin`,
   balanceInformation: `${baseUrl}/business-admin/balance`,
   login: `${baseUrl}/auth/business-admin/login`,
 };
