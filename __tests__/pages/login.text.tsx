@@ -1,8 +1,9 @@
-import {cleanup, fireEvent, render, screen} from '@testing-library/react';
-import Auth from "../../pages/auth";
-import {act} from "react-dom/test-utils";
-import {QueryClient, QueryClientProvider} from "react-query";
-import LoginForm from "../../components/Auth/LoginForm";
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import Auth from '../../pages/auth';
+import { act } from 'react-dom/test-utils';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import LoginForm from '../../components/Auth/LoginForm';
+jest.setTimeout(20000);
 
 jest.mock('firebase/auth', () => {
   return {
@@ -42,6 +43,8 @@ describe('login page', () => {
   });
 
   test('has description', async () => {
-    expect(screen.getByText('Masuk sebagai admin bisnis kamu dan kelola bisnis kamu')).toBeInTheDocument();
+    expect(
+      screen.getByText('Masuk sebagai admin bisnis kamu dan kelola bisnis kamu')
+    ).toBeInTheDocument();
   });
 });
