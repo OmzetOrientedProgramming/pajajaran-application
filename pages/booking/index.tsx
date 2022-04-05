@@ -50,8 +50,8 @@ const ListBooking: React.FC = () => {
       page: page,
     });
 
-    const result = response.then((result) => {
-      return result;
+    const result = response.then((res) => {
+      return res;
     });
 
     const getData = () => {
@@ -126,12 +126,12 @@ const ListBooking: React.FC = () => {
         </Head>
 
         <div>
-          <h1 tw="m-9 text-xl font-bold text-center">
-            Daftar Customer Booking
+          <h1 tw="m-9 text-4xl font-bold text-center">
+            Daftar Booking Customer
           </h1>
         </div>
 
-        <div tw="m-4 grid gap-1 grid-cols-6">
+        <div tw="mx-4 my-6 grid gap-1 grid-cols-6">
           {status === 'error' && <p>Error: {error}</p>}
           <ButtonState
             onClick={() => {
@@ -237,7 +237,8 @@ const ListBooking: React.FC = () => {
           </ButtonState>
         </div>
 
-        <div tw="flex flex-col justify-center w-full m-5">
+        <div tw="flex flex-col justify-center w-full m-5 ">
+          {status === 'loading' && <p>Loading . . .</p>}
           {booking.map((detail: any) => (
             <div key={detail.id}>
               <CardBooking
@@ -252,10 +253,10 @@ const ListBooking: React.FC = () => {
           ))}
         </div>
 
-        <div tw="flex justify-center items-center m-5">
+        <div tw="flex justify-center items-center m-5 gap-x-1">
           <ButtonChangePage
             onClick={handlePrevbtn}
-            state="previous"
+            state="<"
             page={currentPage}
           />
           <ButtonPage
@@ -266,7 +267,7 @@ const ListBooking: React.FC = () => {
           />
           <ButtonChangePage
             onClick={handleNextbtn}
-            state="next"
+            state=">"
             page={currentPage}
           />
         </div>

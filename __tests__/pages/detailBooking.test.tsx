@@ -13,6 +13,10 @@ jest.mock('next/link', () => {
   };
 });
 
+beforeAll(() => {
+  console.warn = jest.fn();
+});
+
 afterEach(() => {
   cleanup();
   jest.clearAllMocks();

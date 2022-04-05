@@ -30,9 +30,11 @@ const DetailRingkasan: React.FC<DetailRingkasanProps> = (props) => {
     { title: 'Jumlah Tiket', value: `${props.capacity} Tiket` },
     {
       title: 'Waktu Booking',
-      value: `${moment(props.date).format(
-        'DD MMMM YYYY'
-      )}\n${moment(props.start_time).format('HH:mm')} - ${moment(props.end_time).format('HH:mm')}`,
+      value: `${moment(props.date).format('DD MMMM YYYY')}\n${moment(
+        props.start_time
+      )
+        .utc()
+        .format('HH:mm')} - ${moment(props.end_time).utc().format('HH:mm')}`,
     },
   ];
   const totalFields = [

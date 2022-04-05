@@ -14,6 +14,7 @@ import toast from 'react-hot-toast';
 import ConfirmModal from '../../../components/Detail/ConfirmModal';
 import moment from 'moment';
 import 'moment/locale/id';
+import { useQueryClient } from 'react-query';
 
 const DetailBooking: React.FC = () => {
   const router = useRouter();
@@ -25,9 +26,11 @@ const DetailBooking: React.FC = () => {
   const [confirmType, setConfirmType] = useState('');
   const [bookingStatus, setBookingStatus] = useState(0);
 
+  const queryClient = useQueryClient();
+
   const { mutate: confirmBooking } = useConfirmBooking();
 
-  const { data, status, error, refetch } = useGetDetailBooking(
+  const { data, status, error }: any = useGetDetailBooking(
     { id: stringId },
     {
       onSuccess: (res: any) => {
@@ -35,14 +38,13 @@ const DetailBooking: React.FC = () => {
         setBookingStatus(res.data.data.status);
       },
       onError: (err: any) => {
-        // console.log('err', err);
-        toast.error(err.response.data.message, { position: 'top-right' });
+        // console.log('err', err.response);
+        toast.error(err.response.data.message);
       },
     }
   );
 
   const detail = data?.data.data;
-  // console.log(detail?.start_time);
 
   const handleConfirm = (state: boolean) => {
     confirmBooking(
@@ -57,6 +59,7 @@ const DetailBooking: React.FC = () => {
           toast.success(
             state ? 'Booking konfirmasi diterima' : 'Booking konfirmasi ditolak'
           );
+          queryClient.invalidateQueries('get_detail_booking');
         },
         onError: (err: any) => {
           // console.log('err', err);
@@ -66,7 +69,6 @@ const DetailBooking: React.FC = () => {
         },
       }
     );
-    refetch();
   };
 
   return (
@@ -94,12 +96,20 @@ const DetailBooking: React.FC = () => {
           <p tw="flex justify-center items-center">Getting data . . .</p>
         )}
 
-        {status === 'error' && <p>Error: {error}</p>}
+        {status === 'error' && <p>Error: {error.response.data.message}</p>}
 
         {status === 'success' && (
           <>
             <div tw="flex flex-row justify-between items-center mb-7">
-              <h1 tw="font-bold text-4xl color[#003366]">Detail Booking</h1>
+              <div tw="flex flex-row items-center justify-center gap-x-3">
+                <button
+                  onClick={() => router.back()}
+                  tw="duration-150 hover:(brightness-125)"
+                >
+                  <img src={'/images/Detail/left-arrow.svg'} alt="back" />
+                </button>
+                <h1 tw="font-bold text-4xl color[#003366]">Detail Booking</h1>
+              </div>
               <div tw="flex flex-col justify-center text-right">
                 <h3 tw="font-bold text-xl color[#003366]">
                   Id Booking #{detail.id}

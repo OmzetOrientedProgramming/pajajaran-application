@@ -21,7 +21,7 @@ const ButtonState: React.FC<ButtonStateProps> = (props) => {
           background: ${props.background};
           color: ${props.color};
         `,
-        tw`w-full font-bold`,
+        tw`w-full font-bold duration-100 hover:(brightness-110)`,
       ]}
       onClick={props.onClick}
     >

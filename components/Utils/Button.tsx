@@ -3,7 +3,12 @@ import tw, { css } from 'twin.macro';
 
 interface ButtonProps {
   children: string;
-  buttonType?: 'primary' | 'secondary' | 'customPrimary' | 'customSecondary' | 'primaryDisabled';
+  buttonType?:
+    | 'primary'
+    | 'secondary'
+    | 'customPrimary'
+    | 'customSecondary'
+    | 'primaryDisabled';
   type?: 'button' | 'submit' | 'reset';
   onClick?: () => void;
   color?: string; // required when choosing customPrimary or customSecondary
@@ -29,7 +34,7 @@ const Button: React.FC<ButtonProps> = ({
         `,
         tw`w-full h-9 font-bold`,
         buttonType === 'primary' && [
-          tw`background[#003366] text-white duration-150 hover:(brightness-110)`,
+          tw`background[#003366] text-white duration-150 hover:(brightness-125)`,
           css`
             border-color: #003366;
           `,

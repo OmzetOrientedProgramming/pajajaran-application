@@ -29,7 +29,7 @@ describe('ui components', () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText('Daftar Customer Booking')).toBeInTheDocument();
+      expect(screen.getByText('Daftar Booking Customer')).toBeInTheDocument();
       expect(screen.getByText('Menunggu Konfirmasi')).toBeInTheDocument();
       expect(screen.getByText('Belum Membayar')).toBeInTheDocument();
       expect(screen.getByText('Booking Berhasil')).toBeInTheDocument();
@@ -39,8 +39,8 @@ describe('ui components', () => {
         screen.getByText('Booking Selesai & Reviewed')
       ).toBeInTheDocument();
       expect(screen.getByText('Menunggu Konfirmasi')).toBeInTheDocument();
-      expect(screen.getByText('previous')).toBeInTheDocument();
-      expect(screen.getByText('next')).toBeInTheDocument();
+      expect(screen.getByText('<')).toBeInTheDocument();
+      expect(screen.getByText('>')).toBeInTheDocument();
     });
   });
 });

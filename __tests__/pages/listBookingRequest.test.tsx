@@ -59,21 +59,6 @@ describe('useGetDetailBooking()', () => {
     });
   });
 
-  test('page failed to display data requested', async () => {
-    mockAxios.get.mockReturnValueOnce(Promise.reject(new Error('get error')));
-
-    render(
-      <ExampleWrapper>
-        <ListBooking />
-      </ExampleWrapper>
-    );
-
-    await waitFor(() => {
-      expect(mockAxios.get).toHaveBeenCalledTimes(1);
-      expect(screen.queryByText('Sabtu, 18 Juni 2022')).not.toBeInTheDocument();
-    });
-  });
-
   test('change state works correctly', async () => {
     mockAxios.get.mockResolvedValue(mockedResponse);
 
