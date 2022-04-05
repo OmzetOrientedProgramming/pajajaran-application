@@ -11,6 +11,8 @@ import { mockGetDetailBookingResponse } from '../../__mocks__/apis/detailBooking
 import ExampleWrapper from '../../__mocks__/pages/example';
 import userEvent from '@testing-library/user-event';
 
+jest.setTimeout(20000);
+
 // @ts-expect-error
 global.IntersectionObserver = class FakeIntersectionObserver {
   observe() {}

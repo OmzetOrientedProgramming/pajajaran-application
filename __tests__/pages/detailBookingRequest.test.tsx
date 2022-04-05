@@ -18,6 +18,8 @@ import {
   mockGetDetailBookingResponse,
 } from '../../__mocks__/apis/detailBookingMocks';
 
+jest.setTimeout(10000);
+
 // @ts-expect-error
 global.IntersectionObserver = class FakeIntersectionObserver {
   observe() {}
