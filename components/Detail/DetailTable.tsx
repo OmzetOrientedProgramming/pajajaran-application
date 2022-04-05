@@ -37,7 +37,9 @@ const InfoContent: React.FunctionComponent<InfoContentProps> = (props) => {
     },
     {
       title: 'Jam Booking',
-      value: `${moment(props.start_time).format('HH:mm')} - ${moment(props.end_time).format('HH:mm')}`,
+      value: `${moment(props.start_time).format('HH:mm')} - ${moment(
+        props.end_time
+      ).format('HH:mm')}`,
     },
     { title: 'Status Booking', value: StatusMap.get(props.status) },
   ];
@@ -113,12 +115,12 @@ const ItemContent: React.FunctionComponent<ItemContentProps> = (props) => {
           tw`overflow-y-scroll overflow-x-hidden`,
         ]}
       >
-        {props.items.length === 0 ? (
+        {props.items?.length === 0 ? (
           <div tw="flex items-center justify-center">
             <p tw="mx-8 mb-8 mt-4 color[#829CB6]">Tidak ada pesanan item</p>
           </div>
         ) : (
-          props.items.map((item: any, key: any) => (
+          props.items?.map((item: any, key: any) => (
             <div
               key={key}
               css={[

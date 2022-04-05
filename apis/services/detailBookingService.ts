@@ -27,7 +27,7 @@ export const confirmBooking = async ({
     headers,
   };
   const data = {
-    booking_status,
+    status: booking_status,
   };
   const response = await axios.patch(
     `${endpoint.detailBooking}/${id}/confirmation`,

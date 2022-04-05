@@ -1,42 +1,52 @@
-import Button from "../Utils/Button";
-import {useForm} from "react-hook-form";
-import {loginParams} from "../../apis/services/authService";
-import toast from "react-hot-toast";
-import {useLogin} from "../../apis/hooks/authHooks";
-import {useEffect, useRef, useState} from "react";
-import {auth} from "../../firebase";
-import {RecaptchaVerifier} from "firebase/auth";
-import "twin.macro";
-import nookies from "nookies";
+import Button from '../Utils/Button';
+import { useForm } from 'react-hook-form';
+import { loginParams } from '../../apis/services/authService';
+import toast from 'react-hot-toast';
+import { useLogin } from '../../apis/hooks/authHooks';
+import { useEffect, useRef, useState } from 'react';
+import { auth } from '../../firebase';
+import { RecaptchaVerifier } from 'firebase/auth';
+import 'twin.macro';
+import nookies from 'nookies';
 
 interface loginForm {
-  email: string,
-  password: string,
-  recaptchaToken: string,
+  email: string;
+  password: string;
+  recaptchaToken: string;
 }
 
 const LoginForm = () => {
-  const {register, handleSubmit, setValue, watch, reset, formState: {errors}} = useForm({
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
-      email: "",
-      password: "",
-      recaptchaToken: ""
+      email: '',
+      password: '',
+      recaptchaToken: '',
     },
-    mode: "onChange"
+    mode: 'onChange',
   });
   const [recaptchaVerifier, setRecaptchaVerifier] = useState<any>();
   const recaptchaValidatorWrapperRef = useRef<HTMLDivElement>(null);
 
-  const {mutate: login, isLoading: isLoggingIn} = useLogin();
+  const { mutate: login, isLoading: isLoggingIn } = useLogin();
   const recaptchaToken = watch('recaptchaToken');
 
-  useEffect(() => setRecaptchaVerifier(
-      new RecaptchaVerifier(
-        'recaptcha-validator',
-        {size: 'invisible'},
-        auth
-      )
-    ), []
+  useEffect(
+    () =>
+      setRecaptchaVerifier(
+        new RecaptchaVerifier(
+          'recaptcha-validator',
+          { size: 'invisible' },
+          auth
+        )
+      ),
+    []
   );
   useEffect(() => {
     if (!recaptchaToken)
@@ -45,100 +55,107 @@ const LoginForm = () => {
       });
   }, [recaptchaToken]);
   useEffect(() => {
-    console.log(recaptchaVerifier?.verify);
+    // console.log(recaptchaVerifier?.verify);
     if (!recaptchaVerifier) return;
-    console.log("Masuk bang")
-    recaptchaVerifier
-      .verify()
-      .then((token: string) => {
-        console.log(token)
-        setValue('recaptchaToken', token)
-      })
+    // console.log("Masuk bang")
+    recaptchaVerifier.verify().then((token: string) => {
+      // console.log(token);
+      setValue('recaptchaToken', token);
+    });
   }, [recaptchaVerifier]);
 
   const onSubmit = async (data: loginParams) => {
-    login(
-      data,
-      {
-        onSuccess: (res: any) => {
-          const data = res?.data;
-          if (res.status >= 200 && res.status < 300) {
-            toast.success(data.message);
-            nookies.set(null, 'token', data.data.access_token, {
-              maxAge: 30 * 24 * 60 * 60,
-              path: '/',
-            });
-            reset();
-          } else {
-            toast.error(data.message);
-            reset();
-          }
-        },
-        onError: (err: any) => {
-          recaptchaVerifier.clear();
-          if (recaptchaValidatorWrapperRef.current) {
-            recaptchaValidatorWrapperRef.current.innerHTML =
-              '<div id="recaptcha-validator"></div>';
-            setRecaptchaVerifier(
-              new RecaptchaVerifier(
-                'recaptcha-validator',
-                {size: 'invisible'},
-                auth
-              )
-            );
-          }
-          if (!err.response.data.message) {
-            toast.error("Terjadi kesalahan");
-            reset();
-          } else {
-            toast.error(err.response.data.message);
-            reset();
-          }
-        },
-      }
-    )
-  }
+    login(data, {
+      onSuccess: (res: any) => {
+        const data = res?.data;
+        if (res.status >= 200 && res.status < 300) {
+          toast.success(data.message);
+          nookies.set(null, 'token', data.data.access_token, {
+            maxAge: 30 * 24 * 60 * 60,
+            path: '/',
+          });
+          reset();
+        } else {
+          toast.error(data.message);
+          reset();
+        }
+      },
+      onError: (err: any) => {
+        recaptchaVerifier.clear();
+        if (recaptchaValidatorWrapperRef.current) {
+          recaptchaValidatorWrapperRef.current.innerHTML =
+            '<div id="recaptcha-validator"></div>';
+          setRecaptchaVerifier(
+            new RecaptchaVerifier(
+              'recaptcha-validator',
+              { size: 'invisible' },
+              auth
+            )
+          );
+        }
+        if (!err.response.data.message) {
+          toast.error('Terjadi kesalahan');
+          reset();
+        } else {
+          toast.error(err.response.data.message);
+          reset();
+        }
+      },
+    });
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div tw={"flex flex-col mb-4"}>
-        <label tw={"text-sm mb-2"} htmlFor="email">Email</label>
+      <div tw={'flex flex-col mb-4'}>
+        <label tw={'text-sm mb-2'} htmlFor="email">
+          Email
+        </label>
         <input
-          tw={"border-solid border-[1px] rounded-lg border-black h-10 p-2"}
-          {...register("email", {
-            required: "Email tidak boleh kosong",
+          tw={'border-solid border-[1px] rounded-lg border-black h-10 p-2'}
+          {...register('email', {
+            required: 'Email tidak boleh kosong',
             pattern: {
               value: /\S+@\S+\.\S+/,
-              message: "Email tidak valid",
-            }
+              message: 'Email tidak valid',
+            },
           })}
           type="email"
           id="email"
-          aria-invalid={errors.email ? "true" : "false"}
+          aria-invalid={errors.email ? 'true' : 'false'}
         />
-        {errors.email && <p tw={"text-xs text-red-700"}>{errors.email.message}</p>}
+        {errors.email && (
+          <p tw={'text-xs text-red-700'}>{errors.email.message}</p>
+        )}
       </div>
-      <div tw={"flex flex-col mb-6"}>
-        <label tw={"text-sm mb-2"} htmlFor="password">Password</label>
+      <div tw={'flex flex-col mb-6'}>
+        <label tw={'text-sm mb-2'} htmlFor="password">
+          Password
+        </label>
         <input
-          tw={"border-solid border-[1px] rounded-lg border-black h-10 p-2"}
-          {...register("password", {
-            required: "Password tidak boleh kosong"
+          tw={'border-solid border-[1px] rounded-lg border-black h-10 p-2'}
+          {...register('password', {
+            required: 'Password tidak boleh kosong',
           })}
           type="password"
           id="password"
-          aria-invalid={errors.password ? "true" : "false"}
+          aria-invalid={errors.password ? 'true' : 'false'}
         />
-        {errors.password && <p tw={"text-xs text-red-700"}>{errors.password.message}</p>}
+        {errors.password && (
+          <p tw={'text-xs text-red-700'}>{errors.password.message}</p>
+        )}
       </div>
       <div ref={recaptchaValidatorWrapperRef}>
-        <div id="recaptcha-validator"/>
+        <div id="recaptcha-validator" />
       </div>
-      {isLoggingIn ?
-        <div tw="text-center">. . .</div> :
-        <Button buttonType="primary" type="submit">Login</Button>}
+      {isLoggingIn ? (
+        <div tw="text-center">. . .</div>
+      ) : (
+        <Button buttonType="primary" type="submit">
+          Login
+        </Button>
+      )}
     </form>
-  )
-}
+  );
+};
 
 export default LoginForm;

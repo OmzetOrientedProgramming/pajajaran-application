@@ -24,7 +24,7 @@ function formatDate(date: any) {
 
 const CardBooking: React.FC<CardBookingProps> = (props) => {
   return (
-    <Link href={`/business-admin/booking/${props.bookingID}`}>
+    <>
       <StyledCardBookingContainer tw="shadow-md">
         <div tw="flex flex-row w-full items-center justify-center">
           <div tw="w-1/6 mx-3 my-3 font-bold leading-tight">
@@ -69,11 +69,15 @@ const CardBooking: React.FC<CardBookingProps> = (props) => {
             </p>
           </div>
           <div tw="w-1/6 mx-10 my-3">
-            <Button>Detail</Button>
+            <Link href={`/booking/${props.bookingID}`}>
+              <div>
+                <Button>Detail</Button>
+              </div>
+            </Link>
           </div>
         </div>
       </StyledCardBookingContainer>
-    </Link>
+    </>
   );
 };
 
