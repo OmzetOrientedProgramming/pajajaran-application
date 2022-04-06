@@ -1,7 +1,6 @@
 import axios from 'axios';
 import endpoint from '../endpoint';
-import { headers } from '../constants';
-import { parseMutationArgs } from 'react-query/types/core/utils';
+import nookies from "nookies";
 
 export interface getListBookingParams {
   state?: number;
@@ -11,9 +10,11 @@ export interface getListBookingParams {
 
 export const getListBooking = async (params: getListBookingParams) => {
   const options = {
-    headers,
-    params: { state: params.state, limit: params.limit, page: params.page },
+    headers: {
+      'Authorization': `Bearer ${nookies.get(null)?.token}`,
+      'Content-Type': 'application/json',
+    },
+    params: {state: params.state, limit: params.limit, page: params.page},
   };
-  const response = await axios.get(`${endpoint.listBooking}/booking`, options);
-  return response;
+  return await axios.get(`${endpoint.listBooking}/booking`, options);
 };

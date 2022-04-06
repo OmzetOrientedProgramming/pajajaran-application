@@ -1,11 +1,13 @@
 import axios from 'axios';
 import endpoint from '../endpoint';
-import { headers } from '../constants';
+import nookies from "nookies";
 
 export const getBalanceInformation = async () => {
   const options = {
-    headers,
+    headers: {
+      'Authorization': `Bearer ${nookies.get(null)?.token}`,
+      'Content-Type': 'application/json',
+    }
   };
-  const response = await axios.get(`${endpoint.balanceInformation}`, options);
-  return response;
+  return await axios.get(`${endpoint.balanceInformation}`, options);
 };

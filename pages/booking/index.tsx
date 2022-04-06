@@ -10,6 +10,7 @@ import CardBooking from '../../components/Booking/CardBooking';
 import { Layout } from '../../components/Utils/Layout';
 import ButtonChangePage from '../../components/Booking/ButtonChangePage';
 import { getListBooking } from '../../apis/services/listBookingService';
+import withAuth from "../../components/Utils/HOC/WithAuth";
 
 interface IBooking {
   id: number;
@@ -280,4 +281,4 @@ const ListBooking: React.FC = () => {
   );
 };
 
-export default ListBooking;
+export default withAuth(ListBooking);

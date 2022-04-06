@@ -1,17 +1,20 @@
 import axios from 'axios';
 import endpoint from '../endpoint';
-import { headers } from '../constants';
+import {headers} from '../constants';
+import nookies from "nookies";
 
 export interface getDetailBookingParams {
   id: string;
 }
 
-export const getDetailBooking = async ({ id }: getDetailBookingParams) => {
+export const getDetailBooking = async ({id}: getDetailBookingParams) => {
   const options = {
-    headers,
+    headers: {
+      'Authorization': `Bearer ${nookies.get(null)?.token}`,
+      'Content-Type': 'application/json',
+    }
   };
-  const response = await axios.get(`${endpoint.detailBooking}/${id}`, options);
-  return response;
+  return await axios.get(`${endpoint.detailBooking}/${id}`, options);
 };
 
 export interface confirmBookingParams {
@@ -20,19 +23,18 @@ export interface confirmBookingParams {
 }
 
 export const confirmBooking = async ({
-  id,
-  booking_status,
-}: confirmBookingParams) => {
+                                       id,
+                                       booking_status,
+                                     }: confirmBookingParams) => {
   const options = {
     headers,
   };
   const data = {
     status: booking_status,
   };
-  const response = await axios.patch(
+  return await axios.patch(
     `${endpoint.detailBooking}/${id}/confirmation`,
     data,
     options
   );
-  return response;
 };

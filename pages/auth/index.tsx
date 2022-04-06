@@ -1,6 +1,7 @@
 import Head from "next/head";
 import 'twin.macro';
 import LoginForm from "../../components/Auth/LoginForm";
+import withoutAuth from "../../components/Utils/HOC/WithoutAuth";
 
 const Auth = (): JSX.Element => {
   return (
@@ -19,4 +20,4 @@ const Auth = (): JSX.Element => {
   );
 }
 
-export default Auth;
+export default withoutAuth(Auth);

@@ -1,20 +1,18 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import 'twin.macro';
 import Head from 'next/head';
-import { Layout } from '../../../components/Utils/Layout';
+import {Layout} from '../../../components/Utils/Layout';
 import DetailRingkasan from '../../../components/Detail/DetailRingkasan';
-import tw, { css } from 'twin.macro';
+import tw, {css} from 'twin.macro';
 import DetailTable from '../../../components/Detail/DetailTable';
-import {
-  useConfirmBooking,
-  useGetDetailBooking,
-} from '../../../apis/hooks/detailBookingHooks';
-import { useRouter } from 'next/router';
+import {useConfirmBooking, useGetDetailBooking,} from '../../../apis/hooks/detailBookingHooks';
+import {useRouter} from 'next/router';
 import toast from 'react-hot-toast';
 import ConfirmModal from '../../../components/Detail/ConfirmModal';
 import moment from 'moment';
 import 'moment/locale/id';
-import { useQueryClient } from 'react-query';
+import {useQueryClient} from 'react-query';
+import withAuth from "../../../components/Utils/HOC/WithAuth";
 
 const DetailBooking: React.FC = () => {
   const router = useRouter();
@@ -106,7 +104,7 @@ const DetailBooking: React.FC = () => {
                   onClick={() => router.back()}
                   tw="duration-150 hover:(brightness-125)"
                 >
-                  <img src={'/images/Detail/left-arrow.svg'} alt="back" />
+                  <img src={'/images/Detail/left-arrow.svg'} alt="back"/>
                 </button>
                 <h1 tw="font-bold text-4xl color[#003366]">Detail Booking</h1>
               </div>
@@ -204,4 +202,4 @@ const DetailBooking: React.FC = () => {
   );
 };
 
-export default DetailBooking;
+export default withAuth(DetailBooking);
