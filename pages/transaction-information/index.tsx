@@ -1,13 +1,14 @@
 import 'twin.macro';
 import Head from 'next/head';
-import { Layout } from '../../components/Utils/Layout';
+import {Layout} from '../../components/Utils/Layout';
 
-import tw, { css } from 'twin.macro';
-import { useRouter } from 'next/router';
+import tw, {css} from 'twin.macro';
+import {useRouter} from 'next/router';
 import toast from 'react-hot-toast';
 import 'moment/locale/id';
-import { BalanceCard } from '../../components/TransactionInformation/BalanceCard';
-import { useGetBalanceInformation } from '../../apis/hooks/balanceInformationHooks';
+import {BalanceCard} from '../../components/TransactionInformation/BalanceCard';
+import {useGetBalanceInformation} from '../../apis/hooks/balanceInformationHooks';
+import withAuth from "../../components/Utils/HOC/WithAuth";
 
 const InformasiTransaksi: React.FC = () => {
   const router = useRouter();
@@ -49,4 +50,4 @@ const InformasiTransaksi: React.FC = () => {
   );
 };
 
-export default InformasiTransaksi;
+export default withAuth(InformasiTransaksi);
