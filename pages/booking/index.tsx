@@ -76,7 +76,7 @@ const ListBooking: React.FC = () => {
       handlePagination(page, state);
     }
 
-    if ((currentPage - 1) % pageNumberLimit == 0) {
+    if ((currentPage - 1) % pageNumberLimit == 0 && currentPage != 1) {
       setMaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
       setMinPageNumberLimit(minPageNumberLimit - pageNumberLimit);
     }
@@ -88,13 +88,13 @@ const ListBooking: React.FC = () => {
       handlePagination(page, state);
     }
 
-    if (currentPage + 1 > maxPageNumberLimit) {
+    if (currentPage + 1 > maxPageNumberLimit && currentPage != totalPage) {
       setMaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
       setMinPageNumberLimit(minPageNumberLimit + pageNumberLimit);
     }
   };
 
-  const { status, error } = useGetListBooking(
+  const { status, error }: any = useGetListBooking(
     {
       state: state,
       limit: limit,
@@ -131,146 +131,150 @@ const ListBooking: React.FC = () => {
           </h1>
         </div>
 
-        <div tw="mx-4 my-6 grid gap-1 grid-cols-6">
-          {status === 'error' && <p>Error: {error}</p>}
-          <ButtonState
-            onClick={() => {
-              setColor({
-                button1: ['#003366', '#FFFFFF'],
-                button2: ['#E5E5E5', '#000000'],
-                button3: ['#E5E5E5', '#000000'],
-                button4: ['#E5E5E5', '#000000'],
-                button5: ['#E5E5E5', '#000000'],
-                button6: ['#E5E5E5', '#000000'],
-              });
-              handlePagination(1, 0);
-            }}
-            background={color.button1[0]}
-            color={color.button1[1]}
-          >
-            Menunggu Konfirmasi
-          </ButtonState>
-          <ButtonState
-            onClick={() => {
-              setColor({
-                button1: ['#E5E5E5', '#000000'],
-                button2: ['#003366', '#FFFFFF'],
-                button3: ['#E5E5E5', '#000000'],
-                button4: ['#E5E5E5', '#000000'],
-                button5: ['#E5E5E5', '#000000'],
-                button6: ['#E5E5E5', '#000000'],
-              });
-              handlePagination(1, 1);
-            }}
-            background={color.button2[0]}
-            color={color.button2[1]}
-          >
-            Belum Membayar
-          </ButtonState>
-          <ButtonState
-            onClick={() => {
-              setColor({
-                button1: ['#E5E5E5', '#000000'],
-                button2: ['#E5E5E5', '#000000'],
-                button3: ['#003366', '#FFFFFF'],
-                button4: ['#E5E5E5', '#000000'],
-                button5: ['#E5E5E5', '#000000'],
-                button6: ['#E5E5E5', '#000000'],
-              });
-              handlePagination(1, 2);
-            }}
-            background={color.button3[0]}
-            color={color.button3[1]}
-          >
-            Booking Berhasil
-          </ButtonState>
-          <ButtonState
-            onClick={() => {
-              setColor({
-                button1: ['#E5E5E5', '#000000'],
-                button2: ['#E5E5E5', '#000000'],
-                button3: ['#E5E5E5', '#000000'],
-                button4: ['#003366', '#FFFFFF'],
-                button5: ['#E5E5E5', '#000000'],
-                button6: ['#E5E5E5', '#000000'],
-              });
-              handlePagination(1, 3);
-            }}
-            background={color.button4[0]}
-            color={color.button4[1]}
-          >
-            Booking Selesai
-          </ButtonState>
-          <ButtonState
-            onClick={() => {
-              setColor({
-                button1: ['#E5E5E5', '#000000'],
-                button2: ['#E5E5E5', '#000000'],
-                button3: ['#E5E5E5', '#000000'],
-                button4: ['#E5E5E5', '#000000'],
-                button5: ['#003366', '#FFFFFF'],
-                button6: ['#E5E5E5', '#000000'],
-              });
-              handlePagination(1, 4);
-            }}
-            background={color.button5[0]}
-            color={color.button5[1]}
-          >
-            Booking Gagal
-          </ButtonState>
-          <ButtonState
-            onClick={() => {
-              setColor({
-                button1: ['#E5E5E5', '#000000'],
-                button2: ['#E5E5E5', '#000000'],
-                button3: ['#E5E5E5', '#000000'],
-                button4: ['#E5E5E5', '#000000'],
-                button5: ['#E5E5E5', '#000000'],
-                button6: ['#003366', '#FFFFFF'],
-              });
-              handlePagination(1, 5);
-            }}
-            background={color.button6[0]}
-            color={color.button6[1]}
-          >
-            Booking Selesai & Reviewed
-          </ButtonState>
-        </div>
+        {status === 'error' && <p>Error: {error.response.data.message}</p>}
+        {status === 'success' && (
+          <>
+            <div tw="mx-4 my-6 grid gap-1 grid-cols-6">
+              <ButtonState
+                onClick={() => {
+                  setColor({
+                    button1: ['#003366', '#FFFFFF'],
+                    button2: ['#E5E5E5', '#000000'],
+                    button3: ['#E5E5E5', '#000000'],
+                    button4: ['#E5E5E5', '#000000'],
+                    button5: ['#E5E5E5', '#000000'],
+                    button6: ['#E5E5E5', '#000000'],
+                  });
+                  handlePagination(1, 0);
+                }}
+                background={color.button1[0]}
+                color={color.button1[1]}
+              >
+                Menunggu Konfirmasi
+              </ButtonState>
+              <ButtonState
+                onClick={() => {
+                  setColor({
+                    button1: ['#E5E5E5', '#000000'],
+                    button2: ['#003366', '#FFFFFF'],
+                    button3: ['#E5E5E5', '#000000'],
+                    button4: ['#E5E5E5', '#000000'],
+                    button5: ['#E5E5E5', '#000000'],
+                    button6: ['#E5E5E5', '#000000'],
+                  });
+                  handlePagination(1, 1);
+                }}
+                background={color.button2[0]}
+                color={color.button2[1]}
+              >
+                Belum Membayar
+              </ButtonState>
+              <ButtonState
+                onClick={() => {
+                  setColor({
+                    button1: ['#E5E5E5', '#000000'],
+                    button2: ['#E5E5E5', '#000000'],
+                    button3: ['#003366', '#FFFFFF'],
+                    button4: ['#E5E5E5', '#000000'],
+                    button5: ['#E5E5E5', '#000000'],
+                    button6: ['#E5E5E5', '#000000'],
+                  });
+                  handlePagination(1, 2);
+                }}
+                background={color.button3[0]}
+                color={color.button3[1]}
+              >
+                Booking Berhasil
+              </ButtonState>
+              <ButtonState
+                onClick={() => {
+                  setColor({
+                    button1: ['#E5E5E5', '#000000'],
+                    button2: ['#E5E5E5', '#000000'],
+                    button3: ['#E5E5E5', '#000000'],
+                    button4: ['#003366', '#FFFFFF'],
+                    button5: ['#E5E5E5', '#000000'],
+                    button6: ['#E5E5E5', '#000000'],
+                  });
+                  handlePagination(1, 3);
+                }}
+                background={color.button4[0]}
+                color={color.button4[1]}
+              >
+                Booking Selesai
+              </ButtonState>
+              <ButtonState
+                onClick={() => {
+                  setColor({
+                    button1: ['#E5E5E5', '#000000'],
+                    button2: ['#E5E5E5', '#000000'],
+                    button3: ['#E5E5E5', '#000000'],
+                    button4: ['#E5E5E5', '#000000'],
+                    button5: ['#003366', '#FFFFFF'],
+                    button6: ['#E5E5E5', '#000000'],
+                  });
+                  handlePagination(1, 4);
+                }}
+                background={color.button5[0]}
+                color={color.button5[1]}
+              >
+                Booking Gagal
+              </ButtonState>
+              <ButtonState
+                onClick={() => {
+                  setColor({
+                    button1: ['#E5E5E5', '#000000'],
+                    button2: ['#E5E5E5', '#000000'],
+                    button3: ['#E5E5E5', '#000000'],
+                    button4: ['#E5E5E5', '#000000'],
+                    button5: ['#E5E5E5', '#000000'],
+                    button6: ['#003366', '#FFFFFF'],
+                  });
+                  handlePagination(1, 5);
+                }}
+                background={color.button6[0]}
+                color={color.button6[1]}
+              >
+                Booking Selesai & Reviewed
+              </ButtonState>
+            </div>
 
-        <div tw="flex flex-col justify-center w-full m-5 ">
-          {status === 'loading' && <p>Loading . . .</p>}
-          {booking.map((detail: any) => (
-            <div key={detail.id}>
-              <CardBooking
-                bookingID={detail.id}
-                name={detail.name}
-                capacity={detail.capacity}
-                date={detail.date}
-                start_time={detail.start_time}
-                end_time={detail.end_time}
+            <div tw="flex flex-col justify-center w-full m-5 ">
+              {status === 'loading' && <p>Loading . . .</p>}
+              {booking.map((detail: any) => (
+                <div key={detail.id}>
+                  <CardBooking
+                    bookingID={detail.id}
+                    name={detail.name}
+                    capacity={detail.capacity}
+                    date={detail.date}
+                    start_time={detail.start_time}
+                    end_time={detail.end_time}
+                  />
+                </div>
+              ))}
+            </div>
+
+            <div tw="flex justify-center items-center m-5 gap-x-1">
+              <ButtonChangePage
+                onClick={handlePrevbtn}
+                state="<"
+                page={currentPage}
+              />
+              <ButtonPage
+                pages={pages}
+                onClick={handleClick}
+                maxLimitPage={maxPageNumberLimit}
+                minLimitPage={minPageNumberLimit}
+              />
+              <ButtonChangePage
+                onClick={handleNextbtn}
+                state=">"
+                page={currentPage}
               />
             </div>
-          ))}
-        </div>
-
-        <div tw="flex justify-center items-center m-5 gap-x-1">
-          <ButtonChangePage
-            onClick={handlePrevbtn}
-            state="<"
-            page={currentPage}
-          />
-          <ButtonPage
-            pages={pages}
-            onClick={handleClick}
-            maxLimitPage={maxPageNumberLimit}
-            minLimitPage={minPageNumberLimit}
-          />
-          <ButtonChangePage
-            onClick={handleNextbtn}
-            state=">"
-            page={currentPage}
-          />
-        </div>
+          </>
+        )}
       </Layout>
     </>
   );
