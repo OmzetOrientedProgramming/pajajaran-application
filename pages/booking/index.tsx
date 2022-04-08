@@ -10,7 +10,7 @@ import CardBooking from '../../components/Booking/CardBooking';
 import { Layout } from '../../components/Utils/Layout';
 import ButtonChangePage from '../../components/Booking/ButtonChangePage';
 import { getListBooking } from '../../apis/services/listBookingService';
-import withAuth from "../../components/Utils/HOC/WithAuth";
+import withAuth from '../../components/Utils/HOC/WithAuth';
 
 interface IBooking {
   id: number;
@@ -44,9 +44,9 @@ const ListBooking: React.FC = () => {
     button6: ['#E5E5E5', '#000000'],
   });
 
-  function handlePagination(page: any, state: any) {
+  function handlePagination(page: any, bookingState: any) {
     const response = getListBooking({
-      state: state,
+      state: bookingState,
       limit: limit,
       page: page,
     });
@@ -59,7 +59,7 @@ const ListBooking: React.FC = () => {
       result.then((data: any) => {
         setBooking(data.data.data.bookings);
         setCurrentPage(page);
-        setState(state);
+        setState(bookingState);
         setTotalPage(data.data.data.pagination.total_page);
       });
     };

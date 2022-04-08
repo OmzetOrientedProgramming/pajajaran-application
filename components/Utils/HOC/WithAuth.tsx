@@ -1,22 +1,21 @@
 import React from 'react';
-import {NextPage, NextPageContext} from 'next';
+import { NextPage, NextPageContext } from 'next';
 import Router from 'next/router';
 import nookies from 'nookies';
-import jwtDecode from 'jwt-decode';
 
 const loginURL = '/auth';
-const withAuth: (WrappedComponent: NextPage) => NextPage = (WrappedComponent: NextPage) => {
-  const hocComponent: NextPage = ({...props}) => (
+const withAuth: (WrappedComponent: NextPage) => NextPage = (
+  WrappedComponent: NextPage
+) => {
+  const hocComponent: NextPage = ({ ...props }) => (
     <WrappedComponent {...props} />
   );
 
   hocComponent.getInitialProps = async (ctx: NextPageContext) => {
-    const {res} = ctx;
+    const { res } = ctx;
     const accessToken = nookies.get(ctx)?.token;
 
-    const flag = !(
-      accessToken
-    );
+    const flag = !accessToken;
 
     const returnProps = {
       accessToken,
@@ -35,7 +34,7 @@ const withAuth: (WrappedComponent: NextPage) => NextPage = (WrappedComponent: Ne
 
     if (WrappedComponent.getInitialProps) {
       const wrappedProps = await WrappedComponent.getInitialProps(ctx);
-      return {...wrappedProps, ...returnProps};
+      return { ...wrappedProps, ...returnProps };
     }
 
     return returnProps;

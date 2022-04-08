@@ -1,14 +1,14 @@
-import Button from "../Utils/Button";
-import {useForm} from "react-hook-form";
-import {loginParams} from "../../apis/services/authService";
-import toast from "react-hot-toast";
-import {useLogin} from "../../apis/hooks/authHooks";
-import {useEffect, useRef, useState} from "react";
-import {auth} from "../../firebase";
-import {RecaptchaVerifier} from "firebase/auth";
-import "twin.macro";
-import nookies from "nookies";
-import Router from "next/router";
+import Button from '../Utils/Button';
+import { useForm } from 'react-hook-form';
+import { loginParams } from '../../apis/services/authService';
+import toast from 'react-hot-toast';
+import { useLogin } from '../../apis/hooks/authHooks';
+import { useEffect, useRef, useState } from 'react';
+import { auth } from '../../firebase';
+import { RecaptchaVerifier } from 'firebase/auth';
+import 'twin.macro';
+import nookies from 'nookies';
+import Router from 'next/router';
 
 const LoginForm = () => {
   const {
@@ -17,7 +17,7 @@ const LoginForm = () => {
     setValue,
     watch,
     reset,
-    formState: {errors},
+    formState: { errors },
   } = useForm({
     defaultValues: {
       email: '',
@@ -29,7 +29,7 @@ const LoginForm = () => {
   const [recaptchaVerifier, setRecaptchaVerifier] = useState<any>();
   const recaptchaValidatorWrapperRef = useRef<HTMLDivElement>(null);
 
-  const {mutate: login, isLoading: isLoggingIn} = useLogin();
+  const { mutate: login, isLoading: isLoggingIn } = useLogin();
   const recaptchaToken = watch('recaptchaToken');
 
   useEffect(
@@ -37,7 +37,7 @@ const LoginForm = () => {
       setRecaptchaVerifier(
         new RecaptchaVerifier(
           'recaptcha-validator',
-          {size: 'invisible'},
+          { size: 'invisible' },
           auth
         )
       ),
@@ -62,17 +62,17 @@ const LoginForm = () => {
   const onSubmit = async (data: loginParams) => {
     login(data, {
       onSuccess: (res: any) => {
-        const data = res?.data;
+        const resData = res?.data;
         if (res.status >= 200 && res.status < 300) {
-          toast.success(data.message);
-          nookies.set(null, 'token', data.data.access_token, {
+          toast.success(resData.message);
+          nookies.set(null, 'token', resData.data.access_token, {
             maxAge: 30 * 24 * 60 * 60,
             path: '/',
           });
           reset();
           Router.push('/');
         } else {
-          toast.error(data.message);
+          toast.error(resData.message);
           reset();
         }
       },
@@ -84,7 +84,7 @@ const LoginForm = () => {
           setRecaptchaVerifier(
             new RecaptchaVerifier(
               'recaptcha-validator',
-              {size: 'invisible'},
+              { size: 'invisible' },
               auth
             )
           );
@@ -141,7 +141,7 @@ const LoginForm = () => {
         )}
       </div>
       <div ref={recaptchaValidatorWrapperRef}>
-        <div id="recaptcha-validator"/>
+        <div id="recaptcha-validator" />
       </div>
       {isLoggingIn ? (
         <div tw="text-center">. . .</div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import 'twin.macro';
 import tw, { css } from 'twin.macro';
-import StatusMap from './ConstantMap';
+import StatusMap from './StatusMap';
 import moment from 'moment';
 
 interface DetailRingkasanProps {
