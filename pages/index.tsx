@@ -2,6 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import tw, { css, styled } from 'twin.macro';
 import { Layout } from '../components/Utils/Layout';
+import withAuth from "../components/Utils/HOC/WithAuth";
 
 // Example creating styled component
 const Title = styled.h1`
@@ -45,4 +46,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default withAuth(Home);
