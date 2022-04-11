@@ -1,7 +1,10 @@
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import InformasiTransaksi from '../../pages/transaction-information/index';
-import { mockGetBalanceInformationResponse } from '../../__mocks__/apis/balanceInformationMocks';
+import {
+  mockGetBalanceInformationResponse,
+  mockGetBalanceInformationEmptyResponse,
+} from '../../__mocks__/apis/balanceInformationMocks';
 import ExampleWrapper from '../../__mocks__/pages/example';
 
 jest.mock('axios');
@@ -49,4 +52,18 @@ describe('ui components', () => {
     });
   });
 
+  test('get request with empty balance', async () => {
+    mockAxios.get.mockResolvedValue(mockGetBalanceInformationEmptyResponse);
+
+    render(
+      <ExampleWrapper>
+        <InformasiTransaksi />
+      </ExampleWrapper>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText('Saldo')).toBeInTheDocument();
+      expect(screen.getByText('Terakhir dicairkan:')).toBeInTheDocument();
+    });
+  });
 });

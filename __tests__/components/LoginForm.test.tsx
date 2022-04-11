@@ -1,8 +1,21 @@
-import {cleanup, fireEvent, render, screen,} from '@testing-library/react';
-import {QueryClient, QueryClientProvider} from 'react-query';
-import LoginForm from "../../components/Auth/LoginForm";
-import {act} from "react-dom/test-utils";
-import axios from "axios";
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import LoginForm from '../../components/Auth/LoginForm';
+import { act } from 'react-dom/test-utils';
+import axios from 'axios';
+import {
+  loginParams,
+  mockLogin400Response,
+  mockLoginResponse,
+} from '../../__mocks__/apis/authMocks';
+import { createMockRouter } from '../../__mocks__/utils/createMockRouter';
+import { RouterContext } from 'next/dist/shared/lib/router-context';
 
 jest.mock('firebase/auth', () => {
   return {
@@ -25,6 +38,10 @@ jest.mock('firebase/auth', () => {
 jest.mock('axios');
 const mockAxios = axios as jest.Mocked<typeof axios>;
 
+beforeAll(() => {
+  console.error = jest.fn();
+});
+
 afterEach(() => {
   cleanup();
   jest.clearAllMocks();
@@ -33,10 +50,13 @@ afterEach(() => {
 describe('LoginForm', () => {
   beforeEach(async () => {
     await act(async () => {
+      const mockRouter = createMockRouter({});
       render(
-        <QueryClientProvider client={new QueryClient()}>
-          <LoginForm/>
-        </QueryClientProvider>
+        <RouterContext.Provider value={mockRouter}>
+          <QueryClientProvider client={new QueryClient()}>
+            <LoginForm />
+          </QueryClientProvider>
+        </RouterContext.Provider>
       );
     });
   });
@@ -51,24 +71,96 @@ describe('LoginForm', () => {
   });
 
   test('display error message when email is empty', async () => {
-    expect(screen.queryByText('Email tidak boleh kosong')).not.toBeInTheDocument();
-    fireEvent.submit(screen.getByRole("button"));
-    expect(await screen.findByText('Email tidak boleh kosong')).toBeInTheDocument();
+    expect(
+      screen.queryByText('Email tidak boleh kosong')
+    ).not.toBeInTheDocument();
+    fireEvent.submit(screen.getByRole('button'));
+    expect(
+      await screen.findByText('Email tidak boleh kosong')
+    ).toBeInTheDocument();
   });
 
   test('display error message when email is not valid', async () => {
     expect(screen.queryByText('Email tidak valid')).not.toBeInTheDocument();
-    fireEvent.input(
-      screen.getByLabelText('Email'),
-      {target: {value: 'wrong@email'}}
-    );
-    fireEvent.submit(screen.getByRole("button"));
+    fireEvent.input(screen.getByLabelText('Email'), {
+      target: { value: 'wrong@email' },
+    });
+    fireEvent.submit(screen.getByRole('button'));
     expect(await screen.findByText('Email tidak valid')).toBeInTheDocument();
   });
 
   test('display error message when password is empty', async () => {
-    expect(screen.queryByText('Password tidak boleh kosong')).not.toBeInTheDocument();
-    fireEvent.submit(screen.getByRole("button"));
-    expect(await screen.findByText('Password tidak boleh kosong')).toBeInTheDocument();
+    expect(
+      screen.queryByText('Password tidak boleh kosong')
+    ).not.toBeInTheDocument();
+    fireEvent.submit(screen.getByRole('button'));
+    expect(
+      await screen.findByText('Password tidak boleh kosong')
+    ).toBeInTheDocument();
+  });
+
+  test('form submitted successfully', async () => {
+    mockAxios.post.mockResolvedValueOnce(mockLoginResponse);
+
+    fireEvent.input(screen.getByLabelText('Email'), {
+      target: { value: loginParams.email },
+    });
+    fireEvent.input(screen.getByLabelText('Password'), {
+      target: { value: loginParams.password },
+    });
+
+    expect(mockAxios.post).not.toHaveBeenCalled();
+
+    act(() => {
+      fireEvent.submit(screen.getByRole('button'));
+    });
+
+    await waitFor(() => {
+      expect(mockAxios.post).toHaveBeenCalled();
+    });
+  });
+
+  test('form submitted with 400', async () => {
+    mockAxios.post.mockResolvedValueOnce(mockLogin400Response);
+
+    fireEvent.input(screen.getByLabelText('Email'), {
+      target: { value: loginParams.email },
+    });
+    fireEvent.input(screen.getByLabelText('Password'), {
+      target: { value: loginParams.password },
+    });
+
+    expect(mockAxios.post).not.toHaveBeenCalled();
+
+    act(() => {
+      fireEvent.submit(screen.getByRole('button'));
+    });
+
+    await waitFor(() => {
+      expect(mockAxios.post).toHaveBeenCalled();
+    });
+  });
+
+  test('form submit error', async () => {
+    mockAxios.post.mockResolvedValueOnce(
+      Promise.reject(new Error('get error'))
+    );
+
+    fireEvent.input(screen.getByLabelText('Email'), {
+      target: { value: loginParams.email },
+    });
+    fireEvent.input(screen.getByLabelText('Password'), {
+      target: { value: loginParams.password },
+    });
+
+    expect(mockAxios.post).not.toHaveBeenCalled();
+
+    act(() => {
+      fireEvent.submit(screen.getByRole('button'));
+    });
+
+    await waitFor(() => {
+      expect(mockAxios.post).toHaveBeenCalled();
+    });
   });
 });
