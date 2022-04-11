@@ -52,7 +52,6 @@ const LoginForm = () => {
   useEffect(() => {
     // console.log(recaptchaVerifier?.verify);
     if (!recaptchaVerifier) return;
-    // console.log("Masuk bang")
     recaptchaVerifier.verify().then((token: string) => {
       // console.log(token);
       setValue('recaptchaToken', token);
@@ -77,6 +76,7 @@ const LoginForm = () => {
         }
       },
       onError: (err: any) => {
+        // console.log(err);
         recaptchaVerifier.clear();
         if (recaptchaValidatorWrapperRef.current) {
           recaptchaValidatorWrapperRef.current.innerHTML =

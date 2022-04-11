@@ -71,31 +71,56 @@ describe('useGetDetailBooking()', () => {
     await waitFor(() => {
       fireEvent.click(screen.getByText('Belum Membayar'));
     });
-
     expect(mockAxios.get).toHaveBeenCalledTimes(2);
 
     await waitFor(() => {
       fireEvent.click(screen.getByText('Booking Berhasil'));
     });
-
     expect(mockAxios.get).toHaveBeenCalledTimes(3);
 
     await waitFor(() => {
       fireEvent.click(screen.getByText('Booking Selesai'));
     });
-
     expect(mockAxios.get).toHaveBeenCalledTimes(4);
 
     await waitFor(() => {
       fireEvent.click(screen.getByText('Booking Gagal'));
     });
-
     expect(mockAxios.get).toHaveBeenCalledTimes(5);
 
     await waitFor(() => {
       fireEvent.click(screen.getByText('Booking Selesai & Reviewed'));
     });
-
     expect(mockAxios.get).toHaveBeenCalledTimes(6);
+
+    await waitFor(() => {
+      fireEvent.click(screen.getByText('Menunggu Konfirmasi'));
+    });
+    expect(mockAxios.get).toHaveBeenCalledTimes(7);
+  });
+
+  test('change page buttons work correctly', async () => {
+    mockAxios.get.mockResolvedValue(mockedResponse);
+
+    render(
+      <ExampleWrapper>
+        <ListBooking />
+      </ExampleWrapper>
+    );
+
+    await waitFor(() => {
+      fireEvent.click(screen.getByText('>'));
+    });
+    expect(mockAxios.get).toHaveBeenCalledTimes(2);
+
+    await waitFor(() => {
+      fireEvent.click(screen.getByText('<'));
+    });
+    expect(mockAxios.get).toHaveBeenCalledTimes(3);
+
+    await waitFor(() => {
+      fireEvent.click(screen.getByText('1'));
+    });
+    expect(mockAxios.get).toHaveBeenCalledTimes(4);
   });
 });
