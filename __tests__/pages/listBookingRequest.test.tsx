@@ -119,8 +119,32 @@ describe('useGetDetailBooking()', () => {
     expect(mockAxios.get).toHaveBeenCalledTimes(3);
 
     await waitFor(() => {
-      fireEvent.click(screen.getByText('1'));
+      fireEvent.click(screen.getByText('2'));
     });
     expect(mockAxios.get).toHaveBeenCalledTimes(4);
+  });
+
+  test('change page button limit works correctly', async () => {
+    mockAxios.get.mockResolvedValue(mockedResponse);
+
+    render(
+      <ExampleWrapper>
+        <ListBooking />
+      </ExampleWrapper>
+    );
+
+    await waitFor(() => {
+      fireEvent.click(screen.getByText('>'));
+      fireEvent.click(screen.getByText('>'));
+      fireEvent.click(screen.getByText('>'));
+      fireEvent.click(screen.getByText('>'));
+      fireEvent.click(screen.getByText('>'));
+    });
+    expect(mockAxios.get).toHaveBeenCalled();
+
+    await waitFor(() => {
+      fireEvent.click(screen.getByText('<'));
+    });
+    expect(mockAxios.get).toHaveBeenCalled();
   });
 });

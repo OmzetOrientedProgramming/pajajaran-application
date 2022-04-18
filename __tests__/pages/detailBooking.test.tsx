@@ -1,4 +1,10 @@
-import { cleanup, render, screen, waitFor } from '@testing-library/react';
+import {
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react';
 import axios from 'axios';
 import DetailBooking from '../../pages/booking/[id]';
 import { mockGetDetailBookingResponse } from '../../__mocks__/apis/detailBookingMocks';
@@ -36,6 +42,20 @@ describe('ui components', () => {
       expect(screen.getByText('Detail Booking')).toBeInTheDocument();
       expect(screen.getByText('Pesanan Tambahan')).toBeInTheDocument();
       expect(screen.getByText('Ringkasan')).toBeInTheDocument();
+    });
+  });
+
+  test('back button', async () => {
+    mockAxios.get.mockResolvedValue(mockGetDetailBookingResponse);
+
+    render(
+      <ExampleWrapper>
+        <DetailBooking />
+      </ExampleWrapper>
+    );
+
+    await waitFor(() => {
+      fireEvent.click(screen.getByTestId('back-button'));
     });
   });
 });
