@@ -10,6 +10,7 @@ const endpoint = {
   listBooking: `${baseUrl}/business-admin`,
   balanceInformation: `${baseUrl}/business-admin/balance`,
   login: `${baseUrl}/auth/business-admin/login`,
+  businessProfile: `${baseUrl}/business-admin/business-profile`,
 };
 
 export default endpoint;

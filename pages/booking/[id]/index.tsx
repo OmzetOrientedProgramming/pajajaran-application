@@ -21,7 +21,7 @@ const DetailBooking: React.FC = () => {
   const router = useRouter();
   if (!router.isReady) return <></>;
   const { id } = router.query;
-  const stringId: string = (id as string) || '';
+  const stringId: string = id as string;
 
   const [isOpen, setIsOpen] = useState(false);
   const [confirmType, setConfirmType] = useState('');
@@ -105,6 +105,7 @@ const DetailBooking: React.FC = () => {
               <div tw="flex flex-row items-center justify-center gap-x-3">
                 <button
                   onClick={() => router.back()}
+                  data-testid="back-button"
                   tw="duration-150 hover:(brightness-125)"
                 >
                   <img src={'/images/Detail/left-arrow.svg'} alt="back" />

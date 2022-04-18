@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import 'twin.macro';
 import { useGetListBooking } from '../../apis/hooks/listBookingHooks';
@@ -9,7 +9,6 @@ import ButtonState from '../../components/Booking/ButtonState';
 import CardBooking from '../../components/Booking/CardBooking';
 import { Layout } from '../../components/Utils/Layout';
 import ButtonChangePage from '../../components/Booking/ButtonChangePage';
-import { getListBooking } from '../../apis/services/listBookingService';
 import withAuth from '../../components/Utils/HOC/WithAuth';
 
 interface IBooking {
@@ -25,7 +24,7 @@ const ListBooking: React.FC = () => {
   const router = useRouter();
   if (!router.isReady) return <></>;
 
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
   const [booking, setBooking] = useState<Array<IBooking>>([]);
@@ -34,6 +33,27 @@ const ListBooking: React.FC = () => {
 
   let limit = 5;
   let pageNumberLimit = 5;
+
+  const { status, error, refetch }: any = useGetListBooking(
+    {
+      state: state,
+      limit: limit,
+      page: currentPage,
+    },
+    {
+      onSuccess: (res: any) => {
+        setBooking(res.data.data.bookings);
+        setTotalPage(res.data.data.pagination.total_page);
+      },
+      onError: (err: any) => {
+        toast.error(err.response.data.message, { position: 'top-right' });
+      },
+    }
+  );
+
+  useEffect(() => {
+    refetch();
+  }, [currentPage, state]);
 
   const [color, setColor] = useState({
     button1: ['#003366', '#FFFFFF'],
@@ -44,37 +64,13 @@ const ListBooking: React.FC = () => {
     button6: ['#E5E5E5', '#000000'],
   });
 
-  function handlePagination(page: any, bookingState: any) {
-    const response = getListBooking({
-      state: bookingState,
-      limit: limit,
-      page: page,
-    });
-
-    const result = response.then((res) => {
-      return res;
-    });
-
-    const getData = () => {
-      result.then((data: any) => {
-        setBooking(data.data.data.bookings);
-        setCurrentPage(page);
-        setState(bookingState);
-        setTotalPage(data.data.data.pagination.total_page);
-      });
-    };
-    getData();
-  }
-
-  const handleClick = (data: any) => {
-    let page = data.target.id;
-    handlePagination(page, state);
+  const handleChangePage = (button: any) => {
+    setCurrentPage(parseInt(button.target.id));
   };
 
   const handlePrevbtn = () => {
     if (currentPage > 1) {
-      let page = currentPage - 1;
-      handlePagination(page, state);
+      setCurrentPage((prevPage) => prevPage - 1);
     }
 
     if ((currentPage - 1) % pageNumberLimit == 0 && currentPage != 1) {
@@ -84,9 +80,11 @@ const ListBooking: React.FC = () => {
   };
 
   const handleNextbtn = () => {
+    console.log(currentPage, totalPage);
     if (currentPage < totalPage) {
-      let page = currentPage + 1;
-      handlePagination(page, state);
+      setCurrentPage((prevPage: number) => {
+        return prevPage + 1;
+      });
     }
 
     if (currentPage + 1 > maxPageNumberLimit && currentPage != totalPage) {
@@ -94,25 +92,6 @@ const ListBooking: React.FC = () => {
       setMinPageNumberLimit(minPageNumberLimit + pageNumberLimit);
     }
   };
-
-  const { status, error }: any = useGetListBooking(
-    {
-      state: state,
-      limit: limit,
-      page: currentPage,
-    },
-    {
-      onSuccess: (res: any) => {
-        setBooking(res.data.data.bookings);
-        if (totalPage == 0) {
-          setTotalPage(res.data.data.pagination.total_page);
-        }
-      },
-      onError: (err: any) => {
-        toast.error(err.response.data.message, { position: 'top-right' });
-      },
-    }
-  );
 
   const pages = [];
   for (let i = 1; i <= totalPage; i++) {
@@ -146,7 +125,8 @@ const ListBooking: React.FC = () => {
                     button5: ['#E5E5E5', '#000000'],
                     button6: ['#E5E5E5', '#000000'],
                   });
-                  handlePagination(1, 0);
+                  setState(0);
+                  setCurrentPage(1);
                 }}
                 background={color.button1[0]}
                 color={color.button1[1]}
@@ -163,7 +143,8 @@ const ListBooking: React.FC = () => {
                     button5: ['#E5E5E5', '#000000'],
                     button6: ['#E5E5E5', '#000000'],
                   });
-                  handlePagination(1, 1);
+                  setState(1);
+                  setCurrentPage(1);
                 }}
                 background={color.button2[0]}
                 color={color.button2[1]}
@@ -180,7 +161,8 @@ const ListBooking: React.FC = () => {
                     button5: ['#E5E5E5', '#000000'],
                     button6: ['#E5E5E5', '#000000'],
                   });
-                  handlePagination(1, 2);
+                  setState(2);
+                  setCurrentPage(1);
                 }}
                 background={color.button3[0]}
                 color={color.button3[1]}
@@ -197,7 +179,8 @@ const ListBooking: React.FC = () => {
                     button5: ['#E5E5E5', '#000000'],
                     button6: ['#E5E5E5', '#000000'],
                   });
-                  handlePagination(1, 3);
+                  setState(3);
+                  setCurrentPage(1);
                 }}
                 background={color.button4[0]}
                 color={color.button4[1]}
@@ -214,7 +197,8 @@ const ListBooking: React.FC = () => {
                     button5: ['#003366', '#FFFFFF'],
                     button6: ['#E5E5E5', '#000000'],
                   });
-                  handlePagination(1, 4);
+                  setState(4);
+                  setCurrentPage(1);
                 }}
                 background={color.button5[0]}
                 color={color.button5[1]}
@@ -231,7 +215,8 @@ const ListBooking: React.FC = () => {
                     button5: ['#E5E5E5', '#000000'],
                     button6: ['#003366', '#FFFFFF'],
                   });
-                  handlePagination(1, 5);
+                  setState(5);
+                  setCurrentPage(1);
                 }}
                 background={color.button6[0]}
                 color={color.button6[1]}
@@ -264,7 +249,7 @@ const ListBooking: React.FC = () => {
               />
               <ButtonPage
                 pages={pages}
-                onClick={handleClick}
+                onClick={handleChangePage}
                 maxLimitPage={maxPageNumberLimit}
                 minLimitPage={minPageNumberLimit}
               />

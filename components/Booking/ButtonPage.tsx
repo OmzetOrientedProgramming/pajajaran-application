@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'twin.macro';
 import tw, { css } from 'twin.macro';
 
@@ -10,12 +10,6 @@ interface ButtonPageProps {
 }
 
 const ButtonPage: React.FC<ButtonPageProps> = (props) => {
-  let [num, setNum] = useState(1);
-
-  function Back() {
-    num > 1 && setNum(--num);
-  }
-
   function renderPageNumbers(number: any) {
     if (number < props.maxLimitPage + 1 && number > props.minLimitPage) {
       return (
