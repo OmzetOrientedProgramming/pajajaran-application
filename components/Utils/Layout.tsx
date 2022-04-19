@@ -16,7 +16,7 @@ export const Layout: React.FC = ({ children }) => {
 const navbarItems = [
   {
     text: 'Profil Bisnis',
-    href: '/profil',
+    href: '/profil/item',
   },
   {
     text: 'Booking Customer',
