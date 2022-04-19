@@ -80,7 +80,6 @@ const ListBooking: React.FC = () => {
   };
 
   const handleNextbtn = () => {
-    console.log(currentPage, totalPage);
     if (currentPage < totalPage) {
       setCurrentPage((prevPage: number) => {
         return prevPage + 1;

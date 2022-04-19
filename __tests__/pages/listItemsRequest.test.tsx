@@ -80,7 +80,7 @@ describe('pagination', () => {
     expect(mockAxios.get).toHaveBeenCalledTimes(3);
 
     await waitFor(() => {
-      fireEvent.click(screen.getByText('1'));
+      fireEvent.click(screen.getByText('3'));
     });
     expect(mockAxios.get).toHaveBeenCalledTimes(4);
   });

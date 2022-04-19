@@ -44,7 +44,7 @@ const Item: React.FC = () => {
   }, [currentPage]);
 
   const handleChangePage = (button: any) => {
-    setCurrentPage(button.target.id);
+    setCurrentPage(parseInt(button.target.id));
   };
 
   const handlePrevbtn = () => {
