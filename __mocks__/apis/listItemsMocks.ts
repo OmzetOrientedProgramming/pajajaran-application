@@ -1,7 +1,8 @@
 import { AxiosResponse } from 'axios';
 
+// Get List Items
 export const dummyGetListItemsResponse = {
-  status: 0,
+  status: 200,
   message: 'string',
   data: {
     pagination: {
@@ -77,4 +78,22 @@ export const mockGetListItemsResponse: AxiosResponse = {
 export const getListItemsParams = {
   limit: 5,
   page: 1,
+};
+
+// Delete Item
+export const dummyDeleteItemResponse = {
+  status: 0,
+  message: 'success',
+};
+
+export const mockDeleteItemResponse: AxiosResponse = {
+  data: dummyDeleteItemResponse,
+  status: 200,
+  statusText: 'OK',
+  headers: {},
+  config: {},
+};
+
+export const deleteItemParams = {
+  item_id: '1',
 };
