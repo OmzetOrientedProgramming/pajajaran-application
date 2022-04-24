@@ -2,10 +2,13 @@ import { cleanup } from '@testing-library/react';
 import axios from 'axios';
 import { headers } from '../../apis/constants';
 import endpoint from '../../apis/endpoint';
-import { getListItems } from '../../apis/services/itemsService';
+import { getListItems, deleteItem } from '../../apis/services/itemsService';
 import {
+  deleteItemParams,
+  dummyDeleteItemResponse,
   dummyGetListItemsResponse,
   getListItemsParams,
+  mockDeleteItemResponse,
   mockGetListItemsResponse,
 } from '../../__mocks__/apis/listItemsMocks';
 
@@ -36,5 +39,21 @@ describe('getListItems()', () => {
       }
     );
     expect(data.data).toEqual(dummyGetListItemsResponse);
+  });
+});
+
+describe('deleteItem()', () => {
+  test('deleteItem works successfully', async () => {
+    mockAxios.delete.mockResolvedValueOnce(mockDeleteItemResponse);
+
+    expect(mockAxios.delete).not.toHaveBeenCalled();
+    const data = await deleteItem(deleteItemParams);
+
+    expect(mockAxios.delete).toHaveBeenCalledTimes(1);
+    expect(mockAxios.delete).toHaveBeenCalledWith(
+      `${endpoint.businessProfile}/list-items/${deleteItemParams.item_id}`,
+      { headers: headers }
+    );
+    expect(data.data).toEqual(dummyDeleteItemResponse);
   });
 });

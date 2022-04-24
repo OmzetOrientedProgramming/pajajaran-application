@@ -9,8 +9,20 @@ import axios from 'axios';
 import { headers } from '../../apis/constants';
 import endpoint from '../../apis/endpoint';
 import ListItems from '../../pages/profil/item';
-import { mockGetListItemsResponse } from '../../__mocks__/apis/listItemsMocks';
+import {
+  deleteItemParams,
+  mockDeleteItemResponse,
+  mockGetListItemsResponse,
+} from '../../__mocks__/apis/listItemsMocks';
 import ExampleWrapper from '../../__mocks__/pages/example';
+
+jest.setTimeout(30000);
+
+// @ts-expect-error
+global.IntersectionObserver = class FakeIntersectionObserver {
+  observe() {}
+  disconnect() {}
+};
 
 jest.mock('axios');
 const mockAxios = axios as jest.Mocked<typeof axios>;
@@ -105,5 +117,32 @@ describe('pagination', () => {
       fireEvent.click(screen.getByText('<'));
     });
     expect(mockAxios.get).toHaveBeenCalledTimes(3);
+  });
+});
+
+describe('useDeleteItem()', () => {
+  test('useDeleteItem is called correctly', async () => {
+    mockAxios.delete.mockResolvedValueOnce(mockDeleteItemResponse);
+    expect(mockAxios.delete).not.toHaveBeenCalled();
+
+    render(
+      <ExampleWrapper>
+        <ListItems />
+      </ExampleWrapper>
+    );
+
+    await waitFor(() => {
+      expect(screen.getByText('Tenda ABC')).toBeInTheDocument();
+
+      fireEvent.click(screen.getAllByText('Hapus')[0]);
+
+      fireEvent.click(screen.getByTestId('hapus-confirm'));
+    });
+
+    expect(mockAxios.delete).toHaveBeenCalledTimes(1);
+    expect(mockAxios.delete).toHaveBeenCalledWith(
+      `${endpoint.businessProfile}/list-items/${deleteItemParams.item_id}`,
+      { headers: headers }
+    );
   });
 });

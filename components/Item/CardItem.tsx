@@ -8,6 +8,8 @@ interface CardItemProps {
   image: string;
   price: number;
   description: string;
+  setIsOpen: any;
+  setItemId: any;
 }
 
 const formatter = new Intl.NumberFormat('id-ID', {
@@ -29,7 +31,13 @@ const CardItem: React.FC<CardItemProps> = (props) => {
           <Button buttonType="primary" onClick={() => {}}>
             Ubah
           </Button>
-          <Button buttonType="secondary" onClick={() => {}}>
+          <Button
+            buttonType="secondary"
+            onClick={() => {
+              props.setItemId(props.id);
+              props.setIsOpen(true);
+            }}
+          >
             Hapus
           </Button>
         </div>

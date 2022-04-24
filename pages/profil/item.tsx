@@ -1,11 +1,13 @@
 import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { useQueryClient } from 'react-query';
 import 'twin.macro';
-import { useGetListItems } from '../../apis/hooks/itemsHooks';
+import { useDeleteItem, useGetListItems } from '../../apis/hooks/itemsHooks';
 import ButtonChangePage from '../../components/Booking/ButtonChangePage';
 import ButtonPage from '../../components/Booking/ButtonPage';
 import CardItem from '../../components/Item/CardItem';
+import DeleteItemModal from '../../components/Item/DeleteItemModal';
 import { Layout } from '../../components/Utils/Layout';
 
 const Item: React.FC = () => {
@@ -13,6 +15,9 @@ const Item: React.FC = () => {
   const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(3);
   const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
   const [pages, setPages] = useState<Array<number>>([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [itemId, setItemId] = useState('');
+  const queryClient = useQueryClient();
 
   const limit = 8;
   const pageNumberLimit = 3;
@@ -39,9 +44,32 @@ const Item: React.FC = () => {
     }
   );
 
+  const { mutate: deleteItem } = useDeleteItem();
+
   useEffect(() => {
     refetch();
   }, [currentPage]);
+
+  const handleConfirm = () => {
+    deleteItem(
+      {
+        item_id: itemId,
+      },
+      {
+        onSuccess: (res: any) => {
+          setIsOpen(false);
+          toast.success('Item berhasil dihapus');
+          queryClient.invalidateQueries('get_list_items');
+        },
+        onError: (err: any) => {
+          // console.log('err', err);
+          toast.error(err.response.data.message, {
+            position: 'top-right',
+          });
+        },
+      }
+    );
+  };
 
   const handleChangePage = (button: any) => {
     setCurrentPage(parseInt(button.target.id));
@@ -77,6 +105,13 @@ const Item: React.FC = () => {
       <Head>
         <title>Daftar Item - Admin</title>
       </Head>
+
+      <DeleteItemModal
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        handleConfirm={handleConfirm}
+      />
+
       <div tw="mt-6">
         <h1 tw="mb-12 text-4xl font-bold text-center">Daftar Item</h1>
         {status === 'loading' && (
@@ -93,6 +128,8 @@ const Item: React.FC = () => {
                   image={item.image}
                   price={item.price}
                   description={item.description}
+                  setIsOpen={setIsOpen}
+                  setItemId={setItemId}
                 />
               ))}
             </div>
