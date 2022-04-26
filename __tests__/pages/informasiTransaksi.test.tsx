@@ -5,7 +5,10 @@ import {
   mockGetBalanceInformationResponse,
   mockGetBalanceInformationEmptyResponse,
 } from '../../__mocks__/apis/balanceInformationMocks';
+import { mockedResponse } from '../../__mocks__/apis/transactionHistoryMocks';
 import ExampleWrapper from '../../__mocks__/pages/example';
+
+jest.setTimeout(50000);
 
 jest.mock('axios');
 const mockAxios = axios as jest.Mocked<typeof axios>;
@@ -23,7 +26,8 @@ afterEach(() => {
 
 describe('ui components', () => {
   test('get request fulfilled', async () => {
-    mockAxios.get.mockResolvedValue(mockGetBalanceInformationResponse);
+    mockAxios.get.mockResolvedValueOnce(mockGetBalanceInformationResponse);
+    mockAxios.get.mockResolvedValueOnce(mockedResponse);
 
     render(
       <ExampleWrapper>
@@ -34,6 +38,8 @@ describe('ui components', () => {
     await waitFor(() => {
       expect(screen.getByText('Saldo')).toBeInTheDocument();
       expect(screen.getByText('Terakhir dicairkan:')).toBeInTheDocument();
+      expect(screen.getByText('Riwayat Transaksi')).toBeInTheDocument();
+      expect(screen.getByText('Lihat Semua')).toBeInTheDocument();
     });
   });
 
@@ -53,7 +59,8 @@ describe('ui components', () => {
   });
 
   test('get request with empty balance', async () => {
-    mockAxios.get.mockResolvedValue(mockGetBalanceInformationEmptyResponse);
+    mockAxios.get.mockResolvedValueOnce(mockGetBalanceInformationResponse);
+    mockAxios.get.mockResolvedValueOnce(mockedResponse);
 
     render(
       <ExampleWrapper>
