@@ -7,6 +7,8 @@ import Button from '../Utils/Button';
 interface BalanceCardProps {
   balanceAmount: number;
   lastDisbursementDate: Date;
+  butonType: 'primary' | 'primaryDisabled';
+  onClick?: () => void;
 }
 
 const options = {
@@ -41,19 +43,6 @@ function formatDate(date: Date) {
 
 function formatBalance(balance: number) {
   return balance.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-}
-
-function inspectWithdrawalAbility(date: Date, amount: number) {
-  if (amount === 0) return false;
-  else {
-    return true;
-  }
-}
-
-function getButtonType(withdrawalAbility: boolean) {
-  if (withdrawalAbility) {
-    return 'primary';
-  } else return 'primaryDisabled';
 }
 
 export const BalanceCard: React.FC<BalanceCardProps> = (props) => {
@@ -119,14 +108,7 @@ export const BalanceCard: React.FC<BalanceCardProps> = (props) => {
             tw`justify-start`,
           ]}
         >
-          <Button
-            buttonType={getButtonType(
-              inspectWithdrawalAbility(
-                props.lastDisbursementDate,
-                props.balanceAmount
-              )
-            )}
-          >
+          <Button buttonType={props.butonType} onClick={props.onClick}>
             Cairkan Saldo
           </Button>
         </div>

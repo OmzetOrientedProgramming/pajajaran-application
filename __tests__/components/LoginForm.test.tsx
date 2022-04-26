@@ -16,6 +16,7 @@ import {
 } from '../../__mocks__/apis/authMocks';
 import { createMockRouter } from '../../__mocks__/utils/createMockRouter';
 import { RouterContext } from 'next/dist/shared/lib/router-context';
+jest.setTimeout(10000);
 
 jest.setTimeout(50000);
 
