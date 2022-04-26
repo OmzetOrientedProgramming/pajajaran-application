@@ -11,6 +11,7 @@ const endpoint = {
   balanceInformation: `${baseUrl}/business-admin/balance`,
   login: `${baseUrl}/auth/business-admin/login`,
   businessProfile: `${baseUrl}/business-admin/business-profile`,
+  transactionHistory: `${baseUrl}/business-admin/transaction-history`
 };
 
 export default endpoint;

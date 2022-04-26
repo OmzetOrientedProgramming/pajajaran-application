@@ -11,7 +11,7 @@ import ExampleWrapper from '../../__mocks__/pages/example';
 import userEvent from '@testing-library/user-event';
 import Item from '../../pages/profil/item';
 
-jest.setTimeout(30000);
+jest.setTimeout(50000);
 
 // @ts-expect-error
 global.IntersectionObserver = class FakeIntersectionObserver {

@@ -17,6 +17,8 @@ import {
 import { createMockRouter } from '../../__mocks__/utils/createMockRouter';
 import { RouterContext } from 'next/dist/shared/lib/router-context';
 
+jest.setTimeout(50000);
+
 jest.mock('firebase/auth', () => {
   return {
     RecaptchaVerifier: jest.fn(() => ({
