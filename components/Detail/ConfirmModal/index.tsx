@@ -3,6 +3,7 @@ import React from 'react';
 import 'twin.macro';
 import Batal from './Batal';
 import Terima from './Terima';
+import Selesai from './Selesai';
 
 interface ConfirmModalInterface {
   type: string;
@@ -32,6 +33,9 @@ const ConfirmModal: React.FC<ConfirmModalInterface> = ({
           )}
           {type === 'batal' && (
             <Batal setIsOpen={setIsOpen} handleConfirm={handleConfirm} />
+          )}
+          {type === 'selesai' && (
+            <Selesai setIsOpen={setIsOpen} handleConfirm={handleConfirm} />
           )}
         </div>
       </div>
