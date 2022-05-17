@@ -1,5 +1,5 @@
 TN:
-SF:apis\constants.ts
+SF:apis/constants.ts
 FNF:0
 FNH:0
 DA:4,13
@@ -9,7 +9,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:apis\endpoint.ts
+SF:apis/endpoint.ts
 FNF:0
 FNH:0
 DA:2,19
@@ -22,7 +22,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:apis\hooks\authHooks.ts
+SF:apis/hooks/authHooks.ts
 FN:4,useLogin
 FNF:1
 FNH:1
@@ -34,7 +34,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:apis\hooks\balanceInformationHooks.ts
+SF:apis/hooks/balanceInformationHooks.ts
 FN:4,useGetBalanceInformation
 FN:7,(anonymous_1)
 FNF:2
@@ -49,7 +49,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:apis\hooks\detailBookingHooks.ts
+SF:apis/hooks/detailBookingHooks.ts
 FN:8,useGetDetailBooking
 FN:14,(anonymous_1)
 FN:19,useConfirmBooking
@@ -67,7 +67,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:apis\hooks\detailTransactionHistoryHooks.ts
+SF:apis/hooks/detailTransactionHistoryHooks.ts
 FN:7,useGetDetailTransactionHistory
 FN:13,(anonymous_1)
 FNF:2
@@ -82,7 +82,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:apis\hooks\disbursementHooks.ts
+SF:apis/hooks/disbursementHooks.ts
 FN:4,useDisbursement
 FNF:1
 FNH:1
@@ -94,7 +94,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:apis\hooks\itemsHooks.ts
+SF:apis/hooks/itemsHooks.ts
 FN:8,useGetListItems
 FN:9,(anonymous_1)
 FN:12,useDeleteItem
@@ -111,7 +111,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:apis\hooks\listBookingHooks.ts
+SF:apis/hooks/listBookingHooks.ts
 FN:7,useGetListBooking
 FN:8,(anonymous_1)
 FNF:2
@@ -125,7 +125,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:apis\hooks\transactionHistoryHooks.ts
+SF:apis/hooks/transactionHistoryHooks.ts
 FN:7,useGetTransactionHistory
 FN:13,(anonymous_1)
 FNF:2
@@ -140,7 +140,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:apis\services\authService.tsx
+SF:apis/services/authService.tsx
 FN:12,(anonymous_0)
 FNF:1
 FNH:1
@@ -155,7 +155,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:apis\services\balanceInformationService.ts
+SF:apis/services/balanceInformationService.ts
 FN:5,(anonymous_0)
 FNF:1
 FNH:1
@@ -169,7 +169,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:apis\services\detailBookingService.ts
+SF:apis/services/detailBookingService.ts
 FN:10,(anonymous_0)
 FN:25,(anonymous_1)
 FNF:2
@@ -189,7 +189,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:apis\services\detailTransactionHistoryService.ts
+SF:apis/services/detailTransactionHistoryService.ts
 FN:10,(anonymous_0)
 FNF:1
 FNH:1
@@ -203,7 +203,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:apis\services\disbursementService.ts
+SF:apis/services/disbursementService.ts
 FN:9,(anonymous_0)
 FNF:1
 FNH:0
@@ -218,7 +218,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:apis\services\itemsService.ts
+SF:apis/services/itemsService.ts
 FN:10,(anonymous_0)
 FN:25,(anonymous_1)
 FNF:2
@@ -237,7 +237,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:apis\services\listBookingService.ts
+SF:apis/services/listBookingService.ts
 FN:11,(anonymous_0)
 FNF:1
 FNH:1
@@ -251,7 +251,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:apis\services\transactionHistoryService.ts
+SF:apis/services/transactionHistoryService.ts
 FN:10,(anonymous_0)
 FNF:1
 FNH:1
@@ -265,7 +265,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:components\Auth\LoginForm.tsx
+SF:components/Auth/LoginForm.tsx
 FN:13,(anonymous_0)
 FN:36,(anonymous_1)
 FN:46,(anonymous_2)
@@ -347,7 +347,7 @@ BRF:22
 BRH:18
 end_of_record
 TN:
-SF:components\Booking\ButtonChangePage.tsx
+SF:components/Booking/ButtonChangePage.tsx
 FN:11,(anonymous_0)
 FNF:1
 FNH:1
@@ -360,7 +360,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:components\Booking\ButtonPage.tsx
+SF:components/Booking/ButtonPage.tsx
 FN:12,(anonymous_0)
 FN:13,renderPageNumbers
 FN:42,(anonymous_2)
@@ -384,7 +384,7 @@ BRF:4
 BRH:4
 end_of_record
 TN:
-SF:components\Booking\ButtonState.tsx
+SF:components/Booking/ButtonState.tsx
 FN:12,(anonymous_0)
 FNF:1
 FNH:1
@@ -397,7 +397,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:components\Booking\CardBooking.tsx
+SF:components/Booking/CardBooking.tsx
 FN:20,(anonymous_0)
 FNF:1
 FNH:1
@@ -412,7 +412,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:components\Detail\DetailRingkasan.tsx
+SF:components/Detail/DetailRingkasan.tsx
 FN:26,(anonymous_0)
 FN:77,(anonymous_1)
 FN:94,(anonymous_2)
@@ -436,7 +436,7 @@ BRF:2
 BRH:2
 end_of_record
 TN:
-SF:components\Detail\DetailTable.tsx
+SF:components/Detail/DetailTable.tsx
 FN:24,(anonymous_0)
 FN:30,(anonymous_1)
 FN:58,(anonymous_2)
@@ -488,7 +488,7 @@ BRF:16
 BRH:11
 end_of_record
 TN:
-SF:components\Detail\StatusMap.ts
+SF:components/Detail/StatusMap.ts
 FNF:0
 FNH:0
 DA:1,3
@@ -498,7 +498,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:components\Detail\ConfirmModal\Batal.tsx
+SF:components/Detail/ConfirmModal/Batal.tsx
 FN:6,(anonymous_0)
 FN:18,(anonymous_1)
 FN:33,(anonymous_2)
@@ -517,7 +517,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:components\Detail\ConfirmModal\Terima.tsx
+SF:components/Detail/ConfirmModal/Terima.tsx
 FN:6,(anonymous_0)
 FN:18,(anonymous_1)
 FN:33,(anonymous_2)
@@ -536,7 +536,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:components\Detail\ConfirmModal\index.tsx
+SF:components/Detail/ConfirmModal/index.tsx
 FN:14,(anonymous_0)
 FN:23,(anonymous_1)
 FNF:2
@@ -556,7 +556,7 @@ BRF:4
 BRH:4
 end_of_record
 TN:
-SF:components\Detail\ConfirmModal\types.ts
+SF:components/Detail/ConfirmModal/types.ts
 FNF:0
 FNH:0
 LF:0
@@ -565,7 +565,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:components\Item\CardItem.tsx
+SF:components/Item/CardItem.tsx
 FN:20,(anonymous_0)
 FN:31,(anonymous_1)
 FN:36,(anonymous_2)
@@ -586,7 +586,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:components\Item\DeleteItemModal.tsx
+SF:components/Item/DeleteItemModal.tsx
 FN:11,(anonymous_0)
 FN:19,(anonymous_1)
 FN:46,(anonymous_2)
@@ -605,7 +605,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:components\TransactionHistory\CardTransaction.tsx
+SF:components/TransactionHistory/CardTransaction.tsx
 FN:17,(anonymous_0)
 FNF:1
 FNH:1
@@ -620,7 +620,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:components\TransactionHistory\Detail\customerInformationCard.tsx
+SF:components/TransactionHistory/Detail/customerInformationCard.tsx
 FN:21,(anonymous_0)
 FN:51,(anonymous_1)
 FNF:2
@@ -641,7 +641,7 @@ BRF:2
 BRH:1
 end_of_record
 TN:
-SF:components\TransactionInformation\BalanceCard.tsx
+SF:components/TransactionInformation/BalanceCard.tsx
 FN:21,formatDate
 FN:44,formatBalance
 FN:48,(anonymous_2)
@@ -662,7 +662,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:components\TransactionInformation\CustomerBookingHistoryCard.tsx
+SF:components/TransactionInformation/CustomerBookingHistoryCard.tsx
 FNF:0
 FNH:0
 LF:0
@@ -671,7 +671,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:components\TransactionInformation\DisbursementModal.tsx
+SF:components/TransactionInformation/DisbursementModal.tsx
 FN:12,(anonymous_0)
 FN:20,(anonymous_1)
 FN:31,(anonymous_2)
@@ -693,7 +693,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:components\Utils\Button.tsx
+SF:components/Utils/Button.tsx
 FN:17,(anonymous_0)
 FNF:1
 FNH:1
@@ -718,7 +718,7 @@ BRF:12
 BRH:12
 end_of_record
 TN:
-SF:components\Utils\Layout.tsx
+SF:components/Utils/Layout.tsx
 FN:7,(anonymous_0)
 FNF:1
 FNH:1
@@ -732,7 +732,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:components\Utils\HOC\WithAuth.tsx
+SF:components/Utils/HOC/WithAuth.tsx
 FN:7,(anonymous_0)
 FN:10,(anonymous_1)
 FN:14,(anonymous_2)
@@ -772,7 +772,7 @@ BRF:6
 BRH:3
 end_of_record
 TN:
-SF:components\Utils\HOC\WithoutAuth.tsx
+SF:components/Utils/HOC/WithoutAuth.tsx
 FN:6,(anonymous_0)
 FN:7,(anonymous_1)
 FN:14,(anonymous_2)
@@ -807,7 +807,7 @@ BRF:6
 BRH:3
 end_of_record
 TN:
-SF:components\Utils\Navbar\Navbar.tsx
+SF:components/Utils/Navbar/Navbar.tsx
 FN:16,(anonymous_0)
 FN:37,(anonymous_1)
 FN:44,(anonymous_2)
@@ -828,7 +828,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:components\Utils\Navbar\index.ts
+SF:components/Utils/Navbar/index.ts
 FNF:0
 FNH:0
 LF:0
@@ -837,7 +837,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:firebase\config.ts
+SF:firebase/config.ts
 FNF:0
 FNH:0
 DA:1,2
@@ -847,7 +847,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:firebase\index.tsx
+SF:firebase/index.tsx
 FNF:0
 FNH:0
 DA:8,2
@@ -858,7 +858,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:pages\index.tsx
+SF:pages/index.tsx
 FN:12,(anonymous_0)
 FNF:1
 FNH:1
@@ -872,7 +872,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:pages\auth\index.tsx
+SF:pages/auth/index.tsx
 FN:6,(anonymous_0)
 FNF:1
 FNH:1
@@ -885,7 +885,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:pages\booking\index.tsx
+SF:pages/booking/index.tsx
 FN:23,(anonymous_0)
 FN:44,(anonymous_1)
 FN:48,(anonymous_2)
@@ -1002,7 +1002,7 @@ BRF:20
 BRH:15
 end_of_record
 TN:
-SF:pages\booking\[id]\index.tsx
+SF:pages/booking/[id]/index.tsx
 FN:20,(anonymous_0)
 FN:37,(anonymous_1)
 FN:41,(anonymous_2)
@@ -1072,7 +1072,7 @@ BRF:16
 BRH:14
 end_of_record
 TN:
-SF:pages\profil\item.tsx
+SF:pages/profil/item.tsx
 FN:13,(anonymous_0)
 FN:31,(anonymous_1)
 FN:41,(anonymous_2)
@@ -1167,7 +1167,7 @@ BRF:18
 BRH:16
 end_of_record
 TN:
-SF:pages\transaction-history\index.tsx
+SF:pages/transaction-history/index.tsx
 FN:23,(anonymous_0)
 FN:36,handlePagination
 FN:42,(anonymous_2)
@@ -1266,7 +1266,7 @@ BRF:22
 BRH:12
 end_of_record
 TN:
-SF:pages\transaction-history\[id]\index.tsx
+SF:pages/transaction-history/[id]/index.tsx
 FN:16,(anonymous_0)
 FN:26,(anonymous_1)
 FN:29,(anonymous_2)
@@ -1308,7 +1308,7 @@ BRF:10
 BRH:7
 end_of_record
 TN:
-SF:pages\transaction-information\index.tsx
+SF:pages/transaction-information/index.tsx
 FN:29,(anonymous_0)
 FN:38,difference
 FN:53,inspectWithdrawalAbility
