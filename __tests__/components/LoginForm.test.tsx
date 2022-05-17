@@ -20,6 +20,8 @@ jest.setTimeout(10000);
 
 jest.setTimeout(50000);
 
+jest.setTimeout(50000);
+
 jest.mock('firebase/auth', () => {
   return {
     RecaptchaVerifier: jest.fn(() => ({

@@ -9,6 +9,7 @@ import moment from "moment";
 import "moment/locale/id"
 import CustomerInformationCard from "../../../components/TransactionHistory/Detail/customerInformationCard";
 import React from "react";
+import { useGetDetailBooking } from "../../../apis/hooks/detailBookingHooks";
 import { useGetDetailTransactionHistory } from "../../../apis/hooks/detailTransactionHistoryHooks";
 import toast from "react-hot-toast";
 
@@ -20,12 +21,10 @@ const DetailTransactionHistory: React.FC = () => {
 	const { id } = router.query;
 	const stringId: string = id as string;
 	
-	const { data, status, error }: any = useGetDetailTransactionHistory(
+	const { data, status, error }: any = useGetDetailBooking(
 		{ id: stringId },
 		{
-		  onSuccess: (res: any) => {
-			console.log(res);
-		  },
+		  onSuccess: (res: any) => {},
 		  onError: (err: any) => {
 			// console.log('err', err.response);
 			toast.error(err.response.data.message);
@@ -84,14 +83,22 @@ const DetailTransactionHistory: React.FC = () => {
 						</div>
 
 						<div tw="row-start-2 col-start-6 col-span-3">
-							<span tw="flex text-xl"><p tw="font-bold whitespace-pre-wrap">: </p> {detail.capacity}</span>
+							<span tw="flex text-xl"><p tw="font-bold whitespace-pre-wrap">: </p> {detail.capacity} Tiket</span>
 						</div>
-						
+
 						<div tw="row-start-3 col-start-4 col-span-2">
-							<h4 tw="font-bold text-xl">Detail Pemesanan </h4>
+							<h4 tw="font-bold text-xl">Total Harga Tiket </h4>
 						</div>
 
 						<div tw="row-start-3 col-start-6 col-span-3 ">
+							<span tw="flex text-xl"><p tw="font-bold whitespace-pre-wrap">: </p> Rp{detail.total_price_ticket}</span>
+						</div>
+						
+						<div tw="row-start-4 col-start-4 col-span-2">
+							<h4 tw="font-bold text-xl">Detail Item </h4>
+						</div>
+
+						<div tw="row-start-4 col-start-6 col-span-3 ">
 							<p tw=" text-xl font-bold whitespace-pre-wrap">: </p>
 						</div>
 
@@ -127,6 +134,14 @@ const DetailTransactionHistory: React.FC = () => {
 						</>
 						)
 						}
+					
+						<div tw="col-start-4 col-span-2 mt-10">
+							<h4 tw="font-bold text-2xl">Total Harga </h4>
+						</div>
+
+						<div tw="col-start-6 col-span-3 ">
+							<span tw="flex text-2xl font-bold "><p tw="whitespace-pre-wrap">: </p> Rp{detail.total_price}</span>
+						</div>
 					</div>
 						
 				</div>)}
