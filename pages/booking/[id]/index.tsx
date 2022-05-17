@@ -72,18 +72,55 @@ const DetailBooking: React.FC = () => {
     );
   };
 
+  const handleSelesai = () => {
+    confirmBooking(
+      {
+        id: detail.id,
+        booking_status: 3
+      },
+      {
+        onSuccess: (res: any) => {
+          setBookingStatus(1);
+          setIsOpen(false);
+          toast.success(
+            'Booking Selesai'
+          );
+          queryClient.invalidateQueries('get_detail_booking');
+        },
+        onError: (err: any) => {
+          // console.log('err', err);
+          toast.error(err.response.data.message, {
+            position: 'top-right',
+          });
+        },
+      }
+    );
+  };
+
   return (
     <Layout>
       <Head>
         <title>Detail Booking</title>
       </Head>
 
-      <ConfirmModal
+      {bookingStatus === 0 && (
+        <ConfirmModal
         type={confirmType}
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         handleConfirm={handleConfirm}
-      />
+        />
+      )}
+
+      {bookingStatus === 2 && (
+        <ConfirmModal
+        type={confirmType}
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        handleConfirm={handleSelesai}
+        />
+      )}
+     
 
       <div
         css={[
@@ -194,6 +231,29 @@ const DetailBooking: React.FC = () => {
                       ]}
                     >
                       Tolak
+                    </button>
+                  </div>
+                )}
+
+                {bookingStatus === 2 && (
+                  <div tw="flex flex-col items-center justify-center">
+                    <button
+                      onClick={() => {
+                        setConfirmType('selesai');
+                        setIsOpen(true);
+                      }}
+                      css={[
+                        css`
+                          box-shadow: 0px 3px 0px 0px #888888;
+                          border-color: #003366;
+                          border-radius: 10px;
+                          padding-top: 9.5px;
+                          padding-bottom: 9.5px;
+                        `,
+                        tw`font-bold mt-12 mb-5 text-2xl w-full border-2 background[#003366] color[#FFFFFF] duration-150 hover:(brightness-110)`,
+                      ]}
+                    >
+                      Selesai
                     </button>
                   </div>
                 )}
