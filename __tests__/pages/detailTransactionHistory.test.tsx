@@ -37,7 +37,7 @@ describe('ui components', () => {
       await waitFor(() => {
         expect(screen.getByText('Waktu Pemesanan')).toBeInTheDocument();
         expect(screen.getByText('Jumlah Pesanan')).toBeInTheDocument();
-        expect(screen.getByText('Detail Pemesanan')).toBeInTheDocument();
+        expect(screen.getByText('Detail Item')).toBeInTheDocument();
       });
     });
 });
