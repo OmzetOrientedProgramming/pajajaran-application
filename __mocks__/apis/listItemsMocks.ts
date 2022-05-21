@@ -97,3 +97,46 @@ export const mockDeleteItemResponse: AxiosResponse = {
 export const deleteItemParams = {
   item_id: '1',
 };
+
+// Update Item
+export const dummyUpdateItemResponse = {
+  status: 0,
+  message: 'success',
+};
+
+export const mockUpdateItemResponse: AxiosResponse = {
+  data: dummyUpdateItemResponse,
+  status: 200,
+  statusText: 'OK',
+  headers: {},
+  config: {},
+};
+
+export const updateItemsParams = {
+  item_id: '1',
+  name: 'test name',
+  description: 'test description',
+  image: 'data:testimage',
+  price: 1000.0,
+};
+
+// Create Item
+export const dummyCreateItemResponse = {
+  status: 0,
+  message: 'success',
+};
+
+export const mockCreateItemResponse: AxiosResponse = {
+  data: dummyUpdateItemResponse,
+  status: 200,
+  statusText: 'OK',
+  headers: {},
+  config: {},
+};
+
+export const createItemsParams = {
+  name: 'test name',
+  description: 'test description',
+  image: 'data:testimage',
+  price: 1000.0,
+};

@@ -3,6 +3,8 @@ import {
   getListItemsParams,
   getListItems,
   deleteItem,
+  updateItem,
+  createItem,
 } from '../services/itemsService';
 
 export function useGetListItems(params: getListItemsParams, handler?: any) {
@@ -11,4 +13,12 @@ export function useGetListItems(params: getListItemsParams, handler?: any) {
 
 export function useDeleteItem() {
   return useMutation(deleteItem);
+}
+
+export function useUpdateItem() {
+  return useMutation(updateItem);
+}
+
+export function useCreateItem() {
+  return useMutation(createItem);
 }

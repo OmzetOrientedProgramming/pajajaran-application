@@ -16,18 +16,18 @@ build:
     paths:
       - node_modules/
 
-# test:
-#   stage: test
-#   image: node:latest
-#   coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
-#   dependencies:
-#     - build
-#   rules:
-#     - if: $CI_PIPELINE_SOURCE == 'push'
-#     - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
-#   script:
-#     - npm install
-#     - npm run test:ci
+test:
+  stage: test
+  image: node:latest
+  coverage: /All files[^|]*\|[^|]*\s+([\d\.]+)/
+  dependencies:
+    - build
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'push'
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+  script:
+    - npm install
+    - npm run test:ci
 
 SonarScanner Dev:
   image:

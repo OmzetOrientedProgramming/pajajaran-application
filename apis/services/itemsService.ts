@@ -1,6 +1,7 @@
 import axios from 'axios';
 import endpoint from '../endpoint';
 import nookies from 'nookies';
+import { StringLike } from '@firebase/util';
 
 export interface getListItemsParams {
   limit?: number;
@@ -31,6 +32,65 @@ export const deleteItem = async (params: deleteItemParams) => {
   };
   return await axios.delete(
     `${endpoint.businessProfile}/list-items/${params.item_id}`,
+    options
+  );
+};
+
+export interface updateItemParams {
+  item_id: string;
+  name: string;
+  image: string;
+  description: string;
+  price: number | string;
+}
+
+export const updateItem = async (params: updateItemParams) => {
+  const options = {
+    headers: {
+      Authorization: `Bearer ${nookies.get(null)?.token}`,
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const body = {
+    name: params.name,
+    image: params.image,
+    description: params.description,
+    price: parseFloat(params.price as string),
+  };
+
+  return await axios.put(
+    `${endpoint.businessProfile}/list-items/${params.item_id}`,
+    body,
+    options
+  );
+};
+
+export interface createItemParams {
+  name: string;
+  image: string;
+  description: string;
+  price: number | string;
+}
+
+export const createItem = async (params: createItemParams) => {
+  const options = {
+    headers: {
+      Authorization: `Bearer ${nookies.get(null)?.token}`,
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const body = {
+    name: params.name,
+    image: params.image,
+    description: params.description,
+    price: parseFloat(params.price as string),
+  };
+
+  return await axios.post(
+    `${endpoint.businessProfile}/list-items`,
+    body,
     options
   );
 };
