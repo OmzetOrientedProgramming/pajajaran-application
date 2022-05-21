@@ -10,6 +10,9 @@ interface CardItemProps {
   description: string;
   setIsOpen: any;
   setItemId: any;
+  setIsOpenUpdate: any;
+  setItem: any;
+  setIsUpdate: any;
 }
 
 const formatter = new Intl.NumberFormat('id-ID', {
@@ -28,7 +31,20 @@ const CardItem: React.FC<CardItemProps> = (props) => {
         <p tw="text-xs font-light mb-2">{props.description}</p>
         <h3 tw="text-base mb-3">{formatter.format(props.price)}</h3>
         <div tw="flex flex-row justify-between items-center w-full gap-x-8">
-          <Button buttonType="primary" onClick={() => {}}>
+          <Button
+            buttonType="primary"
+            onClick={() => {
+              props.setItemId(props.id);
+              props.setIsOpenUpdate(true);
+              props.setItem({
+                name: props.name,
+                image: props.image,
+                description: props.description,
+                price: props.price,
+              });
+              props.setIsUpdate(true);
+            }}
+          >
             Ubah
           </Button>
           <Button
