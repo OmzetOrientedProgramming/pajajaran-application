@@ -15,6 +15,7 @@ import CardItem from '../../components/Item/CardItem';
 import DeleteItemModal from '../../components/Item/DeleteItemModal';
 import CreateUpdateItemModal from '../../components/Item/CreateUpdateItemModal';
 import { Layout } from '../../components/Utils/Layout';
+import withAuth from '../../components/Utils/HOC/WithAuth';
 
 const Item: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -238,4 +239,4 @@ const Item: React.FC = () => {
   );
 };
 
-export default Item;
+export default withAuth(Item);

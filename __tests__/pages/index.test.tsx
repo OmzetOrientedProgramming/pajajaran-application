@@ -30,7 +30,9 @@ afterEach(() => {
 test('renders wave title', () => {
   render(<Home />);
 
-  expect(screen.getByText('Wave Admin')).toBeInTheDocument();
+  expect(
+    screen.getByText('Selamat Datang ke Dashboard Admin')
+  ).toBeInTheDocument();
 });
 
 test('sign out button', async () => {

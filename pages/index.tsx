@@ -1,13 +1,8 @@
 import Head from 'next/head';
-import Link from 'next/link';
-import tw, { css, styled } from 'twin.macro';
+import 'twin.macro';
 import { Layout } from '../components/Utils/Layout';
 import withAuth from '../components/Utils/HOC/WithAuth';
-
-// Example creating styled component
-const Title = styled.h1`
-  font-size: 4rem;
-`;
+import tw, { css } from 'twin.macro';
 
 const Home: React.FC = () => {
   return (
@@ -16,31 +11,20 @@ const Home: React.FC = () => {
         <title>Home</title>
       </Head>
 
-      {/* Example styling with tailwind classes */}
-      <div tw="pt-8 pb-16 flex flex-col items-center justify-center min-h-screen w-full">
-        {/* Example styling with inline css/tailwind */}
-        <h1
-          css={[
-            css`
-              font-color: #f0f0f0;
-            `,
-            tw`text-xl font-bold`,
-          ]}
-        >
-          Next JS
-        </h1>
-
-        {/* Using previously made styled component*/}
-        <Title>Wave Admin</Title>
-
-        <div tw="w-32 flex justify-between items-center">
-          <Link href="/example">
-            <button>Example</button>
-          </Link>
-          <Link href="/empty">
-            <button>Null</button>
-          </Link>
-        </div>
+      <div
+        css={[
+          css`
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-right: -50%;
+            transform: translate(-50%, -50%);
+          `,
+          tw`flex flex-col items-center justify-center min-h-screen w-full`,
+        ]}
+      >
+        <h1 tw="font-bold text-2xl mb-8">Selamat Datang ke Dashboard Admin</h1>
+        <p tw="text-xl">Silahkan eksplorasi melalui tombol navigasi di atas!</p>
       </div>
     </Layout>
   );

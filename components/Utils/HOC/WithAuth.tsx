@@ -2,6 +2,7 @@ import React from 'react';
 import { NextPage, NextPageContext } from 'next';
 import Router from 'next/router';
 import nookies from 'nookies';
+import jwtDecode, { JwtPayload } from 'jwt-decode';
 
 const loginURL = '/auth';
 const withAuth: (WrappedComponent: NextPage) => NextPage = (
@@ -15,7 +16,13 @@ const withAuth: (WrappedComponent: NextPage) => NextPage = (
     const { res } = ctx;
     const accessToken = nookies.get(ctx)?.token;
 
-    const flag = !accessToken;
+    // console.log(jwtDecode<JwtPayload>(accessToken));
+
+    const flag =
+      !accessToken ||
+      (accessToken &&
+        Date.now() >=
+          (jwtDecode<JwtPayload>(accessToken).exp! * 1000 ?? Date.now() + 1));
 
     const returnProps = {
       accessToken,
