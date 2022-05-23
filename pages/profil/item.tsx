@@ -16,6 +16,7 @@ import DeleteItemModal from '../../components/Item/DeleteItemModal';
 import CreateUpdateItemModal from '../../components/Item/CreateUpdateItemModal';
 import { Layout } from '../../components/Utils/Layout';
 import withAuth from '../../components/Utils/HOC/WithAuth';
+import tw, { css } from 'twin.macro';
 
 const Item: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -54,9 +55,9 @@ const Item: React.FC = () => {
     }
   );
 
-  const { mutate: deleteItem } = useDeleteItem();
-  const { mutate: updateItem } = useUpdateItem();
-  const { mutate: createItem } = useCreateItem();
+  const { mutate: deleteItem, isLoading: isDeleting } = useDeleteItem();
+  const { mutate: updateItem, isLoading: isUpdating } = useUpdateItem();
+  const { mutate: createItem, isLoading: isCreating } = useCreateItem();
 
   useEffect(() => {
     refetch();
@@ -163,6 +164,7 @@ const Item: React.FC = () => {
         isOpen={isOpen}
         setIsOpen={setIsOpen}
         handleConfirm={handleConfirm}
+        isDeleting={isDeleting}
       />
 
       <CreateUpdateItemModal
@@ -172,6 +174,8 @@ const Item: React.FC = () => {
         item={item}
         setItem={setItem}
         isUpdate={isUpdate}
+        isCreating={isCreating}
+        isUpdating={isUpdating}
       />
 
       <div tw="mt-6">
@@ -181,7 +185,7 @@ const Item: React.FC = () => {
         )}
         {status === 'success' && (
           <>
-            <div tw="grid grid gap-x-16 gap-y-16 grid-cols-4 auto-rows-auto mb-8">
+            <div tw="grid grid gap-x-16 gap-y-16 xl:grid-cols-4 md:grid-cols-3 auto-cols-fr auto-rows-auto mb-8 sm:grid-cols-2">
               {data?.data.data.items.map((item: any, key: any) => (
                 <CardItem
                   key={key}
@@ -198,7 +202,14 @@ const Item: React.FC = () => {
                 />
               ))}
             </div>
-            <div tw="flex justify-end items-end my-16">
+            <div
+              css={[
+                css`
+                  transition: 0.15;
+                `,
+                tw`fixed bottom-16 right-12 hover:(cursor-pointer brightness-125)`,
+              ]}
+            >
               <img
                 src="/images/Item/PlusIcon.svg"
                 alt="PlusIcon"

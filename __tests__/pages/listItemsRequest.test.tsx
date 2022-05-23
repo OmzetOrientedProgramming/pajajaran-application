@@ -23,7 +23,7 @@ import {
 } from '../../__mocks__/apis/listItemsMocks';
 import ExampleWrapper from '../../__mocks__/pages/example';
 
-jest.setTimeout(30000);
+jest.setTimeout(15000);
 
 // @ts-expect-error
 global.IntersectionObserver = class FakeIntersectionObserver {
@@ -42,6 +42,7 @@ jest.mock('next/link', () => {
 
 beforeAll(() => {
   console.warn = jest.fn();
+  console.error = jest.fn();
 });
 
 afterEach(() => {

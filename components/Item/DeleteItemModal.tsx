@@ -6,12 +6,14 @@ interface DeleteItemModalInterface {
   isOpen: boolean;
   setIsOpen: any;
   handleConfirm: any;
+  isDeleting: boolean;
 }
 
 const DeleteItemModal: React.FC<DeleteItemModalInterface> = ({
   isOpen,
   setIsOpen,
   handleConfirm,
+  isDeleting,
 }) => {
   return (
     <Dialog
@@ -30,6 +32,7 @@ const DeleteItemModal: React.FC<DeleteItemModalInterface> = ({
             <button
               data-testid="hapus-confirm"
               onClick={handleConfirm}
+              disabled={isDeleting}
               css={[
                 css`
                   font-size: 18px;
