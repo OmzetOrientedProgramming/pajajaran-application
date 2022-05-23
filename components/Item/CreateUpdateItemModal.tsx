@@ -10,6 +10,8 @@ interface UpdateItemModalInterface {
   item: any;
   setItem: any;
   isUpdate: boolean;
+  isCreating: boolean;
+  isUpdating: boolean;
 }
 
 const CreateUpdateItemModal: React.FC<UpdateItemModalInterface> = ({
@@ -19,6 +21,8 @@ const CreateUpdateItemModal: React.FC<UpdateItemModalInterface> = ({
   item,
   setItem,
   isUpdate,
+  isCreating,
+  isUpdating,
 }) => {
   const toBase64 = (file: File) =>
     new Promise((resolve, reject) => {
@@ -180,25 +184,28 @@ const CreateUpdateItemModal: React.FC<UpdateItemModalInterface> = ({
             </div>
           </form>
           <div tw="flex flex-row items-center justify-center gap-x-12">
-            <button
-              onClick={() => setIsOpen(false)}
-              css={[
-                css`
-                  font-size: 18px;
-                  box-shadow: 0px 3px 0px 0px #888888;
-                  border-color: #003366;
-                  border-radius: 10px;
-                `,
-                tw`py-2 px-6 font-bold w-full border-2 background[#FFFFFF] color[#003366] duration-150 hover:(background[#003366] color[#FFFFFF])`,
-              ]}
-            >
-              Batal
-            </button>
+            {!isCreating && !isUpdating && (
+              <button
+                onClick={() => setIsOpen(false)}
+                css={[
+                  css`
+                    font-size: 18px;
+                    box-shadow: 0px 3px 0px 0px #888888;
+                    border-color: #003366;
+                    border-radius: 10px;
+                  `,
+                  tw`py-2 px-6 font-bold w-full border-2 background[#FFFFFF] color[#003366] duration-150 hover:(background[#003366] color[#FFFFFF])`,
+                ]}
+              >
+                Batal
+              </button>
+            )}
             <button
               data-testid="create-update-confirm"
               onClick={() => {
                 confirm(item);
               }}
+              disabled={isCreating || isUpdating}
               css={[
                 css`
                   font-size: 18px;
@@ -206,10 +213,15 @@ const CreateUpdateItemModal: React.FC<UpdateItemModalInterface> = ({
                   border-color: #003366;
                   border-radius: 10px;
                 `,
-                tw`py-2 px-6 font-bold w-full border-2 background[#003366] color[#FFFFFF] duration-150 hover:(brightness-110)`,
+                tw`py-2 px-6 font-bold w-full border-2 duration-150 hover:(brightness-110)`,
+                isCreating ||
+                  (isUpdating &&
+                    tw`background[#FFFFFF] color[#003366] hover:cursor-default`),
+                !(isCreating || isUpdating) &&
+                  tw`background[#003366] color[#FFFFFF]`,
               ]}
             >
-              Simpan
+              {isCreating || isUpdating ? 'Loading . . .' : 'Simpan'}
             </button>
           </div>
         </div>
