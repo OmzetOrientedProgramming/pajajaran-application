@@ -50,7 +50,7 @@ const CardItem: React.FC<CardItemProps> = (props) => {
               props.setIsOpenUpdate(true);
               props.setItem({
                 name: props.name,
-                image: props.image,
+                image: null,
                 description: props.description,
                 price: props.price,
               });
