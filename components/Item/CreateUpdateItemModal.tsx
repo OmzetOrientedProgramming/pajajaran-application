@@ -46,6 +46,10 @@ const CreateUpdateItemModal: React.FC<UpdateItemModalInterface> = ({
       err.push('Harga wajib diisi!');
     }
 
+    if (!item.image) {
+      err.push('Image wajib diisi!');
+    }
+
     if (err.length > 0) {
       err.forEach((element) => {
         toast.error(element);
