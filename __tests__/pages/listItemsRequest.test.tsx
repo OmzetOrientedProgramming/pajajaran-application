@@ -10,7 +10,6 @@ import axios from 'axios';
 import { Toaster } from 'react-hot-toast';
 import { headers } from '../../apis/constants';
 import endpoint from '../../apis/endpoint';
-import { updateItem } from '../../apis/services/itemsService';
 import ListItems from '../../pages/profil/item';
 import {
   createItemsParams,

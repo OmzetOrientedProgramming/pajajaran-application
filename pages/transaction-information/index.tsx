@@ -31,7 +31,7 @@ const InformasiTransaksi: React.FC = () => {
   if (!router.isReady) return <></>;
   const [transaction, setTransaction] = useState<Array<ITransaction>>([]);
   const [isOpen, setIsOpen] = useState(false);
-  const { mutate: disburse } = useDisbursement();
+  const { mutate: disburse, isLoading } = useDisbursement();
   const [balance, setBalance] = useState(0);
   const [date, setDate] = useState(new Date());
 
@@ -88,6 +88,7 @@ const InformasiTransaksi: React.FC = () => {
   };
 
   const handleDisbursementButton = async () => {
+    setIsOpen(false);
     disburse(
       {
         amount: balance,
@@ -96,9 +97,12 @@ const InformasiTransaksi: React.FC = () => {
         onSuccess: (res: any) => {
           const resData = res?.data;
           if (res.status >= 200 && res.status < 300) {
-            setIsOpen(false);
-            toast.success('Dana Berhasil Dicairkan!');
             refetch();
+            toast(
+              'Silahkan tunggu beberapa saat, kemudian refresh halaman ini'
+            );
+
+            toast.success('Dana Berhasil Dicairkan!');
           } else {
             toast.error(resData.message);
           }
@@ -107,7 +111,8 @@ const InformasiTransaksi: React.FC = () => {
           if (!err.response.data.message) {
             toast.error('Terjadi kesalahan');
           } else {
-            toast.error(err.response.data.message);
+            console.log('res:', err.response);
+            toast.error(err.response.data.errors[0]);
           }
         },
       }
@@ -173,60 +178,73 @@ const InformasiTransaksi: React.FC = () => {
         >
           Informasi Transaksi
         </p>
-        {balanceStatus === 'success' && (
-          <div css={[tw`flex justify-center`]}>
-            <BalanceCard
-              balanceAmount={balanceData?.data.data.balance}
-              lastDisbursementDate={
-                new Date(balanceData?.data.data.latest_disbursement_date)
-              }
-              butonType={getButtonType(inspectWithdrawalAbility(date, balance))}
-              onClick={() => handleDisbursementOnClick()}
-            />
-          </div>
+        {balanceStatus === 'loading' && (
+          <div tw="text-center text-xl py-20">loading . . .</div>
         )}
-        <div tw="max-w-screen-xl justify-center">
-          <div
-            css={[
-              css`
-                width: 75vw;
-                margin-top: 2vw;
-              `,
-              tw`w-full flex flex-row`,
-            ]}
-          >
-            <div tw=" w-5/6">
-              <p
-                css={[
-                  tw`w-full text-[32px] leading-normal font-bold grid place-items-start`,
-                  css`
-                    text-align: center;
-                  `,
-                ]}
-              >
-                Riwayat Transaksi
-              </p>
-            </div>
-            <div tw="w-1/6">
-              <Link href={`/transaction-history`}>
-                <Button>Lihat Semua</Button>
-              </Link>
-            </div>
-          </div>
-          <div tw="grid grid-cols-2 gap-4 justify-center w-full">
-            {transaction.map((detail: any) => (
-              <div key={detail.id}>
-                <CardTransaction
-                  transactionID={detail.id}
-                  image={detail.image}
-                  name={detail.name}
-                  date={detail.date}
-                  price={detail.price}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
+        {balanceStatus === 'success' && (
+          <>
+            {isLoading ? (
+              <div tw="text-center">loading. . .</div>
+            ) : (
+              <>
+                <div css={[tw`flex justify-center`]}>
+                  <BalanceCard
+                    balanceAmount={balanceData?.data.data.balance}
+                    lastDisbursementDate={
+                      new Date(balanceData?.data.data.latest_disbursement_date)
+                    }
+                    butonType={getButtonType(
+                      inspectWithdrawalAbility(date, balance)
+                    )}
+                    onClick={() => handleDisbursementOnClick()}
+                  />
+                </div>
+                <div tw="max-w-screen-xl justify-center">
+                  <div
+                    css={[
+                      css`
+                        width: 75vw;
+                        margin-top: 2vw;
+                      `,
+                      tw`w-full flex flex-row`,
+                    ]}
+                  >
+                    <div tw=" w-5/6">
+                      <p
+                        css={[
+                          tw`w-full text-[32px] leading-normal font-bold grid place-items-start pl-10`,
+                          css`
+                            text-align: center;
+                          `,
+                        ]}
+                      >
+                        Riwayat Transaksi
+                      </p>
+                    </div>
+                    <div tw="w-1/6 pr-10">
+                      <Link href={`/transaction-history`}>
+                        <Button>Lihat Semua</Button>
+                      </Link>
+                    </div>
+                  </div>
+                  <div tw="grid grid-cols-2 gap-4 justify-center w-full">
+                    {transaction.map((detail: any) => (
+                      <div key={detail.id}>
+                        <CardTransaction
+                          transactionID={detail.id}
+                          image={detail.image}
+                          name={detail.name}
+                          date={detail.date}
+                          price={detail.price}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+          </>
+        )}
       </div>
     </Layout>
   );
