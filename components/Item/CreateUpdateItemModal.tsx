@@ -1,5 +1,5 @@
 import { Dialog } from '@headlessui/react';
-import React, { useState } from 'react';
+import React from 'react';
 import tw, { css } from 'twin.macro';
 import toast from 'react-hot-toast';
 
@@ -32,21 +32,21 @@ const CreateUpdateItemModal: React.FC<UpdateItemModalInterface> = ({
       reader.onerror = (error) => reject(error);
     });
 
-  const confirm = (item: any) => {
+  const confirm = (itemConfirm: any) => {
     const err: Array<string> = [];
-    if (!item.name) {
+    if (!itemConfirm.name) {
       err.push('Nama wajib diisi!');
     }
 
-    if (!item.description) {
+    if (!itemConfirm.description) {
       err.push('Deskripsi wajib diisi!');
     }
 
-    if (!item.price) {
+    if (!itemConfirm.price) {
       err.push('Harga wajib diisi!');
     }
 
-    if (!item.image) {
+    if (!itemConfirm.image) {
       err.push('Image wajib diisi!');
     }
 
@@ -57,22 +57,22 @@ const CreateUpdateItemModal: React.FC<UpdateItemModalInterface> = ({
       return;
     }
 
-    if (item.name.length < 5) {
+    if (itemConfirm.name.length < 5) {
       toast.error('Nama harus lebih besar dari 5 karakter!');
       return;
     }
 
-    if (item.description.split(' ').length < 1) {
+    if (itemConfirm.description.split(' ').length < 1) {
       toast.error('Deskripsi harus lebih besar dari 1 karakter!');
       return;
     }
 
     if (isUpdate) {
-      handleConfirm(item, true);
+      handleConfirm(itemConfirm, true);
       return;
     }
 
-    handleConfirm(item, false);
+    handleConfirm(itemConfirm, false);
   };
 
   const handleFile = async (event: React.ChangeEvent<HTMLInputElement>) => {

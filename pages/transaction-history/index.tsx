@@ -119,16 +119,25 @@ const TransactionHistory: React.FC = () => {
             tw`max-w-screen-xl`,
           ]}
         >
-          <p
-            css={[
-              tw`w-full text-[40px] leading-normal font-bold`,
-              css`
-                text-align: center;
-              `,
-            ]}
-          >
-            Riwayat Transaksi
-          </p>
+          <div tw="flex justify-center items-center gap-6">
+            <button
+              onClick={() => router.back()}
+              data-testid="back-button"
+              tw="duration-150 hover:(brightness-125)"
+            >
+              <img src={'/images/Detail/left-arrow.svg'} alt="back" />
+            </button>
+            <p
+              css={[
+                tw`text-[40px] leading-normal font-bold`,
+                css`
+                  text-align: center;
+                `,
+              ]}
+            >
+              Riwayat Transaksi
+            </p>
+          </div>
 
           {status === 'error' && <p>Error: {error.response?.data?.message}</p>}
           {status === 'success' && (

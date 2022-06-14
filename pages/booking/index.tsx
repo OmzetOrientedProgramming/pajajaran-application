@@ -224,8 +224,13 @@ const ListBooking: React.FC = () => {
               </ButtonState>
             </div>
 
-            <div tw="flex flex-col justify-center w-full m-5 ">
+            <div tw="flex flex-col justify-center w-full p-5 ">
               {status === 'loading' && <p>Loading . . .</p>}
+              {booking.length === 0 && (
+                <p tw="font-bold text-gray-400 flex justify-center items-center m-2">
+                  Tidak ada booking
+                </p>
+              )}
               {booking.map((detail: any) => (
                 <div key={detail.id}>
                   <CardBooking

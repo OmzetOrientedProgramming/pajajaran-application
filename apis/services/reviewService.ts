@@ -1,6 +1,5 @@
 import axios from 'axios';
 import endpoint from '../endpoint';
-import { headers } from '../constants';
 import nookies from 'nookies';
 
 export interface getReviewParams {

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import endpoint from '../endpoint';
 import nookies from 'nookies';
-import { StringLike } from '@firebase/util';
 
 export interface getListItemsParams {
   limit?: number;

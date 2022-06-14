@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { Layout } from '../../components/Utils/Layout';
 
 import tw, { css } from 'twin.macro';
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import toast from 'react-hot-toast';
 import 'moment/locale/id';
 import { BalanceCard } from '../../components/TransactionInformation/BalanceCard';
@@ -50,9 +50,9 @@ const InformasiTransaksi: React.FC = () => {
     return (date2utc - date1utc) / day;
   }
 
-  function inspectWithdrawalAbility(date: Date, amount: number) {
+  function inspectWithdrawalAbility(dateInput: Date, amount: number) {
     var dateNow = new Date(Date.now());
-    var availableDate = new Date(moment(date).add(1, 'M').format());
+    var availableDate = new Date(moment(dateInput).add(1, 'M').format());
 
     if (amount === 0) {
       return false;
@@ -132,8 +132,8 @@ const InformasiTransaksi: React.FC = () => {
         page: 1,
       });
 
-      const result = response.then((res) => {
-        return res;
+      const result = response.then((result: any) => {
+        return result;
       });
 
       const getData = () => {
@@ -221,12 +221,19 @@ const InformasiTransaksi: React.FC = () => {
                         Riwayat Transaksi
                       </p>
                     </div>
-                    <div tw="w-1/6 pr-10">
-                      <Link href={`/transaction-history`}>
-                        <Button>Lihat Semua</Button>
-                      </Link>
-                    </div>
+                    {transaction.length > 0 && (
+                      <div tw="w-1/6 pr-10">
+                        <Link href={`/transaction-history`}>
+                          <Button>Lihat Semua</Button>
+                        </Link>
+                      </div>
+                    )}
                   </div>
+                  {transaction.length === 0 && (
+                    <p tw="font-bold text-gray-400 flex justify-center items-center m-12">
+                      Tidak ada transaksi
+                    </p>
+                  )}
                   <div tw="grid grid-cols-2 gap-4 justify-center w-full">
                     {transaction.map((detail: any) => (
                       <div key={detail.id}>

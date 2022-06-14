@@ -1,30 +1,30 @@
 //import { filterProps } from 'framer-motion';
 import React from 'react';
-import tw, { styled, css } from 'twin.macro';
+import { styled } from 'twin.macro';
 
 interface CustomerInformationProps {
-    customerProfilePicture: string;  
-    customerName: string;
-}
-  
-interface StyledProfileCardImageProps {
-    src?: string;
+  customerProfilePicture: string;
+  customerName: string;
 }
 
+interface StyledProfileCardImageProps {
+  src?: string;
+}
 
 const StyledProfileCardImage = styled.div<StyledProfileCardImageProps>`
-    margin: 0 auto 2rem;
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    background-color: #FFFFFF;
-    background-image: url(${(props) => (props.src === "" ? ("/images/user-image.png"):(props.src))});
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    -webkit-box-shadow:inset 0px 0px 0px 2px #003366;
-    -moz-box-shadow:inset 0px 0px 0px 2px #003366;
-    box-shadow:inset 0px 0px 0px 2px #003366;
+  margin: 0 auto 2rem;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  background-image: url(${(props) =>
+    props.src === '' ? '/images/user-image.png' : props.src});
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-box-shadow: inset 0px 0px 0px 2px #003366;
+  -moz-box-shadow: inset 0px 0px 0px 2px #003366;
+  box-shadow: inset 0px 0px 0px 2px #003366;
 `;
 
 const StyledProfileCardContainer = styled.div`
@@ -38,27 +38,24 @@ const StyledProfileCardImageDiv = styled.div`
   width: 110px;
   height: 110px;
   border-radius: 50%;
-  background-image: url(${("../icons/user-circle-dark.png")});
+  background-image: url(${'../icons/user-circle-dark.png'});
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  -webkit-box-shadow:inset 0px 0px 0px 2px #003366;
-  -moz-box-shadow:inset 0px 0px 0px 2px #003366;
-  box-shadow:inset 0px 0px 0px 2px #003366;
+  -webkit-box-shadow: inset 0px 0px 0px 2px #003366;
+  -moz-box-shadow: inset 0px 0px 0px 2px #003366;
+  box-shadow: inset 0px 0px 0px 2px #003366;
 `;
 
-
 const CustomerInformationCard: React.FC<CustomerInformationProps> = (props) => {
-    return(
-        <div tw="flex flex-col items-center mb-12">
-            <StyledProfileCardImageDiv>
-                <StyledProfileCardImage src={props.customerProfilePicture}/>
-            </StyledProfileCardImageDiv>
-            <h4 tw="font-bold text-xl">{props.customerName}</h4>
-        </div>
-    );
+  return (
+    <div tw="flex flex-col items-center mb-12">
+      <StyledProfileCardImageDiv>
+        <StyledProfileCardImage src={props.customerProfilePicture} />
+      </StyledProfileCardImageDiv>
+      <h4 tw="font-bold text-xl">{props.customerName}</h4>
+    </div>
+  );
 };
 
-
 export default CustomerInformationCard;
-

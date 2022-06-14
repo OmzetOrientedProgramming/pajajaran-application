@@ -84,12 +84,15 @@ const Item: React.FC = () => {
     );
   };
 
-  const handleConfirmCreateUpdate = (item: any, isUpdate: boolean) => {
-    if (isUpdate) {
+  const handleConfirmCreateUpdate = (
+    itemConfirm: any,
+    isUpdateConfirm: boolean
+  ) => {
+    if (isUpdateConfirm) {
       updateItem(
         {
           item_id: itemId,
-          ...item,
+          ...itemConfirm,
         },
         {
           onSuccess: (res: any) => {
@@ -107,7 +110,7 @@ const Item: React.FC = () => {
     } else {
       createItem(
         {
-          ...item,
+          ...itemConfirm,
         },
         {
           onSuccess: (res: any) => {
@@ -185,15 +188,20 @@ const Item: React.FC = () => {
         )}
         {status === 'success' && (
           <>
+            {data?.data.data.items.length === 0 && (
+              <p tw="font-bold text-gray-400 flex justify-center items-center m-12">
+                Tidak ada item
+              </p>
+            )}
             <div tw="grid grid gap-x-16 gap-y-16 xl:grid-cols-4 md:grid-cols-3 auto-cols-fr auto-rows-auto mb-8 sm:grid-cols-2">
-              {data?.data.data.items.map((item: any, key: any) => (
+              {data?.data.data.items.map((itemData: any, key: any) => (
                 <CardItem
                   key={key}
-                  id={item.id}
-                  name={item.name}
-                  image={item.image}
-                  price={item.price}
-                  description={item.description}
+                  id={itemData.id}
+                  name={itemData.name}
+                  image={itemData.image}
+                  price={itemData.price}
+                  description={itemData.description}
                   setIsOpen={setIsOpen}
                   setItemId={setItemId}
                   setIsOpenUpdate={setIsOpenCreateUpdate}

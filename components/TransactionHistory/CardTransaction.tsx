@@ -18,9 +18,14 @@ const CardTransaction: React.FC<CardTransactionProps> = (props) => {
   return (
     <Link href={`/transaction-history/${props.transactionID}`}>
       <StyledCardTransactionContainer tw="shadow-md my-5">
-        <div tw="flex flex-row w-full">
+        <div tw="flex flex-row w-full hover:cursor-pointer">
           <div tw="my-3 mx-2 w-1/6 flex justify-center rounded-full items-center">
-            <img src={props.image} tw="object-center"></img>
+            <div tw="">
+              <img
+                src={props.image}
+                tw="object-cover max-h-[80px] max-w-full"
+              ></img>
+            </div>
           </div>
           <div tw="w-3/6 py-4 px-3 my-3 flex-col grid">
             <div tw="grid items-start">
@@ -74,4 +79,5 @@ const StyledCardTransactionContainer = styled.div`
   border-radius: 0.6rem;
   overflow: hidden;
   align-items: center;
+  height: 110px;
 `;
